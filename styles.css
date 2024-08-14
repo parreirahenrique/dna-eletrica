@@ -1,0 +1,90 @@
+body {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('img/background.png');
+    background-size: cover; /* Para cobrir toda a área sem distorção */
+    background-position: center; /* Para centralizar a imagem */
+    background-attachment: fixed; /* Para fixar a imagem no plano de fundo */
+    background-repeat: no-repeat; /* Para evitar a repetição da imagem */
+    margin: 0;
+    height: 100vh; /* Para garantir que o body ocupe a altura total da viewport */
+    width: 100vw; /* Para garantir que o body ocupe a largura total da viewport */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    visibility: hidden;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    z-index: 1000; /* Para garantir que a barra de navegação esteja acima do conteúdo */
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #333;
+}
+
+.navbar-nav .nav-item .dropdown-menu .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.form-container {
+    visibility: hidden;
+    max-width: 800px;
+    width: 100%; /* Para garantir que não exceda a largura do viewport */
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 150px; /* Espaço ajustado abaixo da barra de navegação */
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+/* Estilo para a nova div de login */
+.login-container {
+    visibility: hidden;
+    max-width: 400px;
+    width: 100%;
+    background-color: white; /* Cor de fundo igual à da form-container */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 150px; /* Distância ajustada abaixo da barra de navegação */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza horizontalmente */
+}
+
+.login-container button {
+    width: 100%; /* O botão ocupa 100% do espaço disponível */
+}
+
+.error-message {
+    visibility: hidden;
+    display: none;
+    border-radius: 50px;
+    display: block;
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    position: fixed;
+    bottom: 100px;
+    left: 0;
+    right: 0;
+    background-color: rgb(200, 0, 0);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    border-top: 1px solid #f5c6cb;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}

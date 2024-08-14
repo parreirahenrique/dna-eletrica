@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário | Procuração e Contrato</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://apis.google.com/js/api.js"></script>
+</head>
+
+<body onload="login(), handleAuthClick()">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
+        <div class="container d-flex justify-content-between">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" alt="Logo" height="50">
+            </a>
+            <!-- Menu centralizado -->
+            <div class="collapse navbar-collapse d-flex justify-content-center">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="procContratoDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Procuração e contrato
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="procContratoDropdown">
+                            <li><a class="dropdown-item" href="index.html">Novo cliente</a></li>
+                            <li><a class="dropdown-item" href="get-client.html">Obter cliente existente</a></li>
+                            <li><a class="dropdown-item" href="update-client">Editar cliente existente</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="checklistDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Checklist
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="checklistDropdown">
+                            <li><a class="dropdown-item" href="#">Novo cliente</a></li>
+                            <li><a class="dropdown-item" href="#">Obter cliente existente</a></li>
+                            <li><a class="dropdown-item" href="#">Editar cliente existente</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- Novo item alinhado à direita -->
+            <div class="d-flex align-items-center">
+                <button class="nav-link" onclick="logout()">Sair</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="login-container" id="login-container">
+        <div class="mb-3">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="password" required>
+        </div>
+        <button class="btn btn-primary w-100" onclick="login()">Entrar</button>
+    </div>
+
+    <!-- Formulário -->
+    <div class="form-container" id="form-container">
+        <h5 class="text-center mb-3">Dados do cliente</h3>
+            <div class="row mb-5">
+                <div class="col-md-6">
+                    <label for="nome" class="form-label">Nome</label>
+                    <select class="form-control" id="name" onclick="initializeApp()" required>
+                        <option value="" disabled selected>Selecione um cliente</option>
+                        <!-- As opções serão adicionadas aqui dinamicamente -->
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="cpf" class="form-label">CPF/CNPJ</label>
+                    <input type="text" class="form-control" id="cpf-cnpj" readonly>
+                </div>
+            </div>
+
+            <h5 class="text-center mb-3">Dados da instalação</h3>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label for="complemento" class="form-label">CEP</label>
+                        <input type="text" class="form-control" id="cep" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="logradouro" class="form-label">Logradouro</label>
+                        <input type="text" class="form-control" id="address" readonly>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="numeroPredial" class="form-label">Número predial</label>
+                        <input type="text" class="form-control" id="number" readonly>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-md-3">
+                        <label for="complemento" class="form-label">Complemento</label>
+                        <input type="text" class="form-control" id="complement" readonly>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="bairro" class="form-label">Bairro</label>
+                        <input type="text" class="form-control" id="neighborhood" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="cidade" class="form-label">Cidade</label>
+                        <input type="text" class="form-control" id="city" readonly>
+                    </div>
+                </div>
+                <button class="btn btn-primary w-100"
+                    onclick="generateProxy();">Obter
+                    procuração
+                    e
+                    contrato</button>
+    </div>
+    <div id="error-message" class="error-message">Error message</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="gapi.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.49.0/docxtemplater.js"></script>
+    <script src="https://unpkg.com/pizzip@3.1.7/dist/pizzip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+    <script src="https://unpkg.com/pizzip@3.1.7/dist/pizzip-utils.js"></script>
+</body>
+
+</html>
