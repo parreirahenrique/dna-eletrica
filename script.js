@@ -272,3 +272,13 @@ function fieldsFilled() {
 
     return name && cpfCnpj && cep && address && number && neighborhood && city;
 }
+
+function toggleDisjuntor() {
+    var checkBox = document.getElementById('alteracao-carga');
+    var disjuntorGroup = document.getElementById('disjuntor-group');
+    if (checkBox.checked) {
+        disjuntorGroup.classList.remove('d-none');
+    } else {
+        disjuntorGroup.classList.add('d-none');
+    }
+}
