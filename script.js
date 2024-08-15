@@ -34,7 +34,6 @@ function login() {
     }
     
     if (validateUser(password)) {
-        document.getElementById("navbar").style.visibility = "visible";
         document.getElementById("form-container").style.visibility = "visible";
         document.getElementById("login-container").style.visibility = "hidden";
         document.getElementById("password").value = "";
@@ -42,8 +41,6 @@ function login() {
         if (password) {
             showMessage("Senha incorreta.", "error")
         }
-
-        document.getElementById("navbar").style.visibility = "hidden";
         document.getElementById("form-container").style.visibility = "hidden";
         document.getElementById("login-container").style.visibility = "visible";
         document.getElementById("password").value = "";
@@ -51,7 +48,6 @@ function login() {
 }
 
 function logout() {
-    document.getElementById("navbar").style.visibility = "hidden";
     document.getElementById("form-container").style.visibility = "hidden";
     document.getElementById("login-container").style.visibility = "visible";
     document.getElementById("password").value = "";

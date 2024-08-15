@@ -5,11 +5,13 @@ body {
     background-attachment: fixed; /* Para fixar a imagem no plano de fundo */
     background-repeat: no-repeat; /* Para evitar a repetição da imagem */
     margin: 0;
+    margin-bottom: 150px;
     height: 100vh; /* Para garantir que o body ocupe a altura total da viewport */
     width: 100vw; /* Para garantir que o body ocupe a largura total da viewport */
     display: flex;
     flex-direction: column;
     align-items: center; /* Centraliza o conteúdo horizontalmente */
+    overflow-x: hidden;
 }
 
 html, body {
@@ -18,7 +20,6 @@ html, body {
 }
 
 .navbar {
-    visibility: hidden;
     background-color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -42,6 +43,7 @@ html, body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 150px; /* Espaço ajustado abaixo da barra de navegação */
+    margin-bottom: 150px !important;
 }
 
 .title {
@@ -63,7 +65,7 @@ html, body {
     transform: translateX(-50%); /* Centraliza horizontalmente */
 }
 
-.login-container button {
+.login-container {
     width: 100%; /* O botão ocupa 100% do espaço disponível */
 }
 
@@ -87,4 +89,90 @@ html, body {
     border-top: 1px solid #f5c6cb;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+}
+
+.bordered-section {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    position: absolute;
+    top: -12px; /* Ajuste para alinhar verticalmente com a borda */
+    left: 20px; /* Ajuste para posicionar horizontalmente */
+    background-color: white; /* Fundo branco para sobrepor a borda */
+    font-weight: light;
+    padding: 0 10px; /* Espaçamento ao redor do texto */
+    z-index: 1; /* Garante que o título esteja acima da borda */
+}
+
+.input-wrapper {
+    border: 1px solid #eeeeee; /* Borda da div */
+    padding: 20px;
+    border-radius: 8px; /* Borda arredondada */
+    margin-top: 10px; /* Para deixar espaço para o título */
+    position: relative;
+}
+
+.input-wrapper:hover {
+    border: 1px solid #cccccc; /* Borda da div */
+}
+
+.header-title {
+    left: -0.8em;
+    margin-bottom: 50px;
+    margin-right: -60px;
+    padding-left: 1em;
+    line-height: 2.55em;
+    position: relative;
+    border-radius: 0 0.156em 0.156em 0;
+    font-family: var(--title-font);
+    font-size: 25px;
+    color: white;
+    background: #1b4a51;
+    box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.header-title::before,
+.header-title::after {
+    position: absolute;
+    content: '';
+    display: block;
+}
+
+.header-title::before {
+    padding: 0 0 2em;
+    border-radius: 0.313em 0 0 0.313em;
+    width: 0.769em;
+    height: 121%;
+    top: 0;
+    left: -0.75em;
+    background: #1b4a51;
+}
+
+.header-title::after {
+    width: 0.5em;
+    height: 0.4em;
+    border-radius: 0.313em 0 0 0.313em;
+    bottom: -0.4em;
+    left: -0.5em;
+    background: rgba(0, 0, 0, 0.35);
+    box-shadow: inset -1px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.btn  {
+    font-size: 18px;
+    width: 75%;
+    color: white;
+    background-color: #26777a !important;
+    margin-bottom: 50px;
+}
+
+.btn:hover {
+    color: white;
+    background-color: #26777a95 !important;
+}
+
+.last-btn {
+    margin-bottom: 0px;
 }
