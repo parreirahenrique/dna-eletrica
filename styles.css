@@ -98,10 +98,12 @@ html, body {
 
 .subtitle {
     position: absolute;
-    top: -12px; /* Ajuste para alinhar verticalmente com a borda */
+    top: -10px; /* Ajuste para alinhar verticalmente com a borda */
     left: 20px; /* Ajuste para posicionar horizontalmente */
     background-color: white; /* Fundo branco para sobrepor a borda */
     font-weight: light;
+    font-family: 'Crete Round', serif;
+    font-size: 18px;
     padding: 0 10px; /* Espaçamento ao redor do texto */
     z-index: 1; /* Garante que o título esteja acima da borda */
 }
@@ -126,11 +128,15 @@ html, body {
     line-height: 2.55em;
     position: relative;
     border-radius: 0 0.156em 0.156em 0;
-    font-family: var(--title-font);
+    font-family: 'Crete Round', serif;
     font-size: 25px;
     color: white;
     background: #1b4a51;
     box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.login-container .header-title {
+    margin-bottom: 20px;
 }
 
 .header-title::before,
@@ -161,18 +167,119 @@ html, body {
 }
 
 .btn  {
+    font-family: 'Crete Round', serif;
     font-size: 18px;
     width: 75%;
     color: white;
-    background-color: #26777a !important;
+    background-color: #26777a;
     margin-bottom: 50px;
 }
 
 .btn:hover {
     color: white;
-    background-color: #26777a95 !important;
+    background-color: #26777a95;
 }
 
 .last-btn {
     margin-bottom: 0px;
+}
+
+.inverter-btn {
+    margin-bottom: 10px;
+    background-color: #26777aaa;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #26777a;
+    border-color: #26777a;
+}
+
+.cartao-cnpj {
+    display: none !important;
+    visibility: hidden;
+}
+
+.contrato-social {
+    display: none !important;
+    visibility: hidden;
+}
+
+.fotos-inversor-usina {
+    display: none !important;
+    visibility: hidden;
+}
+
+.quantidade-potencia-modulos {
+    display: none !important;
+    visibility: hidden;
+}
+
+.escritura-imovel {
+    display: none !important;
+    visibility: hidden;
+}
+
+.car {
+    display: none !important;
+    visibility: hidden;
+}
+
+.autorizacao-uso-telhado {
+    display: none !important;
+    visibility: hidden;
+}
+
+.fotos-todos-padroes {
+    display: none;
+    visibility: hidden;
+}
+
+.procuracao-troca-titularidade {
+    display: none;
+    visibility: hidden;
+}
+
+#inversor-2 {
+    display: none;
+    visibility: hidden;
+}
+
+#inversor-3 {
+    display: none;
+    visibility: hidden;
+}
+
+#inversor-4 {
+    display: none;
+    visibility: hidden;
+}
+
+.disjuntor-solicitado {
+    display: none;
+    visibility: hidden;
+}
+
+.disjuntor-geral {
+    display: none;
+    visibility: hidden;
+}
+
+.botao-procuracao {
+    display: none;
+    visibility: hidden;
+}
+
+.botao-contrato {
+    display: none;
+    visibility: hidden;
+}
+
+.botao-checklist {
+    display: none;
+    visibility: hidden;
+}
+
+.botao-todos-documentos {
+    display: none;
+    visibility: hidden;
 }
