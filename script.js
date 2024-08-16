@@ -37,6 +37,7 @@ function login() {
         document.getElementById("form-container").style.visibility = "visible";
         document.getElementById("login-container").style.visibility = "hidden";
         document.getElementById("password").value = "";
+        controlVisibility();
     } else {
         if (password) {
             showMessage("Senha incorreta.", "error")
@@ -45,6 +46,8 @@ function login() {
         document.getElementById("login-container").style.visibility = "visible";
         document.getElementById("password").value = "";
     }
+
+    controlVisibility();
 }
 
 function logout() {
@@ -53,6 +56,8 @@ function logout() {
     document.getElementById("password").value = "";
     localStorage.removeItem("user");
     localStorage.removeItem("password");
+    localStorage.removeItem("role");
+    controlVisibility();
 }
 
 function validateUser(password) {
@@ -60,11 +65,282 @@ function validateUser(password) {
         if (USERS[i].password === password) {
             localStorage.setItem("user", USERS[i].user);
             localStorage.setItem("password", password);
+            localStorage.setItem("role", USERS[i].role);
             return true;
         }
     }
     
     return false;
+}
+
+function controlVisibility() {
+    const role = localStorage.getItem("role");
+    console.log(role)
+
+    const selectionContainer = document.getElementsByClassName("selection-container");
+    const proxyContainer = document.getElementsByClassName("proxy-container");
+    const contractContainer = document.getElementsByClassName("contract-container");
+    const checklistContainer = document.getElementsByClassName("checklist-container");
+
+    const proxyButton = document.getElementsByClassName("botao-procuracao");
+    const contractButton = document.getElementsByClassName("botao-contrato");
+    const checklistButton = document.getElementsByClassName("botao-checklist");
+    const allButton = document.getElementsByClassName("botao-todos-documentos");
+    const inverterButton = document.getElementsByClassName("inverter-btn");
+
+
+    const allCheckbox = document.getElementById("todos");
+    const proxyCheckbox = document.getElementById("procuracao");
+    const contractCheckbox = document.getElementById("contrato");
+    const checklistCheckbox = document.getElementById("checklist");
+
+    if (role === "Salesman") {
+        for (let i = 0; i < proxyContainer.length; i++) {
+            proxyContainer[i].style.visibility = "visible";
+            proxyContainer[i].style.display = "block";
+        }
+
+        for (let i = 0; i < contractContainer.length; i++) {
+            contractContainer[i].style.visibility = "visible";
+            contractContainer[i].style.display = "block";
+        }
+
+        for (let i = 0; i < checklistContainer.length; i++) {
+            checklistContainer[i].style.visibility = "visible";
+            checklistContainer[i].style.display = "block";
+        }
+
+        for (let i = 0; i < allButton.length; i++) {
+            allButton[i].style.visibility = "visible";
+            allButton[i].style.display = "block";
+        }
+    } else if (role === "Director" || role === "Administrator") {
+
+        for (let i = 0; i < selectionContainer.length; i++) {
+            selectionContainer[i].style.visibility = "visible";
+            selectionContainer[i].style.display = "block";
+        }
+
+        if (allCheckbox.checked) {
+            proxyCheckbox.checked = true;
+            contractCheckbox.checked = true;
+            checklistCheckbox.checked = true;
+        }
+
+        if (proxyCheckbox.checked) {
+            for (let i = 0; i < proxyContainer.length; i++) {
+                proxyContainer[i].style.visibility = "visible";
+                proxyContainer[i].style.display = "block";
+            }
+        } else {
+            for (let i = 0; i < proxyContainer.length; i++) {
+                proxyContainer[i].style.visibility = "hidden";
+                proxyContainer[i].style.display = "none";
+            }
+        }
+
+        if (contractCheckbox.checked) {
+            for (let i = 0; i < contractContainer.length; i++) {
+                contractContainer[i].style.visibility = "visible";
+                contractContainer[i].style.display = "block";
+            }
+        } else {
+            for (let i = 0; i < contractContainer.length; i++) {
+                contractContainer[i].style.visibility = "hidden";
+                contractContainer[i].style.display = "none";
+            }
+        }
+
+        if (checklistCheckbox.checked) {
+            for (let i = 0; i < checklistContainer.length; i++) {
+                checklistContainer[i].style.visibility = "visible";
+                checklistContainer[i].style.display = "block";
+            }
+        } else {
+            for (let i = 0; i < contractContainer.length; i++) {
+                checklistContainer[i].style.visibility = "hidden";
+                checklistContainer[i].style.display = "none";
+            }
+        }
+
+        const FIRST_CONDITION = proxyCheckbox.checked && contractCheckbox.checked;
+        const SECOND_CONDITION = proxyCheckbox.checked && checklistCheckbox.checked;
+        const THIRD_CONDITION = contractCheckbox.checked && checklistCheckbox.checked;
+
+        if (FIRST_CONDITION || SECOND_CONDITION || THIRD_CONDITION) {
+            for (let i = 0; i < allButton.length; i++) {
+                allButton[i].style.visibility = "visible";
+                allButton[i].style.display = "block";
+            }
+
+            for (let i = 0; i < proxyButton.length; i++) {
+                proxyButton[i].style.visibility = "hidden";
+                proxyButton[i].style.display = "none";
+            }
+            
+            for (let i = 0; i < contractButton.length; i++) {
+                contractButton[i].style.visibility = "hidden";
+                contractButton[i].style.display = "none";
+            }
+            
+            for (let i = 0; i < checklistButton.length; i++) {
+                checklistButton[i].style.visibility = "hidden";
+                checklistButton[i].style.display = "none";
+            }
+        } else if (proxyCheckbox.checked && !contractCheckbox.checked && !checklistCheckbox.checked) {
+            for (let i = 0; i < proxyButton.length; i++) {
+                proxyButton[i].style.visibility = "visible";
+                proxyButton[i].style.display = "block";
+                proxyButton[i].style.marginBottom = "0";
+            }
+
+            for (let i = 0; i < allButton.length; i++) {
+                allButton[i].style.visibility = "hidden";
+                allButton[i].style.display = "none";
+            }
+        } else if (!proxyCheckbox.checked && contractCheckbox.checked && !checklistCheckbox.checked) {
+            for (let i = 0; i < contractButton.length; i++) {
+                contractButton[i].style.visibility = "visible";
+                contractButton[i].style.display = "block";
+                contractButton[i].style.marginBottom = "0";
+            }
+            
+            for (let i = 0; i < allButton.length; i++) {
+                allButton[i].style.visibility = "hidden";
+                allButton[i].style.display = "none";
+            }
+        } else if (!proxyCheckbox.checked && !contractCheckbox.checked && checklistCheckbox.checked) {
+            for (let i = 0; i < checklistButton.length; i++) {
+                checklistButton[i].style.visibility = "visible";
+                checklistButton[i].style.display = "block";
+            }
+            
+            for (let i = 0; i < allButton.length; i++) {
+                allButton[i].style.visibility = "hidden";
+                allButton[i].style.display = "none";
+            }
+        } else {
+            proxyCheckbox.checked = false;
+            contractCheckbox.checked = false;
+            checklistCheckbox.checked = false;
+
+            for (let i = 0; i < allButton.length; i++) {
+                allButton[i].style.visibility = "hidden";
+                allButton[i].style.display = "none";
+            }
+
+            for (let i = 0; i < proxyButton.length; i++) {
+                proxyButton[i].style.visibility = "hidden";
+                proxyButton[i].style.display = "none";
+            }
+            
+            for (let i = 0; i < contractButton.length; i++) {
+                contractButton[i].style.visibility = "hidden";
+                contractButton[i].style.display = "none";
+            }
+            
+            for (let i = 0; i < checklistButton.length; i++) {
+                checklistButton[i].style.visibility = "hidden";
+                checklistButton[i].style.display = "none";
+            }
+        }
+    } else {
+        for (let i = 0; i < selectionContainer.length; i++) {
+            selectionContainer[i].style.visibility = "hidden";
+            selectionContainer[i].style.display = "none";
+        }
+
+        for (let i = 0; i < proxyContainer.length; i++) {
+            proxyContainer[i].style.visibility = "hidden";
+            proxyContainer[i].style.display = "none";
+        }
+
+        for (let i = 0; i < contractContainer.length; i++) {
+            contractContainer[i].style.visibility = "hidden";
+            contractContainer[i].style.display = "none";
+        }
+
+        for (let i = 0; i < checklistContainer.length; i++) {
+            checklistContainer[i].style.visibility = "hidden";
+            checklistContainer[i].style.display = "none";
+        }
+
+        for (let i = 0; i < allButton.length; i++) {
+            allButton[i].style.visibility = "hidden";
+            allButton[i].style.display = "none";
+        }
+
+        for (let i = 0; i < proxyButton.length; i++) {
+            proxyButton[i].style.visibility = "hidden";
+            proxyButton[i].style.display = "none";
+        }
+        
+        for (let i = 0; i < contractButton.length; i++) {
+            contractButton[i].style.visibility = "hidden";
+            contractButton[i].style.display = "none";
+        }
+        
+        for (let i = 0; i < checklistButton.length; i++) {
+            checklistButton[i].style.visibility = "hidden";
+            checklistButton[i].style.display = "none";
+        }
+    }
+}
+
+function addInverter() {
+    const inverter1 = document.getElementById("inverter-1");
+    const inverter2 = document.getElementById("inverter-2");
+    const inverter3 = document.getElementById("inverter-3");
+    const inverter4 = document.getElementById("inverter-4");
+    
+    const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"),null).getPropertyValue('visibility') === "hidden";
+
+    const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"),null).getPropertyValue('visibility') === "visible" &&
+                            window.getComputedStyle(document.getElementById("inverter-3"),null).getPropertyValue('visibility') === "hidden";
+    
+    const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"),null).getPropertyValue('visibility') === "visible" &&
+                            window.getComputedStyle(document.getElementById("inverter-3"),null).getPropertyValue('visibility') === "visible" &&
+                            window.getComputedStyle(document.getElementById("inverter-4"),null).getPropertyValue('visibility') === "hidden";
+
+    if (FIRST_CONDITION) {
+        inverter1.innerText = "Primeiro inversor";
+        inverter2.style.visibility = "visible";
+        inverter2.style.display = "block";
+    } else if (SECOND_CONDITION) {
+        inverter3.style.visibility = "visible";
+        inverter3.style.display = "block";
+    } else if (THIRD_CONDITION) {
+        inverter4.style.visibility = "visible";
+        inverter4.style.display = "block";
+    }
+}
+
+function removeInverter() {
+    const inverter1 = document.getElementById("inverter-1");
+    const inverter2 = document.getElementById("inverter-2");
+    const inverter3 = document.getElementById("inverter-3");
+    const inverter4 = document.getElementById("inverter-4");
+    
+    const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"),null).getPropertyValue('visibility') === "visible";
+
+    const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"),null).getPropertyValue('visibility') === "hidden" &&
+                             window.getComputedStyle(document.getElementById("inverter-3"),null).getPropertyValue('visibility') === "visible";
+    
+    const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"),null).getPropertyValue('visibility') === "hidden" &&
+                            window.getComputedStyle(document.getElementById("inverter-3"),null).getPropertyValue('visibility') === "hidden" &&
+                            window.getComputedStyle(document.getElementById("inverter-2"),null).getPropertyValue('visibility') === "visible";
+
+    if (FIRST_CONDITION) {
+        inverter4.style.visibility = "hidden";
+        inverter4.style.display = "none";
+    } else if (SECOND_CONDITION) {
+        inverter3.style.visibility = "hidden";
+        inverter3.style.display = "none";
+    } else if (THIRD_CONDITION) {
+        inverter1.innerText = "Inversor";
+        inverter2.style.visibility = "hidden";
+        inverter2.style.display = "none";
+    }
 }
 
 function getUserRole(password) {
