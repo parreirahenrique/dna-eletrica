@@ -195,37 +195,37 @@ input[type="checkbox"]:checked {
 }
 
 .cartao-cnpj {
-    display: none !important;
+    display: none;
     visibility: hidden;
 }
 
 .contrato-social {
-    display: none !important;
+    display: none;
     visibility: hidden;
 }
 
 .fotos-inversor-usina {
-    display: none !important;
+    display: none;
     visibility: hidden;
 }
 
 .quantidade-potencia-modulos {
-    display: none !important;
+    display: none;
     visibility: hidden;
 }
 
 .escritura-imovel {
-    display: none !important;
+    display: none;
     visibility: hidden;
 }
 
 .car {
-    display: none !important;
+    display: none;
     visibility: hidden;
 }
 
 .autorizacao-uso-telhado {
-    display: none !important;
+    display: none;
     visibility: hidden;
 }
 

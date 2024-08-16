@@ -451,6 +451,201 @@ function formatCPF_CNPJ() {
     }
 }
 
+function controlChecklistCheckboxes(checkboxChanged) {
+    const trocaTitularidade = document.getElementById("troca-titularidade");
+    const pessoaFisica = document.getElementById("pessoa-fisica");
+    const pessoaJuridica = document.getElementById("pessoa-juridica");
+    const urbano = document.getElementById("urbano");
+    const rural = document.getElementById("rural");
+    const semAumento = document.getElementById("sem-aumento-carga");
+    const comAumento = document.getElementById("com-aumento-carga");
+    const aumentoUsina = document.getElementById("aumento-usina");
+    const ligacaoNova = document.getElementById("ligacao-nova");
+    const individual = document.getElementById("instalacao-individual");
+    const agrupamento = document.getElementById("agrupamento");
+    const telhadoIndividual = document.getElementById("telhado-individual");
+    const telhadoColetivo = document.getElementById("telhado-coletivo");
+    const disjuntorSolicitado = document.getElementsByClassName("disjuntor-solicitado");
+    const disjuntorGeral = document.getElementsByClassName("disjuntor-geral");
+    const procuracaoTrocaTitularidade = document.getElementsByClassName("procuracao-troca-titularidade");
+    const car = document.getElementsByClassName("car");
+    const escritura = document.getElementsByClassName("escritura-imovel");
+    const contratoSocial = document.getElementsByClassName("contrato-social");
+    const cartaoCNPJ = document.getElementsByClassName("cartao-cnpj");
+    const autorizacaoTelhado = document.getElementsByClassName("autorizacao-uso-telhado");
+    const fotosAgrupamento = document.getElementsByClassName("fotos-todos-padroes");
+    const fotosUsina = document.getElementsByClassName("fotos-inversor-usina");
+    const quantidadeModulos = document.getElementsByClassName("quantidade-potencia-modulos");
+
+    if (checkboxChanged === pessoaFisica && pessoaFisica.checked) {
+        pessoaJuridica.checked = false;
+    } else if (checkboxChanged === pessoaJuridica && pessoaJuridica.checked) {
+        pessoaFisica.checked = false;
+    }
+
+    if (checkboxChanged === urbano && urbano.checked) {
+        rural.checked = false;
+    } else if (checkboxChanged === rural && rural.checked) {
+        urbano.checked = false;
+    }
+
+    if (checkboxChanged === semAumento && semAumento.checked) {
+        comAumento.checked = false;
+    } else if (checkboxChanged === comAumento && comAumento.checked) {
+        semAumento.checked = false;
+        ligacaoNova.checked = false;
+    } else if (checkboxChanged === aumentoUsina && aumentoUsina.checked) {
+        ligacaoNova.checked = false;
+    } else if (checkboxChanged === ligacaoNova && ligacaoNova.checked) {
+        comAumento.checked = false;
+        aumentoUsina.checked = false;
+    }
+
+    if (checkboxChanged === individual && individual.checked) {
+        agrupamento.checked = false;
+    } else if (checkboxChanged === agrupamento && agrupamento.checked) {
+        individual.checked = false;
+    }
+
+    if (checkboxChanged === individual && individual.checked) {
+        agrupamento.checked = false;
+    } else if (checkboxChanged === agrupamento && agrupamento.checked) {
+        individual.checked = false;
+    }
+
+    if (checkboxChanged === telhadoIndividual && telhadoIndividual.checked) {
+        telhadoColetivo.checked = false;
+    } else if (checkboxChanged === telhadoColetivo && telhadoColetivo.checked) {
+        telhadoIndividual.checked = false;
+    }
+    
+    if (comAumento.checked) {
+        for (let i = 0; i < disjuntorSolicitado.length; i++) {
+            disjuntorSolicitado[i].style.visibility = "visible";
+            disjuntorSolicitado[i].style.display = "block";
+        }
+    } else {
+        for (let i = 0; i < disjuntorSolicitado.length; i++) {
+            disjuntorSolicitado[i].style.visibility = "hidden";
+            disjuntorSolicitado[i].style.display = "none";
+        }
+    }
+
+    if (agrupamento.checked) {
+        for (let i = 0; i < disjuntorGeral.length; i++) {
+            disjuntorGeral[i].style.visibility = "visible";
+            disjuntorGeral[i].style.display = "block";
+        }
+
+        for (let i = 0; i < fotosAgrupamento.length; i++) {
+            fotosAgrupamento[i].style.visibility = "visible";
+            fotosAgrupamento[i].style.display = "block";
+        }
+    } else {
+        for (let i = 0; i < disjuntorGeral.length; i++) {
+            disjuntorGeral[i].style.visibility = "hidden";
+            disjuntorGeral[i].style.display = "none";
+        }
+
+        for (let i = 0; i < fotosAgrupamento.length; i++) {
+            fotosAgrupamento[i].style.visibility = "hidden";
+            fotosAgrupamento[i].style.display = "none";
+        }
+    }
+
+    if (trocaTitularidade.checked) {
+        for (let i = 0; i < procuracaoTrocaTitularidade.length; i++) {
+            procuracaoTrocaTitularidade[i].style.visibility = "visible";
+            procuracaoTrocaTitularidade[i].style.display = "block";
+        }
+    } else {
+        for (let i = 0; i < procuracaoTrocaTitularidade.length; i++) {
+            procuracaoTrocaTitularidade[i].style.visibility = "hidden";
+            procuracaoTrocaTitularidade[i].style.display = "none";
+        }
+    }
+
+    if (pessoaJuridica.checked) {
+        for (let i = 0; i < cartaoCNPJ.length; i++) {
+            cartaoCNPJ[i].style.visibility = "visible";
+            cartaoCNPJ[i].style.display = "block";
+        }
+
+        for (let i = 0; i < contratoSocial.length; i++) {
+            contratoSocial[i].style.visibility = "visible";
+            contratoSocial[i].style.display = "block";
+        }
+    } else {
+        for (let i = 0; i < cartaoCNPJ.length; i++) {
+            cartaoCNPJ[i].style.visibility = "hidden";
+            cartaoCNPJ[i].style.display = "none";
+        }
+
+        for (let i = 0; i < contratoSocial.length; i++) {
+            contratoSocial[i].style.visibility = "hidden";
+            contratoSocial[i].style.display = "none";
+        }
+    }
+
+    if (rural.checked) {
+        for (let i = 0; i < car.length; i++) {
+            car[i].style.visibility = "visible";
+            car[i].style.display = "block";
+        }
+    } else {
+        for (let i = 0; i < car.length; i++) {
+            car[i].style.visibility = "hidden";
+            car[i].style.display = "none";
+        }
+    }
+
+    if (aumentoUsina.checked) {
+        for (let i = 0; i < quantidadeModulos.length; i++) {
+            quantidadeModulos[i].style.visibility = "visible";
+            quantidadeModulos[i].style.display = "block";
+        }
+
+        for (let i = 0; i < fotosUsina.length; i++) {
+            fotosUsina[i].style.visibility = "visible";
+            fotosUsina[i].style.display = "block";
+        }
+    } else {
+        for (let i = 0; i < quantidadeModulos.length; i++) {
+            quantidadeModulos[i].style.visibility = "hidden";
+            quantidadeModulos[i].style.display = "none";
+        }
+        
+        for (let i = 0; i < fotosUsina.length; i++) {
+            fotosUsina[i].style.visibility = "hidden";
+            fotosUsina[i].style.display = "none";
+        }
+    }
+
+    if (ligacaoNova.checked || agrupamento.checked) {
+        for (let i = 0; i < escritura.length; i++) {
+            escritura[i].style.visibility = "visible";
+            escritura[i].style.display = "block";
+        }
+    } else {
+        for (let i = 0; i < escritura.length; i++) {
+            escritura[i].style.visibility = "hidden";
+            escritura[i].style.display = "none";
+        }
+    }
+
+    if (telhadoColetivo.checked) {
+        for (let i = 0; i < autorizacaoTelhado.length; i++) {
+            autorizacaoTelhado[i].style.visibility = "visible";
+            autorizacaoTelhado[i].style.display = "block";
+        }
+    } else {
+        for (let i = 0; i < autorizacaoTelhado.length; i++) {
+            autorizacaoTelhado[i].style.visibility = "hidden";
+            autorizacaoTelhado[i].style.display = "none";
+        }
+    }
+}
+
 function loadFile(url, callback) {
     PizZipUtils.getBinaryContent(url, callback);
 }
@@ -554,3 +749,4 @@ function toggleDisjuntor() {
         disjuntorGroup.classList.add('d-none');
     }
 }
+
