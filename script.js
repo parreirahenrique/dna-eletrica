@@ -2,7 +2,7 @@ const USERS = [
     {
         "user": "Henrique",
         "role": "Administrator",
-        "password": "formulario@dna2024"
+        "password": "123"
     },
     {
         "user": "Willy",
@@ -34,14 +34,17 @@ function login() {
     }
     
     if (validateUser(password)) {
+        document.getElementById("logout-btn").style.visibility = "visible";
         document.getElementById("form-container").style.visibility = "visible";
         document.getElementById("login-container").style.visibility = "hidden";
         document.getElementById("password").value = "";
+        document.getElementById("logout-btn").style.visibility = "visible";
         controlVisibility();
     } else {
         if (password) {
             showMessage("Senha incorreta.", "error")
         }
+        document.getElementById("logout-btn").style.visibility = "hidden";
         document.getElementById("form-container").style.visibility = "hidden";
         document.getElementById("login-container").style.visibility = "visible";
         document.getElementById("password").value = "";
@@ -51,6 +54,7 @@ function login() {
 }
 
 function logout() {
+    document.getElementById("logout-btn").style.visibility = "hidden";
     document.getElementById("form-container").style.visibility = "hidden";
     document.getElementById("login-container").style.visibility = "visible";
     document.getElementById("password").value = "";
@@ -722,9 +726,9 @@ function generateProxy() {
 };
 
 function fieldsFilled() {
-    const proxyVisibility = window.getComputedStyle(document.getElementById("proxy-container"),null).getPropertyValue('visibility');
-    const contractVisibility = window.getComputedStyle(document.getElementById("proxy-container"),null).getPropertyValue('visibility');
-    const checklistVisibility = window.getComputedStyle(document.getElementById("proxy-container"),null).getPropertyValue('visibility');
+    const proxyVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0],null).getPropertyValue('visibility');
+    const contractVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0],null).getPropertyValue('visibility');
+    const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0],null).getPropertyValue('visibility');
     
     const name = document.getElementsByClassName("name")[0].value;
     const cpfCnpj = document.getElementsByClassName("cpf-cnpj")[0].value;
@@ -733,10 +737,45 @@ function fieldsFilled() {
     const number = document.getElementById("number").value;
     const neighborhood = document.getElementById("neighborhood").value;
     const city = document.getElementById("city").value;
-
+    let filled = false;
+    
     if (proxyVisibility === "visible") {
-        return name && cpfCnpj && cep && address && number && neighborhood && city;
-    }   
+        filled = name && cpfCnpj && cep && address && number && neighborhood && city;
+        
+        if (!name) {
+            showRequiredMessageForClass("nome-required");
+        }
+
+        if (!cpfCnpj) {
+            showRequiredMessageForClass("cpf-required");
+        }
+
+        if (!cep) {
+            showRequiredMessageForID("cep-required");
+        }
+
+        if (!address) {
+            showRequiredMessageForID("address-required");
+        }
+
+        if (!number) {
+            showRequiredMessageForID("number-required");
+        }
+
+        if (!neighborhood) {
+            showRequiredMessageForID("neighborhood-required");
+        }
+
+        if (!city) {
+            showRequiredMessageForID("city-required");
+        }
+
+        if (!filled) {
+            return filled;
+        }
+    }
+
+    return filled;
 }
 
 function generateDocuments() {
@@ -749,4 +788,32 @@ function fillClientName(name) {
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = name;
     }
+}
+
+function showRequiredMessageForClass(inputName) {
+    const inputs = document.getElementsByClassName(inputName);
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].style.visibility = "visible";
+        inputs[i].style.display = "block";
+    }
+
+    setTimeout(() => {
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].style.visibility = "hidden";
+            inputs[i].style.display = "none";
+        }
+    }, 15000);
+}
+
+function showRequiredMessageForID(inputName) {
+    const input = document.getElementById(inputName);
+
+    input.style.visibility = "visible";
+    input.style.display = "block";
+
+    setTimeout(() => {
+        input.style.visibility = "hidden";
+        input.style.display = "none";
+    }, 15000);
 }

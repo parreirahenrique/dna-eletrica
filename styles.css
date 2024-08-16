@@ -303,3 +303,45 @@ input[type="checkbox"]:checked {
     display: none;
     visibility: hidden;
 }
+
+.required-message {
+    color: white;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    border-radius: 50px;
+    background-color: rgb(200, 0, 0);
+    display: none;
+    visibility: hidden;
+}
+
+.nome-required {
+    color: white;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    border-radius: 50px;
+    background-color: rgb(200, 0, 0);
+    display: none;
+    visibility: hidden;
+}
+
+.cpf-required {
+    color: white;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    border-radius: 50px;
+    background-color: rgb(200, 0, 0);
+    display: none;
+    visibility: hidden;
+}

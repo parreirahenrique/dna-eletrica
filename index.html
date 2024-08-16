@@ -22,7 +22,7 @@
             </a>
             <!-- Novo item alinhado à direita -->
             <div class="d-flex align-items-center">
-                <button class="nav-link" onclick="logout()">Sair</button>
+                <button class="nav-link" id="logout-btn" onclick="logout()">Sair</button>
             </div>
         </div>
     </nav>
@@ -80,15 +80,17 @@
                     <div class="row mb-1">
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control name" classe="name" oninput="fillClientName(this.value)" required>
+                            <input type="text" class="form-control name" id="nome" oninput="fillClientName(this.value)" required>
+                            <div class="nome-required">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="cpf" class="form-label">CPF/CNPJ</label>
-                            <input type="text" class="form-control cpf-cnpj" class="cpf-cnpj" oninput="formatCPF_CNPJ(this.value)" required>
+                            <input type="text" class="form-control cpf-cnpj" id="cpf" oninput="formatCPF_CNPJ(this.value)" required>
+                            <div class="cpf-required">Obrigatório.</div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>            
 
             <div class="bordered-section">
                 <h5 class="subtitle">Instalação</h5>
@@ -97,14 +99,17 @@
                         <div class="col-md-3">
                             <label for="complemento" class="form-label">CEP</label>
                             <input type="text" class="form-control" id="cep" onchange="getFullAddress()">
+                            <div id="cep-required" class="required-message">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="logradouro" class="form-label">Logradouro</label>
                             <input type="text" class="form-control" id="address" required>
+                            <div id="address-required" class="required-message">Obrigatório.</div>
                         </div>
                         <div class="col-md-3">
                             <label for="numeroPredial" class="form-label">Número predial</label>
                             <input type="text" class="form-control" id="number" required>
+                            <div id="number-required" class="required-message">Obrigatório.</div>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -115,10 +120,12 @@
                         <div class="col-md-3">
                             <label for="bairro" class="form-label">Bairro</label>
                             <input type="text" class="form-control" id="neighborhood" required>
+                            <div id="neighborhood-required" class="required-message">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="cidade" class="form-label">Cidade</label>
                             <input type="text" class="form-control" id="city" required>
+                            <div id="city-required" class="required-message">Obrigatório.</div>
                         </div>
                     </div>
                 </div>
@@ -152,16 +159,16 @@
                 <div class="input-wrapper">
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="valor" class="form-label">Valor</label>
-                            <input type="text" class="form-control" id="quantity" required>
+                            <label for="value" class="form-label">Valor</label>
+                            <input type="text" class="form-control" id="value" required>
                         </div>
                         <div class="col-md-4">
-                            <label for="quantidade" class="form-label">Forma de pagamento</label>
+                            <label for="quantity" class="form-label">Forma de pagamento</label>
                             <input type="number" class="form-control" id="quantity" required>
                         </div>
                         <div class="col-md-4">
-                            <label for="potencia" class="form-label">Parcela</label>
-                            <select id="power" class="form-select" required>
+                            <label for="instalment" class="form-label">Parcela</label>
+                            <select id="instalment" class="form-select" required>
                                 <option selected>Selecione a parcela</option>
                                 <option value="450">À vista</option>
                                 <option value="455">30/70</option>
