@@ -45,25 +45,29 @@
                     <div class="row mb-1">
                         <div class="col">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="todos" onchange="controlVisibility()">
+                                <input class="form-check-input" type="checkbox" id="todos"
+                                    onchange="controlVisibility()">
                                 <label class="form-check-label" for="todos">Todos</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="procuracao" onchange="controlVisibility()">
+                                <input class="form-check-input" type="checkbox" id="procuracao"
+                                    onchange="controlVisibility()">
                                 <label class="form-check-label" for="procuracao">Procuração</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="contrato" onchange="controlVisibility()">
+                                <input class="form-check-input" type="checkbox" id="contrato"
+                                    onchange="controlVisibility()">
                                 <label class="form-check-label" for="contrato">Contrato</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="checklist" onchange="controlVisibility()">
+                                <input class="form-check-input" type="checkbox" id="checklist"
+                                    onchange="controlVisibility()">
                                 <label class="form-check-label" for="checklist">Checklist</label>
                             </div>
                         </div>
@@ -80,17 +84,19 @@
                     <div class="row mb-1">
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control name" id="nome" oninput="fillClientName(this.value)" required>
+                            <input type="text" class="form-control name" id="nome" oninput="fillClientName(this.value)"
+                                required>
                             <div class="nome-required">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="cpf" class="form-label">CPF/CNPJ</label>
-                            <input type="text" class="form-control cpf-cnpj" id="cpf" oninput="formatCPF_CNPJ(this.value)" required>
+                            <input type="text" class="form-control cpf-cnpj" id="cpf"
+                                oninput="formatCPF_CNPJ(this.value)" required>
                             <div class="cpf-required">Obrigatório.</div>
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>
 
             <div class="bordered-section">
                 <h5 class="subtitle">Instalação</h5>
@@ -144,12 +150,14 @@
                     <div class="row mb-1">
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control name" class="name" oninput="fillClientName(this.value)" required>
+                            <input type="text" class="form-control name" class="name"
+                                oninput="fillClientName(this.value)" required>
                             <div class="nome-required">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="cpf" class="form-label">CPF/CNPJ</label>
-                            <input type="text" class="form-control cpf-cnpj" class="cpf-cnpj" oninput="formatCPF_CNPJ(this.value)" required>
+                            <input type="text" class="form-control cpf-cnpj" class="cpf-cnpj"
+                                oninput="formatCPF_CNPJ(this.value)" required>
                             <div class="cpf-required">Obrigatório.</div>
                         </div>
                     </div>
@@ -522,40 +530,53 @@
                     <div class="row mb-1">
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control name" class="name" oninput="fillClientName(this.value)" required>
+                            <input type="text" class="form-control name" class="name"
+                                oninput="fillClientName(this.value)" required>
                             <div class="nome-required">Obrigatório.</div>
                         </div>
                         <div class="col mt-5">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="troca-titularidade" onchange="controlChecklistCheckboxes(this)">
+                                <input class="form-check-input" type="checkbox" id="troca-titularidade"
+                                    onchange="controlChecklistCheckboxes(this)">
                                 <label class="form-check-label" for="troca-titularidade">Troca de titularidade</label>
                             </div>
                         </div>
                     </div>
                     <div class="row mb-1">
-                        <div class="col mt-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="pessoa-fisica" onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="pessoa-fisica">Pessoa física</label>
+                        <div class="row col-md-6 mx-auto">
+                            <div class="col mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="pessoa-fisica"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="pessoa-fisica">Pessoa física</label>
+                                </div>
                             </div>
+                            <div class="col mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="pessoa-juridica"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="pessoa-juridica">Pessoa jurídica</label>
+                                </div>
+                            </div>
+                            <div id="checkbox-1-required" class="required-message">Selecione "Pessoa física" ou "Pessoa
+                                jurídica".</div>
                         </div>
-                        <div class="col mt-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="pessoa-juridica" onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="pessoa-juridica">Pessoa jurídica</label>
+                        <div class="row col-md-6">
+                            <div class="col mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="urbano"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="urbano">Urbano</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col mt-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="urbano" onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="urbano">Urbano</label>
+                            <div class="col mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rural"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="rural">Rural</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col mt-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="rural" onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="rural">Rural</label>
-                            </div>
+                            <div id="checkbox-2-required" class="required-message">Selecione "Urbano" ou "Rural".</div>
                         </div>
                     </div>
                 </div>
@@ -566,19 +587,13 @@
                 <div class="input-wrapper">
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="disjuntor-tipo" class="form-label">Vendedor responsável</label>
-                            <select class="form-select" id="disjuntor-tipo">
-                                <option selected>Selecione o vendedor</option>
-                                <option value="Burica">Burica</option>
-                                <option value="Claudinei">Claudinei</option>
-                                <option value="Claudiovane">Claudiovane</option>
-                                <option value="Iheleno">Iheleno</option>
-                                <option value="Matheus Arouca">Matheus Arouca</option>
-                            </select>
+                            <label for="salesman" class="form-label">Vendedor responsável</label>
+                            <input type="text" class="form-control" id="salesman" readonly>
                         </div>
                         <div class="col-md-6">
-                            <label for="coordenadas-geograficas" class="form-label">Coordenadas geográficas</label>
-                            <input type="text" class="form-control" class="name" oninput="fillClientName(this.value)" required>
+                            <label for="coordinates" class="form-label">Coordenadas geográficas</label>
+                            <input type="text" class="form-control" id="coordinates" required>
+                            <div id="coordinates-required" class="required-message">Obrigatório.</div>
                         </div>
                     </div>
                 </div>
@@ -588,28 +603,38 @@
                 <h5 class="subtitle">Projeto</h5>
                 <div class="input-wrapper">
                     <div class="row mb-3">
-                        <div class="col">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="sem-aumento-carga" onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="sem-aumento-carga">Sem aumento de carga</label>
+                        <div class="row col-md-6 mx-auto">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="sem-aumento-carga"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="sem-aumento-carga">Sem aumento de carga</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="com-aumento-carga" onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="com-aumento-carga">Com aumento de carga</label>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="com-aumento-carga"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="com-aumento-carga">Com aumento de carga</label>
+                                </div>
                             </div>
+                            <div id="checkbox-3-required" class="required-message">Selecione "Sem aumento de carga" ou
+                                "Com aumento de carga".</div>
                         </div>
-                        <div class="col">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="aumento-usina" onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="aumento-usina">Aumento de usina</label>
+                        <div class="row col-md-6 mx-auto">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="aumento-usina"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="aumento-usina">Aumento de usina</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="ligacao-nova" onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="ligacao-nova">Ligação nova</label>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="ligacao-nova"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="ligacao-nova">Ligação nova</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -620,30 +645,42 @@
                 <h5 class="subtitle">Instalação</h5>
                 <div class="input-wrapper">
                     <div class="row mb-3">
-                        <div class="col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="instalacao-individual" onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="instalacao-individual">Instalação
-                                    individual</label>
+                        <div class="row col-md-6 mx-auto">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="instalacao-individual"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="instalacao-individual">Instalação
+                                        individual</label>
+                                </div>
                             </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="agrupamento"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="agrupamento">Agrupamento</label>
+                                </div>
+                            </div>
+                            <div id="checkbox-4-required" class="required-message">Selecione "Instalação individual" ou
+                                "Agrupamento".</div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="agrupamento" onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="agrupamento">Agrupamento</label>
+                        <div class="row col-md-6 mx-auto">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="telhado-individual"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="telhado-individual">Telhado individual</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="telhado-individual" onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="telhado-individual">Telhado individual</label>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="telhado-coletivo"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="telhado-coletivo">Telhado coletivo</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="telhado-coletivo" onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="telhado-coletivo">Telhado coletivo</label>
-                            </div>
+                            <div id="checkbox-5-required" class="required-message">Selecione "Telhado individual" ou
+                                "Telhado coletivo".</div>
                         </div>
                     </div>
                 </div>
@@ -654,17 +691,18 @@
                 <div class="input-wrapper">
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="disjuntor-tipo" class="form-label">Número de fases</label>
-                            <select class="form-select" id="disjuntor-tipo">
+                            <label for="disjuntor-atual" class="form-label">Número de fases</label>
+                            <select class="form-select" id="disjuntor-atual">
                                 <option selected>Selecione o número de fases</option>
                                 <option value="Monofásico">Monofásico</option>
                                 <option value="Bifásico">Bifásico</option>
                                 <option value="Trifásico">Trifásico</option>
                             </select>
+                            <div id="disjuntor-atual-required" class="required-message">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
-                            <label for="disjuntor-corrente" class="form-label">Corrente</label>
-                            <select class="form-select" id="disjuntor-corrente">
+                            <label for="corrente-atual" class="form-label">Corrente</label>
+                            <select class="form-select" id="corrente-atual">
                                 <option selected>Selecione a corrente</option>
                                 <option value="40">40 A</option>
                                 <option value="50">50 A</option>
@@ -680,6 +718,7 @@
                                 <option value="175">175 A</option>
                                 <option value="200">200 A</option>
                             </select>
+                            <div id="corrente-atual-required" class="required-message">Obrigatório.</div>
                         </div>
                     </div>
                 </div>
@@ -690,17 +729,18 @@
                 <div class="input-wrapper">
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="disjuntor-solicitado-tipo" class="form-label">Número de fases</label>
-                            <select class="form-select" id="disjuntor-solicitado-tipo">
+                            <label for="disjuntor-solicitado" class="form-label">Número de fases</label>
+                            <select class="form-select" id="disjuntor-solicitado">
                                 <option selected>Selecione o número de fases</option>
                                 <option value="Monofásico">Monofásico</option>
                                 <option value="Bifásico">Bifásico</option>
                                 <option value="Trifásico">Trifásico</option>
                             </select>
+                            <div id="disjuntor-solicitado-required" class="required-message">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
-                            <label for="disjuntor-solicitado-corrente" class="form-label">Corrente</label>
-                            <select class="form-select" id="disjuntor-solicitado-corrente">
+                            <label for="corrente-solicitado" class="form-label">Corrente</label>
+                            <select class="form-select" id="corrente-solicitado">
                                 <option selected>Selecione a corrente</option>
                                 <option value="40">40 A</option>
                                 <option value="50">50 A</option>
@@ -716,6 +756,7 @@
                                 <option value="175">175 A</option>
                                 <option value="200">200 A</option>
                             </select>
+                            <div id="corrente-solicitado-required" class="required-message">Obrigatório.</div>
                         </div>
                     </div>
                 </div>
@@ -726,17 +767,18 @@
                 <div class="input-wrapper">
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="disjuntor-solicitado-tipo" class="form-label">Número de fases</label>
-                            <select class="form-select" id="disjuntor-solicitado-tipo">
+                            <label for="disjuntor-geral" class="form-label">Número de fases</label>
+                            <select class="form-select" id="disjuntor-geral">
                                 <option selected>Selecione o número de fases</option>
                                 <option value="Monofásico">Monofásico</option>
                                 <option value="Bifásico">Bifásico</option>
                                 <option value="Trifásico">Trifásico</option>
                             </select>
+                            <div id="disjuntor-geral-required" class="required-message">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
-                            <label for="disjuntor-solicitado-corrente" class="form-label">Corrente</label>
-                            <select class="form-select" id="disjuntor-solicitado-corrente">
+                            <label for="corrente-geral" class="form-label">Corrente</label>
+                            <select class="form-select" id="corrente-geral">
                                 <option selected>Selecione a corrente</option>
                                 <option value="40">40 A</option>
                                 <option value="50">50 A</option>
@@ -752,6 +794,7 @@
                                 <option value="175">175 A</option>
                                 <option value="200">200 A</option>
                             </select>
+                            <div id="corrente-geral-required" class="required-message">Obrigatório.</div>
                         </div>
                     </div>
                 </div>
@@ -768,17 +811,21 @@
                                 <label class="form-check-label documento-oficial" for="documento-oficial">Documento
                                     oficial do titular com
                                     foto e CPF com validade recente</label>
+                                <div id="documento-oficial-required" class="required-message-checkbox">Obrigatório.</div>
                             </div>
                             <div class="form-check procuracao-troca-titularidade">
                                 <input class="form-check-input procuracao-troca-titularidade" type="checkbox"
-                                    id="procuraca-troca-titularidade">
+                                    id="procuracao-troca-titularidade">
                                 <label class="form-check-label procuracao-troca-titularidade"
-                                    for="documento-oficial">Contrato de locação ou
+                                    for="procuracao-troca-titularidade">Contrato de locação ou
                                     procuração para troca de titularidade</label>
+                                <div id="procuracao-troca-titularidade-required" class="required-message-checkbox">Obrigatório.
+                                </div>
                             </div>
                             <div class="form-check fatura-cemig">
                                 <input class="form-check-input fatura-cemig" type="checkbox" id="fatura-cemig">
                                 <label class="form-check-label fatura-cemig" for="fatura-cemig">Fatura da Cemig</label>
+                                <div id="fatura-cemig-required" class="required-message-checkbox">Obrigatório.</div>
                             </div>
                             <div class="form-check coordenadas-padrao">
                                 <input class="form-check-input coordenadas-padrao" type="checkbox"
@@ -786,6 +833,7 @@
                                 <label class="form-check-label coordenadas-padrao" for="coordenadas-padrao">Coordenadas
                                     do padrão
                                     atual</label>
+                                <div id="coordenadas-padrao-required" class="required-message-checkbox">Obrigatório.</div>
                             </div>
                             <div class="form-check fotos-padrao-disjuntor">
                                 <input class="form-check-input fotos-padrao-disjuntor" type="checkbox"
@@ -793,26 +841,31 @@
                                 <label class="form-check-label fotos-padrao-disjuntor"
                                     for="fotos-padrao-disjuntor">Fotos do padrão e
                                     disjuntor</label>
+                                <div id="fotos-padrao-disjuntor-required" class="required-message-checkbox">Obrigatório.</div>
                             </div>
                             <div class="form-check car">
                                 <input class="form-check-input car" type="checkbox" id="car">
                                 <label class="form-check-label car" for="car">CAR (cadastro de ambiente rural)</label>
+                                <div id="car-required" class="required-message-checkbox">Obrigatório.</div>
                             </div>
                             <div class="form-check escritura-imovel">
                                 <input class="form-check-input escritura-imovel" type="checkbox" id="escritura-imovel">
                                 <label class="form-check-label escritura-imovel" for="escritura-imovel">Escritura do
                                     imóvel ou contrato
                                     de locação</label>
+                                <div id="escritura-imovel-required" class="required-message-checkbox">Obrigatório.</div>
                             </div>
                             <div class="form-check contrato-social">
                                 <input class="form-check-input contrato-social" type="checkbox" id="contrato-social">
                                 <label class="form-check-label contrato-social" for="contrato-social">Contrato social ou
                                     alteração
                                     contratual</label>
+                                <div id="contrato-social-required" class="required-message">Obrigatório.</div>
                             </div>
                             <div class="form-check cartao-cnpj">
                                 <input class="form-check-input cartao-cnpj" type="checkbox" id="cartao-cnpj">
                                 <label class="form-check-label cartao-cnpj" for="cartao-cnpj">Cartão CNPJ</label>
+                                <div id="cartao-cnpj-required" class="required-message-checkbox">Obrigatório.</div>
                             </div>
                             <div class="form-check autorizacao-uso-telhado">
                                 <input class="form-check-input autorizacao-uso-telhado" type="checkbox"
@@ -820,6 +873,7 @@
                                 <label class="form-check-label autorizacao-uso-telhado"
                                     for="autorizacao-uso-telhado">Autorização de uso do
                                     telhado</label>
+                                <div id="autorizacao-uso-telhado-required" class="required-message-checkbox">Obrigatório.</div>
                             </div>
                             <div class="form-check fotos-todos-padroes">
                                 <input class="form-check-input fotos-todos-padroes" type="checkbox"
@@ -827,6 +881,7 @@
                                 <label class="form-check-label fotos-todos-padroes" for="fotos-todos-padroes">Fotos de
                                     todos os padrões,
                                     disjuntores e disjuntor geral</label>
+                                <div id="fotos-todos-padroes-required" class="required-message-checkbox">Obrigatório.</div>
                             </div>
                             <div class="form-check fotos-inversor-usina">
                                 <input class="form-check-input fotos-inversor-usina" type="checkbox"
@@ -835,6 +890,7 @@
                                     inversor já
                                     instalado e
                                     da usina</label>
+                                <div id="fotos-inversor-usina-required" class="required-message-checkbox">Obrigatório.</div>
                             </div>
                             <div class="form-check quantidade-potencia-modulos">
                                 <input class="form-check-input quantidade-potencia-modulos" type="checkbox"
@@ -843,18 +899,22 @@
                                     for="quantidade-potencia-modulos">Quantidade e potência
                                     dos
                                     módulos já instalados</label>
+                                <div id="quantidade-potencia-modulos-required" class="required-message-checkbox">Obrigatório.
+                                </div>
                             </div>
                             <div class="form-check procuracao-assinada">
                                 <input class="form-check-input procuracao-assinada" type="checkbox"
                                     id="procuracao-assinada">
-                                <label class="form-check-label procuracao-assinada"
-                                    for="documento-oficial">Procuração assinada</label>
+                                <label class="form-check-label procuracao-assinada" for="documento-oficial">Procuração
+                                    assinada</label>
+                                <div id="procuracao-assinada-required" class="required-message-checkbox">Obrigatório.</div>
                             </div>
                             <div class="form-check contrato-assinado">
                                 <input class="form-check-input contrato-assinado" type="checkbox"
-                                    id="procuracao-assinada">
-                                <label class="form-check-label contrato-assinado"
-                                    for="documento-oficial">Contrato de compra de equipamentos assinado</label>
+                                    id="contrato-assinado">
+                                <label class="form-check-label contrato-assinado" for="contrato-assinado">Contrato de
+                                    compra de equipamentos assinado</label>
+                                <div id="contrato-assinado-required" class="required-message-checkbox">Obrigatório.</div>
                             </div>
                         </div>
                     </div>
@@ -862,12 +922,13 @@
             </div>
 
             <div class="d-flex justify-content-center botao-checklist">
-                <button class="btn w-100 last-btn botao-checklist" onclick="generateProxy()">Obter checklist</button>
+                <button class="btn w-100 last-btn botao-checklist" onclick="generateChecklist()">Obter checklist</button>
             </div>
         </div>
 
         <div class="d-flex justify-content-center botao-todos-documentos">
-            <button class="btn w-100 last-btn  botao-todos-documentos" onclick="generateDocuments()">Obter todos os documentos</button>
+            <button class="btn w-100 last-btn  botao-todos-documentos" onclick="generateDocuments()">Obter todos os
+                documentos</button>
         </div>
     </div>
     <div id="error-message" class="error-message">Error message</div>

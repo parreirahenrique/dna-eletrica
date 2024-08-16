@@ -67,6 +67,7 @@ function logout() {
 function validateUser(password) {
     for (let i = 0; i < USERS.length; i++) {
         if (USERS[i].password === password) {
+            document.getElementById("salesman").value = USERS[i].user;
             localStorage.setItem("user", USERS[i].user);
             localStorage.setItem("password", password);
             localStorage.setItem("role", USERS[i].role);
@@ -349,6 +350,7 @@ function removeInverter() {
 function getUserRole(password) {
     for (let i = 0; i < USERS.length; i++) {
         if (USERS[i].password === password) {
+            console.log(document.getElementById("salesman").value)
             localStorage.setItem("user", USERS[i].user);
             localStorage.setItem("password", password);
             return true;
@@ -733,6 +735,14 @@ function generateContract() {
     }
 }
 
+function generateChecklist() {
+    if (fieldsFilled()) {
+
+    } else {
+        showMessage("Preencha todos os campos antes de prosseguir.", "error")
+    }
+}
+
 function generateDocuments() {
     if (fieldsFilled()) {
 
@@ -786,10 +796,6 @@ function fieldsFilled() {
 
         if (!city) {
             showRequiredMessageForID("city-required");
-        }
-
-        if (!filled) {
-            return filled;
         }
     }
 
@@ -923,18 +929,207 @@ function fieldsFilled() {
         if (powerInverter4 === "Selecione a potência"){
             showRequiredMessageForID("power-inverter-4-required");
         }
-
-        if (!filled) {
-            return filled;
-        }
     }
 
-    if (contractVisibility === "visible") {
-        const paymentValue = document.getElementById("value").value;
-        const payment = document.getElementById("payment").value;
+    if (checklistVisibility === "visible") {
+        const trocaTitularidade = document.getElementById("troca-titularidade").checked;
+        const pessoaFisica = document.getElementById("pessoa-fisica").checked;
+        const pessoaJuridica = document.getElementById("pessoa-juridica").checked;
+        const urbano = document.getElementById("urbano").checked;
+        const rural = document.getElementById("rural").checked;
+        const semAumento = document.getElementById("sem-aumento-carga").checked;
+        const comAumento = document.getElementById("com-aumento-carga").checked;
+        const aumentoUsina = document.getElementById("aumento-usina").checked;
+        const ligacaoNova = document.getElementById("ligacao-nova").checked;
+        const individual = document.getElementById("instalacao-individual").checked;
+        const agrupamento = document.getElementById("agrupamento").checked;
+        const telhadoIndividual = document.getElementById("telhado-individual").checked;
+        const telhadoColetivo = document.getElementById("telhado-coletivo").checked;
 
-        if (!filled) {
-            return filled;
+        const coordenadas = document.getElementById("coordinates").value;
+        const disjuntorAtual = document.getElementById("disjuntor-atual").value;
+        const correnteAtual = document.getElementById("corrente-atual").value;
+        const disjuntorSolicitado = document.getElementById("disjuntor-solicitado").value;
+        const correnteSolicitado = document.getElementById("corrente-solicitado").value;
+        const disjuntorGeral = document.getElementById("disjuntor-geral").value;
+        const correnteGeral = document.getElementById("corrente-geral").value;
+
+        const documento = document.getElementById("documento-oficial").checked;
+        const procuracaoTroca = document.getElementById("procuracao-troca-titularidade").checked;
+        const fatura = document.getElementById("fatura-cemig").checked;
+        const coordenadasPadrao = document.getElementById("coordenadas-padrao").checked;
+        const fotosPadrao = document.getElementById("fotos-padrao-disjuntor").checked;
+        const car = document.getElementById("car").checked;
+        const escritura = document.getElementById("escritura-imovel").checked;
+        const contratoSocial = document.getElementById("contrato-social").checked;
+        const cnpj = document.getElementById("cartao-cnpj").checked;
+        const autorizacaoTelhado = document.getElementById("autorizacao-uso-telhado").checked;
+        const fotosAgrupamento = document.getElementById("fotos-todos-padroes").checked;
+        const fotosInversor = document.getElementById("fotos-inversor-usina").checked;
+        const quantidadeModulos = document.getElementById("quantidade-potencia-modulos").checked;
+        const procuracao = document.getElementById("procuracao-assinada").checked;
+        const contrato = document.getElementById("contrato-assinado").checked;
+
+        const FIRST_CONDITION = pessoaFisica || pessoaJuridica;
+        const SECOND_CONDITION = urbano || rural;
+        const THIRD_CONDITION = semAumento || comAumento;
+        const FOURTH_CONDITION = individual || agrupamento;
+        const FIFTH_CONDITION = telhadoIndividual || telhadoColetivo;
+        const SIXTH_CONDITION = !trocaTitularidade ? true : procuracaoTroca;
+        const SEVENTH_CONDITION = !pessoaJuridica ? true : cartaoCNPJ && contratoSocial;
+        const EIGHTH_CONDITION = !rural ? true : car;
+        const NINTH_CONDITION = !aumentoUsina ? true : fotosInversor && quantidadeModulos;
+        const TENTH_CONDITION = !ligacaoNova ? true : escritura;
+        const ELEVENTH_CONDITION = !agrupamento ? true : escritura && fotosAgrupamento && disjuntorGeral && correnteGeral;
+        const TWELFTH_CONDITION = !telhadoColetivo ? true : autorizacaoTelhado;
+        const THIRTEENTH_CONDITION = !comAumento ? true : disjuntorSolicitado && correnteSolicitado;
+
+        console.log(FIRST_CONDITION)
+        console.log(SECOND_CONDITION)
+        console.log(THIRD_CONDITION)
+        console.log(FOURTH_CONDITION)
+        console.log(FIFTH_CONDITION)
+        console.log(SIXTH_CONDITION)
+        console.log(SEVENTH_CONDITION)
+        console.log(EIGHTH_CONDITION)
+        console.log(NINTH_CONDITION)
+        console.log(TENTH_CONDITION)
+        console.log(ELEVENTH_CONDITION)
+        console.log(TWELFTH_CONDITION)
+        console.log(THIRTEENTH_CONDITION)
+        filled = FIRST_CONDITION &&
+                 SECOND_CONDITION &&
+                 THIRD_CONDITION &&
+                 FOURTH_CONDITION &&
+                 FIFTH_CONDITION &&
+                 SIXTH_CONDITION &&
+                 SEVENTH_CONDITION &&
+                 EIGHTH_CONDITION &&
+                 NINTH_CONDITION &&
+                 TENTH_CONDITION &&
+                 ELEVENTH_CONDITION &&
+                 TWELFTH_CONDITION &&
+                 THIRTEENTH_CONDITION &&
+                 name &&
+                 coordenadas &&
+                 disjuntorAtual &&
+                 correnteAtual &&
+                 documento &&
+                 fatura &&
+                 coordenadasPadrao &&
+                 fotosPadrao &&
+                 procuracao &&
+                 contrato;
+
+        if (!name) {
+            showRequiredMessageForClass("nome-required");
+        }
+        if (!pessoaFisica && !pessoaJuridica) {
+            showRequiredMessageForID("checkbox-1-required");
+        }
+
+        if (!urbano && !rural) {
+            showRequiredMessageForID("checkbox-2-required");
+        }
+
+        if (!coordenadas) {
+            showRequiredMessageForID("coordinates-required");
+        }
+
+        if (!semAumento && !comAumento) {
+            showRequiredMessageForID("checkbox-3-required");
+        }
+
+        if (!individual && !agrupamento) {
+            showRequiredMessageForID("checkbox-4-required");
+        }
+
+        if (!telhadoIndividual && !telhadoColetivo) {
+            showRequiredMessageForID("checkbox-5-required");
+        }
+
+        if (disjuntorAtual === "Selecione o número de fases") {
+            showRequiredMessageForID("disjuntor-atual-required");
+        }
+
+        if (correnteAtual === "Selecione a corrente") {
+            showRequiredMessageForID("corrente-atual-required");
+        }
+
+        if (disjuntorSolicitado === "Selecione o número de fases") {
+            showRequiredMessageForID("disjuntor-solicitado-required");
+        }
+
+        if (correnteSolicitado === "Selecione a corrente") {
+            showRequiredMessageForID("corrente-solicitado-required");
+        }
+
+        if (disjuntorGeral === "Selecione o número de fases") {
+            showRequiredMessageForID("disjuntor-geral-required");
+        }
+
+        if (correnteGeral === "Selecione a corrente") {
+            showRequiredMessageForID("corrente-geral-required");
+        }
+
+        if (!documento) {
+            showRequiredMessageForID("documento-oficial-required");
+        }
+
+        if (!procuracaoTroca) {
+            showRequiredMessageForID("procuracao-troca-titularidade-required");
+        }
+
+        if (!fatura) {
+            showRequiredMessageForID("fatura-cemig-required");
+        }
+
+        if (!coordenadasPadrao) {
+            showRequiredMessageForID("coordenadas-padrao-required");
+        }
+
+        if (!fotosPadrao) {
+            showRequiredMessageForID("fotos-padrao-disjuntor-required");
+        }
+
+        if (!car) {
+            showRequiredMessageForID("car-required");
+        }
+
+        if (!escritura) {
+            showRequiredMessageForID("escritura-imovel-required");
+        }
+
+        if (!contratoSocial) {
+            showRequiredMessageForID("contrato-social-required");
+        }
+
+        if (!cnpj) {
+            showRequiredMessageForID("cartao-cnpj-required");
+        }
+
+        if (!autorizacaoTelhado) {
+            showRequiredMessageForID("autorizacao-uso-telhado-required");
+        }
+
+        if (!fotosAgrupamento) {
+            showRequiredMessageForID("fotos-todos-padroes-required");
+        }
+
+        if (!fotosInversor) {
+            showRequiredMessageForID("fotos-inversor-usina-required");
+        }
+
+        if (!quantidadeModulos) {
+            showRequiredMessageForID("quantidade-potencia-modulos-required");
+        }
+
+        if (!procuracao) {
+            showRequiredMessageForID("procuracao-assinada-required");
+        }
+
+        if (!contrato) {
+            showRequiredMessageForID("contrato-assinado-required");
         }
     }
 
