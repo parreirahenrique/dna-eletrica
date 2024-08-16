@@ -725,21 +725,39 @@ function generateProxy() {
     }
 };
 
+function generateContract() {
+    if (fieldsFilled()) {
+
+    } else {
+        showMessage("Preencha todos os campos antes de prosseguir.", "error")
+    }
+}
+
+function generateDocuments() {
+    if (fieldsFilled()) {
+
+    } else {
+        showMessage("Preencha todos os campos antes de prosseguir.", "error")
+    }
+}
+
 function fieldsFilled() {
     const proxyVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0],null).getPropertyValue('visibility');
-    const contractVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0],null).getPropertyValue('visibility');
-    const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0],null).getPropertyValue('visibility');
+    const contractVisibility = window.getComputedStyle(document.getElementsByClassName("contract-container")[0],null).getPropertyValue('visibility');
+    const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("checklist-container")[0],null).getPropertyValue('visibility');
     
     const name = document.getElementsByClassName("name")[0].value;
     const cpfCnpj = document.getElementsByClassName("cpf-cnpj")[0].value;
-    const cep = document.getElementById("cep").value;
-    const address = document.getElementById("address").value;
-    const number = document.getElementById("number").value;
-    const neighborhood = document.getElementById("neighborhood").value;
-    const city = document.getElementById("city").value;
-    let filled = false;
     
+    let filled = false;
+
     if (proxyVisibility === "visible") {
+        const cep = document.getElementById("cep").value;
+        const address = document.getElementById("address").value;
+        const number = document.getElementById("number").value;
+        const neighborhood = document.getElementById("neighborhood").value;
+        const city = document.getElementById("city").value;
+
         filled = name && cpfCnpj && cep && address && number && neighborhood && city;
         
         if (!name) {
@@ -775,11 +793,152 @@ function fieldsFilled() {
         }
     }
 
+    if (contractVisibility === "visible") {
+        const paymentValue = document.getElementById("value").value;
+        const payment = document.getElementById("payment").value;
+        const instalment = document.getElementById("instalment").value;
+
+        const quantityModule = document.getElementById("quantity-module").value;
+        const manufacturerModule = document.getElementById("manufacturer-module").value;
+        const powerModule = document.getElementById("power-module").value;
+        
+        const quantityInverter1 = document.getElementById("quantity-inverter-1").value;
+        const manufacturerInverter1 = document.getElementById("manufacturer-inverter-1").value;
+        const powerInverter1 = document.getElementById("power-inverter-1").value;
+        
+        const quantityInverter2 = document.getElementById("quantity-inverter-2").value;
+        const manufacturerInverter2 = document.getElementById("manufacturer-inverter-2").value;
+        const powerInverter2 = document.getElementById("power-inverter-2").value;
+        
+        const quantityInverter3 = document.getElementById("quantity-inverter-3").value;
+        const manufacturerInverter3 = document.getElementById("manufacturer-inverter-3").value;
+        const powerInverter3 = document.getElementById("power-inverter-3").value;
+        
+        const quantityInverter4 = document.getElementById("quantity-inverter-4").value;
+        const manufacturerInverter4 = document.getElementById("manufacturer-inverter-4").value;
+        const powerInverter4 = document.getElementById("power-inverter-4").value;
+        
+        const inverter2 = document.getElementById("inverter-2");
+        const inverter3 = document.getElementById("inverter-3");
+        const inverter4 = document.getElementById("inverter-4");
+
+        const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"),null).getPropertyValue('visibility') === "hidden" ? true :
+                                (quantityInverter2 && manufacturerInverter2 !== "Selecione o fabricante" && powerInverter2 !== "Selecione a potência");
+
+        const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-3"),null).getPropertyValue('visibility') === "hidden" ? true :
+                                 (quantityInverter3 && manufacturerInverter3 !== "Selecione o fabricante" && powerInverter3 !== "Selecione a potência");
+
+        const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"),null).getPropertyValue('visibility') === "hidden" ? true :
+                                (quantityInverter4 && manufacturerInverter4 !== "Selecione o fabricante" && powerInverter4 !== "Selecione a potência");
+        
+        filled = FIRST_CONDITION && SECOND_CONDITION && THIRD_CONDITION &&
+                 name &&
+                 cpfCnpj &&
+                 paymentValue &&
+                 (payment !== "Selecione a forma") &&
+                 (instalment !== "Selecione a parcela") &&
+                 quantityModule &&
+                 (manufacturerModule !== "Selecione o fabricante") &&
+                 (powerModule !== "Selecione a potência") &&
+                 quantityInverter1 &&
+                 (manufacturerInverter1 !== "Selecione o fabricante") &&
+                 (powerInverter1 !== "Selecione a potência");
+
+        if (!name) {
+            showRequiredMessageForClass("nome-required");
+        }
+
+        if (!cpfCnpj) {
+            showRequiredMessageForClass("cpf-required");
+        }
+
+        if (!paymentValue){
+            showRequiredMessageForID("value-required");
+        }
+        
+        if (payment === "Selecione a forma"){
+            showRequiredMessageForID("payment-required");
+        }
+        
+        if (instalment === "Selecione a parcela"){
+            showRequiredMessageForID("instalment-required");
+        }
+        
+        if (!quantityModule){
+            showRequiredMessageForID("quantity-module-required");
+        }
+        
+        if (manufacturerModule === "Selecione o fabricante"){
+            showRequiredMessageForID("manufacturer-module-required");
+        }
+        
+        if (powerModule === "Selecione a potência"){
+            showRequiredMessageForID("power-module-required");
+        }
+        
+        if (!quantityInverter1){
+            showRequiredMessageForID("quantity-inverter-1-required");
+        }
+        
+        if (manufacturerInverter1 === "Selecione o fabricante"){
+            showRequiredMessageForID("manufacturer-inverter-1-required");
+        }
+        
+        if (powerInverter1 === "Selecione a potência"){
+            showRequiredMessageForID("power-inverter-1-required");
+        }
+        
+        if (!quantityInverter2){
+            showRequiredMessageForID("quantity-inverter-2-required");
+        }
+        
+        if (manufacturerInverter2 === "Selecione o fabricante"){
+            showRequiredMessageForID("manufacturer-inverter-2-required");
+        }
+        
+        if (powerInverter2 === "Selecione a potência"){
+            showRequiredMessageForID("power-inverter-2-required");
+        }
+        
+        if (!quantityInverter3){
+            showRequiredMessageForID("quantity-inverter-3-required");
+        }
+        
+        if (manufacturerInverter3 === "Selecione o fabricante"){
+            showRequiredMessageForID("manufacturer-inverter-3-required");
+        }
+        
+        if (powerInverter3 === "Selecione a potência"){
+            showRequiredMessageForID("power-inverter-3-required");
+        }
+        
+        if (!quantityInverter4){
+            showRequiredMessageForID("quantity-inverter-4-required");
+        }
+        
+        if (manufacturerInverter4 === "Selecione o fabricante"){
+            showRequiredMessageForID("manufacturer-inverter-4-required");
+        }
+        
+        if (powerInverter4 === "Selecione a potência"){
+            showRequiredMessageForID("power-inverter-4-required");
+        }
+
+        if (!filled) {
+            return filled;
+        }
+    }
+
+    if (contractVisibility === "visible") {
+        const paymentValue = document.getElementById("value").value;
+        const payment = document.getElementById("payment").value;
+
+        if (!filled) {
+            return filled;
+        }
+    }
+
     return filled;
-}
-
-function generateDocuments() {
-
 }
 
 function fillClientName(name) {
