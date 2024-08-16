@@ -870,7 +870,21 @@ function generateChecklist() {
 
 function generateDocuments() {
     if (fieldsFilled()) {
+        const proxyVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0], null).getPropertyValue('visibility');
+        const contractVisibility = window.getComputedStyle(document.getElementsByClassName("contract-container")[0], null).getPropertyValue('visibility');
+        const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("checklist-container")[0], null).getPropertyValue('visibility');
+        
+        if (proxyVisibility === "visible") {
+            generateProxy();
+        }
 
+        if (contractVisibility === "visible") {
+            generateContract();
+        }
+
+        if (checklistVisibility === "visible") {
+            generateChecklist();
+        }
     } else {
         showMessage("Preencha todos os campos antes de prosseguir.", "error")
     }
