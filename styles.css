@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round&display=swap');
+
 body {
     background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('img/background.png');
     background-size: cover; /* Para cobrir toda a área sem distorção */
@@ -358,4 +360,12 @@ input[type="checkbox"]:checked {
     background-color: rgb(200, 0, 0);
     display: none;
     visibility: hidden;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSI2Ij48cGF0aCBkPSJNNSA2TDAtMEw2LTUgTDExIDBMNSA2WiIgZmlsbD0iI0FBQUFBQSIgLz48L3N2Zz4=') no-repeat right center;
+    padding-right: 15px; /* Ajusta a posição da seta */
 }

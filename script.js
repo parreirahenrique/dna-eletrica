@@ -1,18 +1,38 @@
 const USERS = [
     {
+        "user": "Alexandre",
+        "role": "Salesman",
+        "password": "alexandre@dna2024"
+    },
+    {
+        "user": "Burica",
+        "role": "Salesman",
+        "password": "burica@dna2024"
+    },
+    {
+        "user": "Claudio",
+        "role": "Salesman",
+        "password": "claudio@dna2024"
+    },
+    {
+        "user": "Claudinei",
+        "role": "Salesman",
+        "password": "claudinei@dna2024"
+    },
+    {
+        "user": "Claudiovane",
+        "role": "Salesman",
+        "password": "claudiovane@dna2024"
+    },
+    {
+        "user": "Diogenes",
+        "role": "Salesman",
+        "password": "diogenes@dna2024"
+    },
+    {
         "user": "Henrique",
         "role": "Administrator",
         "password": "123"
-    },
-    {
-        "user": "Willy",
-        "role": "Administrator",
-        "password": "willy@dna2024"
-    },
-    {
-        "user": "Matheus Arouca",
-        "role": "Director",
-        "password": "arouca@dna2024"
     },
     {
         "user": "Iheleno",
@@ -20,11 +40,46 @@ const USERS = [
         "password": "iheleno@dna2024"
     },
     {
-        "user": "Claudiovane",
+        "user": "Jorge Luiz",
         "role": "Salesman",
-        "password": "claudiovane@dna2024"
+        "password": "jorge_luiz@dna2024"
+    },
+    {
+        "user": "Luciano",
+        "role": "Salesman",
+        "password": "luciano@dna2024"
+    },
+    {
+        "user": "Matheus Arouca",
+        "role": "Director",
+        "password": "arouca@dna2024"
+    },
+    {
+        "user": "Regis",
+        "role": "Salesman",
+        "password": "regis@dna2024"
+    },
+    {
+        "user": "Reinaldo",
+        "role": "Salesman",
+        "password": "reinaldo@dna2024"
+    },
+    {
+        "user": "Ronei",
+        "role": "Salesman",
+        "password": "ronei@dna2024"
+    },
+    {
+        "user": "Walace",
+        "role": "Salesman",
+        "password": "walace@dna2024"
+    },
+    {
+        "user": "Willy",
+        "role": "Administrator",
+        "password": "willy@dna2024"
     }
-]
+];
 
 function login() {
     let password = localStorage.getItem("password");
@@ -32,7 +87,7 @@ function login() {
     if (!password) {
         password = document.getElementById("password").value;
     }
-    
+
     if (validateUser(password)) {
         document.getElementById("logout-btn").style.visibility = "visible";
         document.getElementById("form-container").style.visibility = "visible";
@@ -74,7 +129,7 @@ function validateUser(password) {
             return true;
         }
     }
-    
+
     return false;
 }
 
@@ -181,12 +236,12 @@ function controlVisibility() {
                 proxyButton[i].style.visibility = "hidden";
                 proxyButton[i].style.display = "none";
             }
-            
+
             for (let i = 0; i < contractButton.length; i++) {
                 contractButton[i].style.visibility = "hidden";
                 contractButton[i].style.display = "none";
             }
-            
+
             for (let i = 0; i < checklistButton.length; i++) {
                 checklistButton[i].style.visibility = "hidden";
                 checklistButton[i].style.display = "none";
@@ -208,7 +263,7 @@ function controlVisibility() {
                 contractButton[i].style.display = "block";
                 contractButton[i].style.marginBottom = "0";
             }
-            
+
             for (let i = 0; i < allButton.length; i++) {
                 allButton[i].style.visibility = "hidden";
                 allButton[i].style.display = "none";
@@ -218,7 +273,7 @@ function controlVisibility() {
                 checklistButton[i].style.visibility = "visible";
                 checklistButton[i].style.display = "block";
             }
-            
+
             for (let i = 0; i < allButton.length; i++) {
                 allButton[i].style.visibility = "hidden";
                 allButton[i].style.display = "none";
@@ -237,12 +292,12 @@ function controlVisibility() {
                 proxyButton[i].style.visibility = "hidden";
                 proxyButton[i].style.display = "none";
             }
-            
+
             for (let i = 0; i < contractButton.length; i++) {
                 contractButton[i].style.visibility = "hidden";
                 contractButton[i].style.display = "none";
             }
-            
+
             for (let i = 0; i < checklistButton.length; i++) {
                 checklistButton[i].style.visibility = "hidden";
                 checklistButton[i].style.display = "none";
@@ -278,12 +333,12 @@ function controlVisibility() {
             proxyButton[i].style.visibility = "hidden";
             proxyButton[i].style.display = "none";
         }
-        
+
         for (let i = 0; i < contractButton.length; i++) {
             contractButton[i].style.visibility = "hidden";
             contractButton[i].style.display = "none";
         }
-        
+
         for (let i = 0; i < checklistButton.length; i++) {
             checklistButton[i].style.visibility = "hidden";
             checklistButton[i].style.display = "none";
@@ -296,15 +351,15 @@ function addInverter() {
     const inverter2 = document.getElementById("inverter-2");
     const inverter3 = document.getElementById("inverter-3");
     const inverter4 = document.getElementById("inverter-4");
-    
-    const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"),null).getPropertyValue('visibility') === "hidden";
 
-    const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"),null).getPropertyValue('visibility') === "visible" &&
-                            window.getComputedStyle(document.getElementById("inverter-3"),null).getPropertyValue('visibility') === "hidden";
-    
-    const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"),null).getPropertyValue('visibility') === "visible" &&
-                            window.getComputedStyle(document.getElementById("inverter-3"),null).getPropertyValue('visibility') === "visible" &&
-                            window.getComputedStyle(document.getElementById("inverter-4"),null).getPropertyValue('visibility') === "hidden";
+    const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"), null).getPropertyValue('visibility') === "hidden";
+
+    const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"), null).getPropertyValue('visibility') === "visible" &&
+        window.getComputedStyle(document.getElementById("inverter-3"), null).getPropertyValue('visibility') === "hidden";
+
+    const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"), null).getPropertyValue('visibility') === "visible" &&
+        window.getComputedStyle(document.getElementById("inverter-3"), null).getPropertyValue('visibility') === "visible" &&
+        window.getComputedStyle(document.getElementById("inverter-4"), null).getPropertyValue('visibility') === "hidden";
 
     if (FIRST_CONDITION) {
         inverter1.innerText = "Primeiro inversor";
@@ -324,15 +379,15 @@ function removeInverter() {
     const inverter2 = document.getElementById("inverter-2");
     const inverter3 = document.getElementById("inverter-3");
     const inverter4 = document.getElementById("inverter-4");
-    
-    const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"),null).getPropertyValue('visibility') === "visible";
 
-    const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"),null).getPropertyValue('visibility') === "hidden" &&
-                             window.getComputedStyle(document.getElementById("inverter-3"),null).getPropertyValue('visibility') === "visible";
-    
-    const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"),null).getPropertyValue('visibility') === "hidden" &&
-                            window.getComputedStyle(document.getElementById("inverter-3"),null).getPropertyValue('visibility') === "hidden" &&
-                            window.getComputedStyle(document.getElementById("inverter-2"),null).getPropertyValue('visibility') === "visible";
+    const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"), null).getPropertyValue('visibility') === "visible";
+
+    const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"), null).getPropertyValue('visibility') === "hidden" &&
+        window.getComputedStyle(document.getElementById("inverter-3"), null).getPropertyValue('visibility') === "visible";
+
+    const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"), null).getPropertyValue('visibility') === "hidden" &&
+        window.getComputedStyle(document.getElementById("inverter-3"), null).getPropertyValue('visibility') === "hidden" &&
+        window.getComputedStyle(document.getElementById("inverter-2"), null).getPropertyValue('visibility') === "visible";
 
     if (FIRST_CONDITION) {
         inverter4.style.visibility = "hidden";
@@ -517,7 +572,7 @@ function controlChecklistCheckboxes(checkboxChanged) {
     } else if (checkboxChanged === telhadoColetivo && telhadoColetivo.checked) {
         telhadoIndividual.checked = false;
     }
-    
+
     if (comAumento.checked) {
         for (let i = 0; i < disjuntorSolicitado.length; i++) {
             disjuntorSolicitado[i].style.visibility = "visible";
@@ -613,7 +668,7 @@ function controlChecklistCheckboxes(checkboxChanged) {
             quantidadeModulos[i].style.visibility = "hidden";
             quantidadeModulos[i].style.display = "none";
         }
-        
+
         for (let i = 0; i < fotosUsina.length; i++) {
             fotosUsina[i].style.visibility = "hidden";
             fotosUsina[i].style.display = "none";
@@ -652,7 +707,7 @@ function loadFile(url, callback) {
 function generateProxy() {
     if (fieldsFilled()) {
         const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
-        
+
         const name = document.getElementsByClassName("name")[0].value;
         const cpfCnpj = document.getElementsByClassName("cpf-cnpj")[0].value;
         const cep = document.getElementById("cep").value;
@@ -737,6 +792,76 @@ function generateContract() {
 
 function generateChecklist() {
     if (fieldsFilled()) {
+        const container = document.getElementsByClassName('checklist-container')[0];
+        const { jsPDF } = window.jspdf;
+        
+        // Calcula a escala baseada na largura da página A4 em pixels, subtraindo as margens
+        const pdfWidth = 595.28 - 40; // Largura em pontos para uma página A4, menos 20px de margem de cada lado
+        const containerWidth = container.scrollWidth + 60;
+        const scale = pdfWidth / containerWidth; // Calcula a escala para caber no PDF
+        
+        const pdf = new jsPDF('p', 'pt', 'a4');
+        
+        // Estilo CSS adicional para forçar a fonte do Bootstrap no PDF e ajustar o fundo
+        const customStyles = `
+            .checklist-container {
+                font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !important;
+                background-color: #f0f0f0 !important; /* Cor de fundo um pouco mais escura */
+                padding: 20px; /* Adiciona padding para criar um contraste com o fundo do PDF */
+                border-radius: 8px; /* Bordas arredondadas para um visual mais suave */
+            }
+            
+            .subtitle {
+                background-color: #f0f0f0 !important;
+                font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !important;
+            }
+
+            .header-title {
+                font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !important;
+            }
+
+            .botao-checklist {
+                display: none;
+            }
+
+            .input-wrapper {
+                border: 1px solid #aaaaaa; /* Borda da div */
+            }
+        `;
+        
+        // Estilo CSS adicional para remover setas das caixas de seleção no PDF
+        const removeSelectArrowStyle = `
+            select {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background: none !important;
+            }
+        `;
+        
+        pdf.html(container, {
+            callback: function (doc) {
+                doc.save('checklist.pdf');
+            },
+            x: 20, // Margem à esquerda
+            y: 10, // Pequena margem no topo
+            margin: [10, 20, 10, 20], // Margens: [topo, direita, inferior, esquerda]
+            autoPaging: true,
+            width: containerWidth,
+            html2canvas: {
+                scale: scale, // Ajuste de escala baseado na largura
+                useCORS: true,
+                scrollX: 0,
+                scrollY: 0,
+                onclone: (clonedDoc) => {
+                    // Injeta os estilos CSS na cópia do documento
+                    const style = clonedDoc.createElement('style');
+                    style.innerHTML = customStyles + removeSelectArrowStyle;
+                    clonedDoc.head.appendChild(style);
+                }
+            }
+        });
+        
 
     } else {
         showMessage("Preencha todos os campos antes de prosseguir.", "error")
@@ -752,13 +877,13 @@ function generateDocuments() {
 }
 
 function fieldsFilled() {
-    const proxyVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0],null).getPropertyValue('visibility');
-    const contractVisibility = window.getComputedStyle(document.getElementsByClassName("contract-container")[0],null).getPropertyValue('visibility');
-    const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("checklist-container")[0],null).getPropertyValue('visibility');
-    
+    const proxyVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0], null).getPropertyValue('visibility');
+    const contractVisibility = window.getComputedStyle(document.getElementsByClassName("contract-container")[0], null).getPropertyValue('visibility');
+    const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("checklist-container")[0], null).getPropertyValue('visibility');
+
     const name = document.getElementsByClassName("name")[0].value;
     const cpfCnpj = document.getElementsByClassName("cpf-cnpj")[0].value;
-    
+
     let filled = false;
 
     if (proxyVisibility === "visible") {
@@ -769,7 +894,7 @@ function fieldsFilled() {
         const city = document.getElementById("city").value;
 
         filled = name && cpfCnpj && cep && address && number && neighborhood && city;
-        
+
         if (!name) {
             showRequiredMessageForClass("nome-required");
         }
@@ -807,48 +932,48 @@ function fieldsFilled() {
         const quantityModule = document.getElementById("quantity-module").value;
         const manufacturerModule = document.getElementById("manufacturer-module").value;
         const powerModule = document.getElementById("power-module").value;
-        
+
         const quantityInverter1 = document.getElementById("quantity-inverter-1").value;
         const manufacturerInverter1 = document.getElementById("manufacturer-inverter-1").value;
         const powerInverter1 = document.getElementById("power-inverter-1").value;
-        
+
         const quantityInverter2 = document.getElementById("quantity-inverter-2").value;
         const manufacturerInverter2 = document.getElementById("manufacturer-inverter-2").value;
         const powerInverter2 = document.getElementById("power-inverter-2").value;
-        
+
         const quantityInverter3 = document.getElementById("quantity-inverter-3").value;
         const manufacturerInverter3 = document.getElementById("manufacturer-inverter-3").value;
         const powerInverter3 = document.getElementById("power-inverter-3").value;
-        
+
         const quantityInverter4 = document.getElementById("quantity-inverter-4").value;
         const manufacturerInverter4 = document.getElementById("manufacturer-inverter-4").value;
         const powerInverter4 = document.getElementById("power-inverter-4").value;
-        
+
         const inverter2 = document.getElementById("inverter-2");
         const inverter3 = document.getElementById("inverter-3");
         const inverter4 = document.getElementById("inverter-4");
 
-        const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"),null).getPropertyValue('visibility') === "hidden" ? true :
-                                (quantityInverter2 && manufacturerInverter2 !== "Selecione o fabricante" && powerInverter2 !== "Selecione a potência");
+        const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"), null).getPropertyValue('visibility') === "hidden" ? true :
+            (quantityInverter2 && manufacturerInverter2 !== "Selecione o fabricante" && powerInverter2 !== "Selecione a potência");
 
-        const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-3"),null).getPropertyValue('visibility') === "hidden" ? true :
-                                 (quantityInverter3 && manufacturerInverter3 !== "Selecione o fabricante" && powerInverter3 !== "Selecione a potência");
+        const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-3"), null).getPropertyValue('visibility') === "hidden" ? true :
+            (quantityInverter3 && manufacturerInverter3 !== "Selecione o fabricante" && powerInverter3 !== "Selecione a potência");
 
-        const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"),null).getPropertyValue('visibility') === "hidden" ? true :
-                                (quantityInverter4 && manufacturerInverter4 !== "Selecione o fabricante" && powerInverter4 !== "Selecione a potência");
-        
+        const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"), null).getPropertyValue('visibility') === "hidden" ? true :
+            (quantityInverter4 && manufacturerInverter4 !== "Selecione o fabricante" && powerInverter4 !== "Selecione a potência");
+
         filled = FIRST_CONDITION && SECOND_CONDITION && THIRD_CONDITION &&
-                 name &&
-                 cpfCnpj &&
-                 paymentValue &&
-                 (payment !== "Selecione a forma") &&
-                 (instalment !== "Selecione a parcela") &&
-                 quantityModule &&
-                 (manufacturerModule !== "Selecione o fabricante") &&
-                 (powerModule !== "Selecione a potência") &&
-                 quantityInverter1 &&
-                 (manufacturerInverter1 !== "Selecione o fabricante") &&
-                 (powerInverter1 !== "Selecione a potência");
+            name &&
+            cpfCnpj &&
+            paymentValue &&
+            (payment !== "Selecione a forma") &&
+            (instalment !== "Selecione a parcela") &&
+            quantityModule &&
+            (manufacturerModule !== "Selecione o fabricante") &&
+            (powerModule !== "Selecione a potência") &&
+            quantityInverter1 &&
+            (manufacturerInverter1 !== "Selecione o fabricante") &&
+            (powerInverter1 !== "Selecione a potência");
 
         if (!name) {
             showRequiredMessageForClass("nome-required");
@@ -858,75 +983,75 @@ function fieldsFilled() {
             showRequiredMessageForClass("cpf-required");
         }
 
-        if (!paymentValue){
+        if (!paymentValue) {
             showRequiredMessageForID("value-required");
         }
-        
-        if (payment === "Selecione a forma"){
+
+        if (payment === "Selecione a forma") {
             showRequiredMessageForID("payment-required");
         }
-        
-        if (instalment === "Selecione a parcela"){
+
+        if (instalment === "Selecione a parcela") {
             showRequiredMessageForID("instalment-required");
         }
-        
-        if (!quantityModule){
+
+        if (!quantityModule) {
             showRequiredMessageForID("quantity-module-required");
         }
-        
-        if (manufacturerModule === "Selecione o fabricante"){
+
+        if (manufacturerModule === "Selecione o fabricante") {
             showRequiredMessageForID("manufacturer-module-required");
         }
-        
-        if (powerModule === "Selecione a potência"){
+
+        if (powerModule === "Selecione a potência") {
             showRequiredMessageForID("power-module-required");
         }
-        
-        if (!quantityInverter1){
+
+        if (!quantityInverter1) {
             showRequiredMessageForID("quantity-inverter-1-required");
         }
-        
-        if (manufacturerInverter1 === "Selecione o fabricante"){
+
+        if (manufacturerInverter1 === "Selecione o fabricante") {
             showRequiredMessageForID("manufacturer-inverter-1-required");
         }
-        
-        if (powerInverter1 === "Selecione a potência"){
+
+        if (powerInverter1 === "Selecione a potência") {
             showRequiredMessageForID("power-inverter-1-required");
         }
-        
-        if (!quantityInverter2){
+
+        if (!quantityInverter2) {
             showRequiredMessageForID("quantity-inverter-2-required");
         }
-        
-        if (manufacturerInverter2 === "Selecione o fabricante"){
+
+        if (manufacturerInverter2 === "Selecione o fabricante") {
             showRequiredMessageForID("manufacturer-inverter-2-required");
         }
-        
-        if (powerInverter2 === "Selecione a potência"){
+
+        if (powerInverter2 === "Selecione a potência") {
             showRequiredMessageForID("power-inverter-2-required");
         }
-        
-        if (!quantityInverter3){
+
+        if (!quantityInverter3) {
             showRequiredMessageForID("quantity-inverter-3-required");
         }
-        
-        if (manufacturerInverter3 === "Selecione o fabricante"){
+
+        if (manufacturerInverter3 === "Selecione o fabricante") {
             showRequiredMessageForID("manufacturer-inverter-3-required");
         }
-        
-        if (powerInverter3 === "Selecione a potência"){
+
+        if (powerInverter3 === "Selecione a potência") {
             showRequiredMessageForID("power-inverter-3-required");
         }
-        
-        if (!quantityInverter4){
+
+        if (!quantityInverter4) {
             showRequiredMessageForID("quantity-inverter-4-required");
         }
-        
-        if (manufacturerInverter4 === "Selecione o fabricante"){
+
+        if (manufacturerInverter4 === "Selecione o fabricante") {
             showRequiredMessageForID("manufacturer-inverter-4-required");
         }
-        
-        if (powerInverter4 === "Selecione a potência"){
+
+        if (powerInverter4 === "Selecione a potência") {
             showRequiredMessageForID("power-inverter-4-required");
         }
     }
@@ -998,28 +1123,28 @@ function fieldsFilled() {
         console.log(TWELFTH_CONDITION)
         console.log(THIRTEENTH_CONDITION)
         filled = FIRST_CONDITION &&
-                 SECOND_CONDITION &&
-                 THIRD_CONDITION &&
-                 FOURTH_CONDITION &&
-                 FIFTH_CONDITION &&
-                 SIXTH_CONDITION &&
-                 SEVENTH_CONDITION &&
-                 EIGHTH_CONDITION &&
-                 NINTH_CONDITION &&
-                 TENTH_CONDITION &&
-                 ELEVENTH_CONDITION &&
-                 TWELFTH_CONDITION &&
-                 THIRTEENTH_CONDITION &&
-                 name &&
-                 coordenadas &&
-                 disjuntorAtual &&
-                 correnteAtual &&
-                 documento &&
-                 fatura &&
-                 coordenadasPadrao &&
-                 fotosPadrao &&
-                 procuracao &&
-                 contrato;
+            SECOND_CONDITION &&
+            THIRD_CONDITION &&
+            FOURTH_CONDITION &&
+            FIFTH_CONDITION &&
+            SIXTH_CONDITION &&
+            SEVENTH_CONDITION &&
+            EIGHTH_CONDITION &&
+            NINTH_CONDITION &&
+            TENTH_CONDITION &&
+            ELEVENTH_CONDITION &&
+            TWELFTH_CONDITION &&
+            THIRTEENTH_CONDITION &&
+            name &&
+            coordenadas &&
+            disjuntorAtual &&
+            correnteAtual &&
+            documento &&
+            fatura &&
+            coordenadasPadrao &&
+            fotosPadrao &&
+            procuracao &&
+            contrato;
 
         if (!name) {
             showRequiredMessageForClass("nome-required");

@@ -210,12 +210,11 @@
                                 <option selected>Selecione o fabricante</option>
                                 <option value="belenergy">BelEnergy</option>
                                 <option value="canadian-solar">Canadian Solar</option>
-                                <option value="first-solar">First Solar</option>
+                                <option value="dah-solar">DAH Solar</option>
                                 <option value="ja-solar">JA Solar</option>
                                 <option value="jinko">Jinko</option>
                                 <option value="longi">Longi</option>
                                 <option value="q-cells">Q Cells</option>
-                                <option value="rec">REC</option>
                                 <option value="sunpower">SunPower</option>
                                 <option value="trina">Trina</option>
                             </select>
@@ -225,26 +224,7 @@
                             <label for="power-module" class="form-label">Potência</label>
                             <select id="power-module" class="form-select" required>
                                 <option selected>Selecione a potência</option>
-                                <option value="450">450 Wp</option>
-                                <option value="455">455 Wp</option>
-                                <option value="460">460 Wp</option>
-                                <option value="465">465 Wp</option>
-                                <option value="470">470 Wp</option>
-                                <option value="475">475 Wp</option>
-                                <option value="480">480 Wp</option>
-                                <option value="485">485 Wp</option>
-                                <option value="490">490 Wp</option>
-                                <option value="495">495 Wp</option>
-                                <option value="500">500 Wp</option>
-                                <option value="505">505 Wp</option>
-                                <option value="510">510 Wp</option>
-                                <option value="515">515 Wp</option>
-                                <option value="520">520 Wp</option>
-                                <option value="525">525 Wp</option>
-                                <option value="530">530 Wp</option>
-                                <option value="535">535 Wp</option>
-                                <option value="540">540 Wp</option>
-                                <option value="545">545 Wp</option>
+                                
                                 <option value="550">550 Wp</option>
                                 <option value="555">555 Wp</option>
                                 <option value="560">560 Wp</option>
@@ -300,12 +280,11 @@
                                 <option value="deye">Deye</option>
                                 <option value="fronius">Fronius</option>
                                 <option value="growatt">Growatt</option>
+                                <option value="hoymiles">Hoymiles</option>
                                 <option value="huawei">Huawei</option>
                                 <option value="renovigi">Renovigi</option>
-                                <option value="sma">SMA</option>
                                 <option value="solis">Solis</option>
                                 <option value="sungrow">Sungrow</option>
-                                <option value="victron">Victron</option>
                             </select>
                             <div id="manufacturer-inverter-1-required" class="required-message">Obrigatório.</div>
                         </div>
@@ -314,6 +293,7 @@
                             <select id="power-inverter-1" class="form-select" required>
                                 <option selected>Selecione a potência</option>
                                 <option value="2">2 kW</option>
+                                <option value="2.25">2,25 kW</option>
                                 <option value="3">3 kW</option>
                                 <option value="4">4 kW</option>
                                 <option value="5">5 kW</option>
@@ -333,6 +313,7 @@
                                 <option value="100">100 kW</option>
                                 <option value="110">110 kW</option>
                                 <option value="125">125 kW</option>
+                                <option value="250">250 kW</option>
                             </select>
                             <div id="power-inverter-1-required" class="required-message">Obrigatório.</div>
                         </div>
@@ -811,7 +792,8 @@
                                 <label class="form-check-label documento-oficial" for="documento-oficial">Documento
                                     oficial do titular com
                                     foto e CPF com validade recente</label>
-                                <div id="documento-oficial-required" class="required-message-checkbox">Obrigatório.</div>
+                                <div id="documento-oficial-required" class="required-message-checkbox">Obrigatório.
+                                </div>
                             </div>
                             <div class="form-check procuracao-troca-titularidade">
                                 <input class="form-check-input procuracao-troca-titularidade" type="checkbox"
@@ -819,7 +801,8 @@
                                 <label class="form-check-label procuracao-troca-titularidade"
                                     for="procuracao-troca-titularidade">Contrato de locação ou
                                     procuração para troca de titularidade</label>
-                                <div id="procuracao-troca-titularidade-required" class="required-message-checkbox">Obrigatório.
+                                <div id="procuracao-troca-titularidade-required" class="required-message-checkbox">
+                                    Obrigatório.
                                 </div>
                             </div>
                             <div class="form-check fatura-cemig">
@@ -833,7 +816,8 @@
                                 <label class="form-check-label coordenadas-padrao" for="coordenadas-padrao">Coordenadas
                                     do padrão
                                     atual</label>
-                                <div id="coordenadas-padrao-required" class="required-message-checkbox">Obrigatório.</div>
+                                <div id="coordenadas-padrao-required" class="required-message-checkbox">Obrigatório.
+                                </div>
                             </div>
                             <div class="form-check fotos-padrao-disjuntor">
                                 <input class="form-check-input fotos-padrao-disjuntor" type="checkbox"
@@ -841,7 +825,8 @@
                                 <label class="form-check-label fotos-padrao-disjuntor"
                                     for="fotos-padrao-disjuntor">Fotos do padrão e
                                     disjuntor</label>
-                                <div id="fotos-padrao-disjuntor-required" class="required-message-checkbox">Obrigatório.</div>
+                                <div id="fotos-padrao-disjuntor-required" class="required-message-checkbox">Obrigatório.
+                                </div>
                             </div>
                             <div class="form-check car">
                                 <input class="form-check-input car" type="checkbox" id="car">
@@ -873,7 +858,8 @@
                                 <label class="form-check-label autorizacao-uso-telhado"
                                     for="autorizacao-uso-telhado">Autorização de uso do
                                     telhado</label>
-                                <div id="autorizacao-uso-telhado-required" class="required-message-checkbox">Obrigatório.</div>
+                                <div id="autorizacao-uso-telhado-required" class="required-message-checkbox">
+                                    Obrigatório.</div>
                             </div>
                             <div class="form-check fotos-todos-padroes">
                                 <input class="form-check-input fotos-todos-padroes" type="checkbox"
@@ -881,7 +867,8 @@
                                 <label class="form-check-label fotos-todos-padroes" for="fotos-todos-padroes">Fotos de
                                     todos os padrões,
                                     disjuntores e disjuntor geral</label>
-                                <div id="fotos-todos-padroes-required" class="required-message-checkbox">Obrigatório.</div>
+                                <div id="fotos-todos-padroes-required" class="required-message-checkbox">Obrigatório.
+                                </div>
                             </div>
                             <div class="form-check fotos-inversor-usina">
                                 <input class="form-check-input fotos-inversor-usina" type="checkbox"
@@ -890,7 +877,8 @@
                                     inversor já
                                     instalado e
                                     da usina</label>
-                                <div id="fotos-inversor-usina-required" class="required-message-checkbox">Obrigatório.</div>
+                                <div id="fotos-inversor-usina-required" class="required-message-checkbox">Obrigatório.
+                                </div>
                             </div>
                             <div class="form-check quantidade-potencia-modulos">
                                 <input class="form-check-input quantidade-potencia-modulos" type="checkbox"
@@ -899,7 +887,8 @@
                                     for="quantidade-potencia-modulos">Quantidade e potência
                                     dos
                                     módulos já instalados</label>
-                                <div id="quantidade-potencia-modulos-required" class="required-message-checkbox">Obrigatório.
+                                <div id="quantidade-potencia-modulos-required" class="required-message-checkbox">
+                                    Obrigatório.
                                 </div>
                             </div>
                             <div class="form-check procuracao-assinada">
@@ -907,25 +896,27 @@
                                     id="procuracao-assinada">
                                 <label class="form-check-label procuracao-assinada" for="documento-oficial">Procuração
                                     assinada</label>
-                                <div id="procuracao-assinada-required" class="required-message-checkbox">Obrigatório.</div>
+                                <div id="procuracao-assinada-required" class="required-message-checkbox">Obrigatório.
+                                </div>
                             </div>
                             <div class="form-check contrato-assinado">
                                 <input class="form-check-input contrato-assinado" type="checkbox"
                                     id="contrato-assinado">
                                 <label class="form-check-label contrato-assinado" for="contrato-assinado">Contrato de
                                     compra de equipamentos assinado</label>
-                                <div id="contrato-assinado-required" class="required-message-checkbox">Obrigatório.</div>
+                                <div id="contrato-assinado-required" class="required-message-checkbox">Obrigatório.
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="d-flex justify-content-center botao-checklist">
-                <button class="btn w-100 last-btn botao-checklist" onclick="generateChecklist()">Obter checklist</button>
-            </div>
         </div>
 
+        <div class="d-flex justify-content-center botao-checklist">
+            <button class="btn w-100 last-btn botao-checklist" onclick="generateChecklist()">Obter
+                checklist</button>
+        </div>
         <div class="d-flex justify-content-center botao-todos-documentos">
             <button class="btn w-100 last-btn  botao-todos-documentos" onclick="generateDocuments()">Obter todos os
                 documentos</button>
@@ -933,9 +924,10 @@
     </div>
     <div id="error-message" class="error-message">Error message</div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.49.0/docxtemplater.js"></script>
     <script src="https://unpkg.com/pizzip@3.1.7/dist/pizzip.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
