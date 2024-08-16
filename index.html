@@ -80,11 +80,11 @@
                     <div class="row mb-1">
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control name" id="name" required>
+                            <input type="text" class="form-control name" classe="name" oninput="fillClientName(this.value)" required>
                         </div>
                         <div class="col-md-6">
                             <label for="cpf" class="form-label">CPF/CNPJ</label>
-                            <input type="text" class="form-control cpf-cnpj" id="cpf-cnpj" oninput="formatCPF_CNPJ()" required>
+                            <input type="text" class="form-control cpf-cnpj" class="cpf-cnpj" oninput="formatCPF_CNPJ(this.value)" required>
                         </div>
                     </div>
                 </div>
@@ -137,11 +137,11 @@
                     <div class="row mb-1">
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control name" id="name" required>
+                            <input type="text" class="form-control name" class="name" oninput="fillClientName(this.value)" required>
                         </div>
                         <div class="col-md-6">
                             <label for="cpf" class="form-label">CPF/CNPJ</label>
-                            <input type="text" class="form-control cpf-cnpj" id="cpf-cnpj" oninput="formatCPF_CNPJ()" required>
+                            <input type="text" class="form-control cpf-cnpj" class="cpf-cnpj" oninput="formatCPF_CNPJ(this.value)" required>
                         </div>
                     </div>
                 </div>
@@ -490,7 +490,7 @@
                     <div class="row mb-1">
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control name" id="name" required>
+                            <input type="text" class="form-control name" class="name" oninput="fillClientName(this.value)" required>
                         </div>
                         <div class="col mt-5">
                             <div class="form-check">
@@ -545,7 +545,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="coordenadas-geograficas" class="form-label">Coordenadas geográficas</label>
-                            <input type="text" class="form-control" id="name" required>
+                            <input type="text" class="form-control" class="name" oninput="fillClientName(this.value)" required>
                         </div>
                     </div>
                 </div>
@@ -834,7 +834,7 @@
         </div>
 
         <div class="d-flex justify-content-center botao-todos-documentos">
-            <button class="btn w-100 last-btn  botao-todos-documentos" onclick="generateProxy()">Obter todos os documentos</button>
+            <button class="btn w-100 last-btn  botao-todos-documentos" onclick="generateDocuments()">Obter todos os documentos</button>
         </div>
     </div>
     <div id="error-message" class="error-message">Error message</div>

@@ -75,7 +75,6 @@ function validateUser(password) {
 
 function controlVisibility() {
     const role = localStorage.getItem("role");
-    console.log(role)
 
     const selectionContainer = document.getElementsByClassName("selection-container");
     const proxyContainer = document.getElementsByClassName("proxy-container");
@@ -378,8 +377,6 @@ function getFullAddress() {
             .catch(error => {
                 showMessage(error.message, "error");
             });
-    } else if (cep && cep.length) {
-        console.log("O CEP deve ter 8 dígitos");
     }
 }
 
@@ -423,31 +420,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function formatCPF_CNPJ() {
-    const input = document.getElementById("cpf-cnpj");
-    let value = input.value.replace(/\D/g, '');
+function formatCPF_CNPJ(value) {
+    const inputs = document.getElementsByClassName("cpf-cnpj");
 
-    if (value.length < 11) {
-        input.value = value;
-    }
+    value = value.replace(/\D/g, '');
 
-    else if (value.length === 11) {
+    if (value.length === 11) {
         value = value.slice(0, 3) + '.' + value.slice(3, 6) + '.' + value.slice(6, 9) + '-' + value.slice(9, 11);
-        input.value = value;
     }
 
     else {
-        input.value = value;
-
         if (value.length === 14) {
             value = value.slice(0, 2) + '.' + value.slice(2, 5) + '.' + value.slice(5, 8) + '/' + value.slice(8, 12) + '-' + value.slice(12, 14);
-            input.value = value;
         } else if (value.length > 14) {
             value = value.slice(0, 14);
             value = value.slice(0, 2) + '.' + value.slice(2, 5) + '.' + value.slice(5, 8) + '/' + value.slice(8, 12) + '-' + value.slice(12, 14);
-            input.value = value;
             showMessage("CNPJ deve ter, no máximo, 14 dígitos.", "error");
         }
+    }
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = value;
     }
 }
 
@@ -654,8 +647,8 @@ function generateProxy() {
     if (fieldsFilled()) {
         const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
         
-        const name = document.getElementById("name").value;
-        const cpfCnpj = document.getElementById("cpf-cnpj").value;
+        const name = document.getElementsByClassName("name")[0].value;
+        const cpfCnpj = document.getElementsByClassName("cpf-cnpj")[0].value;
         const cep = document.getElementById("cep").value;
         const address = document.getElementById("address").value;
         const number = document.getElementById("number").value;
@@ -729,24 +722,31 @@ function generateProxy() {
 };
 
 function fieldsFilled() {
-    const name = document.getElementById("name").value;
-    const cpfCnpj = document.getElementById("cpf-cnpj").value;
+    const proxyVisibility = window.getComputedStyle(document.getElementById("proxy-container"),null).getPropertyValue('visibility');
+    const contractVisibility = window.getComputedStyle(document.getElementById("proxy-container"),null).getPropertyValue('visibility');
+    const checklistVisibility = window.getComputedStyle(document.getElementById("proxy-container"),null).getPropertyValue('visibility');
+    
+    const name = document.getElementsByClassName("name")[0].value;
+    const cpfCnpj = document.getElementsByClassName("cpf-cnpj")[0].value;
     const cep = document.getElementById("cep").value;
     const address = document.getElementById("address").value;
     const number = document.getElementById("number").value;
     const neighborhood = document.getElementById("neighborhood").value;
     const city = document.getElementById("city").value;
 
-    return name && cpfCnpj && cep && address && number && neighborhood && city;
+    if (proxyVisibility === "visible") {
+        return name && cpfCnpj && cep && address && number && neighborhood && city;
+    }   
 }
 
-function toggleDisjuntor() {
-    var checkBox = document.getElementById('alteracao-carga');
-    var disjuntorGroup = document.getElementById('disjuntor-group');
-    if (checkBox.checked) {
-        disjuntorGroup.classList.remove('d-none');
-    } else {
-        disjuntorGroup.classList.add('d-none');
+function generateDocuments() {
+
+}
+
+function fillClientName(name) {
+    const inputs = document.getElementsByClassName("name");
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = name;
     }
 }
-
