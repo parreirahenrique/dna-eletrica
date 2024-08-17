@@ -928,7 +928,9 @@ function fieldsFilled() {
     const name = document.getElementsByClassName("name")[0].value;
     const cpfCnpj = document.getElementsByClassName("cpf-cnpj")[0].value;
 
-    let filled = false;
+    let filledProxy = false;
+    let filledContract = false;
+    let filledChecklist = false;
 
     if (proxyVisibility === "visible") {
         const cep = document.getElementById("cep").value;
@@ -937,7 +939,7 @@ function fieldsFilled() {
         const neighborhood = document.getElementById("neighborhood").value;
         const city = document.getElementById("city").value;
 
-        filled = name && cpfCnpj && cep && address && number && neighborhood && city;
+        filledProxy = name && cpfCnpj && cep && address && number && neighborhood && city;
 
         if (!name) {
             showRequiredMessageForClass("nome-required");
@@ -1009,7 +1011,7 @@ function fieldsFilled() {
         const FOURTH_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"), null).getPropertyValue('visibility') === "hidden" ? true :
             (quantityInverter4 && manufacturerInverter4 !== "Selecione o fabricante" && powerInverter4 !== "Selecione a potência");
 
-        filled = FIRST_CONDITION && SECOND_CONDITION && THIRD_CONDITION && FOURTH_CONDITION &&
+        filledContract = FIRST_CONDITION && SECOND_CONDITION && THIRD_CONDITION && FOURTH_CONDITION &&
             name &&
             cpfCnpj &&
             paymentValue &&
@@ -1160,7 +1162,7 @@ function fieldsFilled() {
         const TWELFTH_CONDITION = !telhadoColetivo ? true : autorizacaoTelhado;
         const THIRTEENTH_CONDITION = !comAumento ? true : disjuntorSolicitado && correnteSolicitado;
 
-        filled = FIRST_CONDITION &&
+        filledChecklist = FIRST_CONDITION &&
             SECOND_CONDITION &&
             THIRD_CONDITION &&
             FOURTH_CONDITION &&
@@ -1296,7 +1298,11 @@ function fieldsFilled() {
         }
     }
 
-    return filled;
+    const PROXY_INVISIBLE_OR_FILLED = !proxyVisibility ? true : filledProxy;
+    const CONTRACT_INVISIBLE_OR_FILLED = !contractVisibility ? true : filledContract;
+    const CHECKLIST_INVISIBLE_OR_FILLED = !checklistVisibility ? true : filledChecklist;
+
+    return PROXY_INVISIBLE_OR_FILLED && CONTRACT_INVISIBLE_OR_FILLED && CHECKLIST_INVISIBLE_OR_FILLED;
 }
 
 function fillClientName(name) {
