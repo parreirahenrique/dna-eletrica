@@ -1298,9 +1298,9 @@ function fieldsFilled() {
         }
     }
 
-    const PROXY_INVISIBLE_OR_FILLED = !proxyVisibility ? true : filledProxy;
-    const CONTRACT_INVISIBLE_OR_FILLED = !contractVisibility ? true : filledContract;
-    const CHECKLIST_INVISIBLE_OR_FILLED = !checklistVisibility ? true : filledChecklist;
+    const PROXY_INVISIBLE_OR_FILLED = proxyVisibility === "hidden" ? true : filledProxy;
+    const CONTRACT_INVISIBLE_OR_FILLED = contractVisibility === "hidden" ? true : filledContract;
+    const CHECKLIST_INVISIBLE_OR_FILLED = checklistVisibility === "hidden" ? true : filledChecklist;
 
     return PROXY_INVISIBLE_OR_FILLED && CONTRACT_INVISIBLE_OR_FILLED && CHECKLIST_INVISIBLE_OR_FILLED;
 }
