@@ -511,6 +511,10 @@ function controlChecklistCheckboxes(checkboxChanged) {
     const pessoaJuridica = document.getElementById("pessoa-juridica");
     const urbano = document.getElementById("urbano");
     const rural = document.getElementById("rural");
+    const ceramico = document.getElementById("telhado-ceramico");
+    const metalico = document.getElementById("telhado-metalico");
+    const laje = document.getElementById("laje");
+    const solo = document.getElementById("solo");
     const semAumento = document.getElementById("sem-aumento-carga");
     const comAumento = document.getElementById("com-aumento-carga");
     const aumentoUsina = document.getElementById("aumento-usina");
@@ -543,14 +547,34 @@ function controlChecklistCheckboxes(checkboxChanged) {
         urbano.checked = false;
     }
 
+    if (checkboxChanged === ceramico && ceramico.checked) {
+        metalico.checked = false;
+        laje.checked = false;
+        solo.checked = false;
+    } else if (checkboxChanged === metalico && metalico.checked) {
+        ceramico.checked = false;
+        laje.checked = false;
+        solo.checked = false;
+    } else if (checkboxChanged === laje && laje.checked) {
+        ceramico.checked = false;
+        metalico.checked = false;
+        solo.checked = false;
+    } else if (checkboxChanged === solo && solo.checked) {
+        ceramico.checked = false;
+        metalico.checked = false;
+        laje.checked = false;
+    }
+
     if (checkboxChanged === semAumento && semAumento.checked) {
         comAumento.checked = false;
+        ligacaoNova.checked = false;
     } else if (checkboxChanged === comAumento && comAumento.checked) {
         semAumento.checked = false;
         ligacaoNova.checked = false;
     } else if (checkboxChanged === aumentoUsina && aumentoUsina.checked) {
         ligacaoNova.checked = false;
     } else if (checkboxChanged === ligacaoNova && ligacaoNova.checked) {
+        semAumento.checked = false;
         comAumento.checked = false;
         aumentoUsina.checked = false;
     }
@@ -965,10 +989,6 @@ function fieldsFilled() {
         const manufacturerInverter4 = document.getElementById("manufacturer-inverter-4").value;
         const powerInverter4 = document.getElementById("power-inverter-4").value;
 
-        const inverter2 = document.getElementById("inverter-2");
-        const inverter3 = document.getElementById("inverter-3");
-        const inverter4 = document.getElementById("inverter-4");
-
         const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"), null).getPropertyValue('visibility') === "hidden" ? true :
             (quantityInverter2 && manufacturerInverter2 !== "Selecione o fabricante" && powerInverter2 !== "Selecione a potência");
 
@@ -1078,6 +1098,10 @@ function fieldsFilled() {
         const pessoaJuridica = document.getElementById("pessoa-juridica").checked;
         const urbano = document.getElementById("urbano").checked;
         const rural = document.getElementById("rural").checked;
+        const ceramico = document.getElementById("telhado-ceramico").checked;
+        const metalico = document.getElementById("telhado-metalico").checked;
+        const laje = document.getElementById("laje").checked;
+        const solo = document.getElementById("solo").checked;
         const semAumento = document.getElementById("sem-aumento-carga").checked;
         const comAumento = document.getElementById("com-aumento-carga").checked;
         const aumentoUsina = document.getElementById("aumento-usina").checked;
@@ -1113,31 +1137,19 @@ function fieldsFilled() {
 
         const FIRST_CONDITION = pessoaFisica || pessoaJuridica;
         const SECOND_CONDITION = urbano || rural;
-        const THIRD_CONDITION = semAumento || comAumento;
-        const FOURTH_CONDITION = individual || agrupamento;
-        const FIFTH_CONDITION = telhadoIndividual || telhadoColetivo;
-        const SIXTH_CONDITION = !trocaTitularidade ? true : procuracaoTroca;
-        const SEVENTH_CONDITION = !pessoaJuridica ? true : cartaoCNPJ && contratoSocial;
-        const EIGHTH_CONDITION = !rural ? true : car;
-        const NINTH_CONDITION = !aumentoUsina ? true : fotosInversor && quantidadeModulos;
-        const TENTH_CONDITION = !ligacaoNova ? true : escritura;
-        const ELEVENTH_CONDITION = !agrupamento ? true : escritura && fotosAgrupamento && disjuntorGeral && correnteGeral;
-        const TWELFTH_CONDITION = !telhadoColetivo ? true : autorizacaoTelhado;
-        const THIRTEENTH_CONDITION = !comAumento ? true : disjuntorSolicitado && correnteSolicitado;
+        const THIRD_CONDITION = ceramico || metalico || laje || solo;
+        const FOURTH_CONDITION = !ligacaoNova ? semAumento || comAumento : true;
+        const FIFTH_CONDITION = individual || agrupamento;
+        const SIXTH_CONDITION = telhadoIndividual || telhadoColetivo;
+        const SEVENTH_CONDITION = !trocaTitularidade ? true : procuracaoTroca;
+        const EIGHTH_CONDITION = !pessoaJuridica ? true : cartaoCNPJ && contratoSocial;
+        const NINTH_CONDITION = !rural ? true : car;
+        const TENTH_CONDITION = !aumentoUsina ? true : fotosInversor && quantidadeModulos;
+        const ELEVENTH_CONDITION = !ligacaoNova ? true : escritura;
+        const TWELFTH_CONDITION = !agrupamento ? true : escritura && fotosAgrupamento && disjuntorGeral && correnteGeral;
+        const THIRTEENTH_CONDITION = !telhadoColetivo ? true : autorizacaoTelhado;
+        const FOURTEENTH_CONDITION = !comAumento ? true : disjuntorSolicitado && correnteSolicitado;
 
-        console.log(FIRST_CONDITION)
-        console.log(SECOND_CONDITION)
-        console.log(THIRD_CONDITION)
-        console.log(FOURTH_CONDITION)
-        console.log(FIFTH_CONDITION)
-        console.log(SIXTH_CONDITION)
-        console.log(SEVENTH_CONDITION)
-        console.log(EIGHTH_CONDITION)
-        console.log(NINTH_CONDITION)
-        console.log(TENTH_CONDITION)
-        console.log(ELEVENTH_CONDITION)
-        console.log(TWELFTH_CONDITION)
-        console.log(THIRTEENTH_CONDITION)
         filled = FIRST_CONDITION &&
             SECOND_CONDITION &&
             THIRD_CONDITION &&
@@ -1151,6 +1163,7 @@ function fieldsFilled() {
             ELEVENTH_CONDITION &&
             TWELFTH_CONDITION &&
             THIRTEENTH_CONDITION &&
+            FOURTEENTH_CONDITION &&
             name &&
             coordenadas &&
             disjuntorAtual &&
@@ -1173,11 +1186,15 @@ function fieldsFilled() {
             showRequiredMessageForID("checkbox-2-required");
         }
 
+        if (!ceramico && !metalico && !laje && !solo) {
+            showRequiredMessageForID("structure-required");
+        }
+
         if (!coordenadas) {
             showRequiredMessageForID("coordinates-required");
         }
 
-        if (!semAumento && !comAumento) {
+        if (!semAumento && !comAumento && !ligacaoNova) {
             showRequiredMessageForID("checkbox-3-required");
         }
 
