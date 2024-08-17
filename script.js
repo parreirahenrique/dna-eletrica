@@ -838,10 +838,12 @@ function generateChecklist() {
                 background: none !important;
             }
         `;
-        
+
+        const name = document.getElementsByClassName("name")[0].value;
+
         pdf.html(container, {
             callback: function (doc) {
-                doc.save('checklist.pdf');
+                doc.save(`Checklist - ${name}.pdf`);
             },
             x: 20, // Margem à esquerda
             y: 10, // Pequena margem no topo
