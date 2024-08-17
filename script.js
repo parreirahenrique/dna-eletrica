@@ -505,16 +505,38 @@ function formatCPF_CNPJ(value) {
     }
 }
 
+function controlContractCheckboxes(checkboxChanged) {
+    const ceramico = document.getElementById("telhado-ceramico");
+    const metalico = document.getElementById("telhado-metalico");
+    const laje = document.getElementById("laje");
+    const solo = document.getElementById("solo");
+
+    if (checkboxChanged === ceramico && ceramico.checked) {
+        metalico.checked = false;
+        laje.checked = false;
+        solo.checked = false;
+    } else if (checkboxChanged === metalico && metalico.checked) {
+        ceramico.checked = false;
+        laje.checked = false;
+        solo.checked = false;
+    } else if (checkboxChanged === laje && laje.checked) {
+        ceramico.checked = false;
+        metalico.checked = false;
+        solo.checked = false;
+    } else if (checkboxChanged === solo && solo.checked) {
+        ceramico.checked = false;
+        metalico.checked = false;
+        laje.checked = false;
+    }
+}
+
 function controlChecklistCheckboxes(checkboxChanged) {
     const trocaTitularidade = document.getElementById("troca-titularidade");
     const pessoaFisica = document.getElementById("pessoa-fisica");
     const pessoaJuridica = document.getElementById("pessoa-juridica");
     const urbano = document.getElementById("urbano");
     const rural = document.getElementById("rural");
-    const ceramico = document.getElementById("telhado-ceramico");
-    const metalico = document.getElementById("telhado-metalico");
-    const laje = document.getElementById("laje");
-    const solo = document.getElementById("solo");
+    
     const semAumento = document.getElementById("sem-aumento-carga");
     const comAumento = document.getElementById("com-aumento-carga");
     const aumentoUsina = document.getElementById("aumento-usina");
@@ -545,24 +567,6 @@ function controlChecklistCheckboxes(checkboxChanged) {
         rural.checked = false;
     } else if (checkboxChanged === rural && rural.checked) {
         urbano.checked = false;
-    }
-
-    if (checkboxChanged === ceramico && ceramico.checked) {
-        metalico.checked = false;
-        laje.checked = false;
-        solo.checked = false;
-    } else if (checkboxChanged === metalico && metalico.checked) {
-        ceramico.checked = false;
-        laje.checked = false;
-        solo.checked = false;
-    } else if (checkboxChanged === laje && laje.checked) {
-        ceramico.checked = false;
-        metalico.checked = false;
-        solo.checked = false;
-    } else if (checkboxChanged === solo && solo.checked) {
-        ceramico.checked = false;
-        metalico.checked = false;
-        laje.checked = false;
     }
 
     if (checkboxChanged === semAumento && semAumento.checked) {
@@ -965,6 +969,11 @@ function fieldsFilled() {
     }
 
     if (contractVisibility === "visible") {
+        const ceramico = document.getElementById("telhado-ceramico").checked;
+        const metalico = document.getElementById("telhado-metalico").checked;
+        const laje = document.getElementById("laje").checked;
+        const solo = document.getElementById("solo").checked;
+
         const paymentValue = document.getElementById("value").value;
         const payment = document.getElementById("payment").value;
         const instalment = document.getElementById("instalment").value;
@@ -989,16 +998,18 @@ function fieldsFilled() {
         const manufacturerInverter4 = document.getElementById("manufacturer-inverter-4").value;
         const powerInverter4 = document.getElementById("power-inverter-4").value;
 
-        const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"), null).getPropertyValue('visibility') === "hidden" ? true :
+        const FIRST_CONDITION = ceramico || metalico || laje || solo;
+        
+        const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"), null).getPropertyValue('visibility') === "hidden" ? true :
             (quantityInverter2 && manufacturerInverter2 !== "Selecione o fabricante" && powerInverter2 !== "Selecione a potência");
 
-        const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-3"), null).getPropertyValue('visibility') === "hidden" ? true :
+        const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-3"), null).getPropertyValue('visibility') === "hidden" ? true :
             (quantityInverter3 && manufacturerInverter3 !== "Selecione o fabricante" && powerInverter3 !== "Selecione a potência");
 
-        const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"), null).getPropertyValue('visibility') === "hidden" ? true :
+        const FOURTH_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"), null).getPropertyValue('visibility') === "hidden" ? true :
             (quantityInverter4 && manufacturerInverter4 !== "Selecione o fabricante" && powerInverter4 !== "Selecione a potência");
 
-        filled = FIRST_CONDITION && SECOND_CONDITION && THIRD_CONDITION &&
+        filled = FIRST_CONDITION && SECOND_CONDITION && THIRD_CONDITION && FOURTH_CONDITION &&
             name &&
             cpfCnpj &&
             paymentValue &&
@@ -1017,6 +1028,10 @@ function fieldsFilled() {
 
         if (!cpfCnpj) {
             showRequiredMessageForClass("cpf-required");
+        }
+
+        if (!ceramico && !metalico && !laje && !solo) {
+            showRequiredMessageForID("structure-required");
         }
 
         if (!paymentValue) {
@@ -1098,10 +1113,6 @@ function fieldsFilled() {
         const pessoaJuridica = document.getElementById("pessoa-juridica").checked;
         const urbano = document.getElementById("urbano").checked;
         const rural = document.getElementById("rural").checked;
-        const ceramico = document.getElementById("telhado-ceramico").checked;
-        const metalico = document.getElementById("telhado-metalico").checked;
-        const laje = document.getElementById("laje").checked;
-        const solo = document.getElementById("solo").checked;
         const semAumento = document.getElementById("sem-aumento-carga").checked;
         const comAumento = document.getElementById("com-aumento-carga").checked;
         const aumentoUsina = document.getElementById("aumento-usina").checked;
@@ -1137,18 +1148,17 @@ function fieldsFilled() {
 
         const FIRST_CONDITION = pessoaFisica || pessoaJuridica;
         const SECOND_CONDITION = urbano || rural;
-        const THIRD_CONDITION = ceramico || metalico || laje || solo;
-        const FOURTH_CONDITION = !ligacaoNova ? semAumento || comAumento : true;
-        const FIFTH_CONDITION = individual || agrupamento;
-        const SIXTH_CONDITION = telhadoIndividual || telhadoColetivo;
-        const SEVENTH_CONDITION = !trocaTitularidade ? true : procuracaoTroca;
-        const EIGHTH_CONDITION = !pessoaJuridica ? true : cartaoCNPJ && contratoSocial;
-        const NINTH_CONDITION = !rural ? true : car;
-        const TENTH_CONDITION = !aumentoUsina ? true : fotosInversor && quantidadeModulos;
-        const ELEVENTH_CONDITION = !ligacaoNova ? true : escritura;
-        const TWELFTH_CONDITION = !agrupamento ? true : escritura && fotosAgrupamento && disjuntorGeral && correnteGeral;
-        const THIRTEENTH_CONDITION = !telhadoColetivo ? true : autorizacaoTelhado;
-        const FOURTEENTH_CONDITION = !comAumento ? true : disjuntorSolicitado && correnteSolicitado;
+        const THIRD_CONDITION = !ligacaoNova ? semAumento || comAumento : true;
+        const FOURTH_CONDITION = individual || agrupamento;
+        const FIFTH_CONDITION = telhadoIndividual || telhadoColetivo;
+        const SIXTH_CONDITION = !trocaTitularidade ? true : procuracaoTroca;
+        const SEVENTH_CONDITION = !pessoaJuridica ? true : cartaoCNPJ && contratoSocial;
+        const EIGHTH_CONDITION = !rural ? true : car;
+        const NINTH_CONDITION = !aumentoUsina ? true : fotosInversor && quantidadeModulos;
+        const TENTH_CONDITION = !ligacaoNova ? true : escritura;
+        const ELEVENTH_CONDITION = !agrupamento ? true : escritura && fotosAgrupamento && disjuntorGeral && correnteGeral;
+        const TWELFTH_CONDITION = !telhadoColetivo ? true : autorizacaoTelhado;
+        const THIRTEENTH_CONDITION = !comAumento ? true : disjuntorSolicitado && correnteSolicitado;
 
         filled = FIRST_CONDITION &&
             SECOND_CONDITION &&
@@ -1163,7 +1173,6 @@ function fieldsFilled() {
             ELEVENTH_CONDITION &&
             TWELFTH_CONDITION &&
             THIRTEENTH_CONDITION &&
-            FOURTEENTH_CONDITION &&
             name &&
             coordenadas &&
             disjuntorAtual &&
@@ -1184,10 +1193,6 @@ function fieldsFilled() {
 
         if (!urbano && !rural) {
             showRequiredMessageForID("checkbox-2-required");
-        }
-
-        if (!ceramico && !metalico && !laje && !solo) {
-            showRequiredMessageForID("structure-required");
         }
 
         if (!coordenadas) {

@@ -165,6 +165,48 @@
             </div>
 
             <div class="bordered-section">
+                <h5 class="subtitle">Estrutura</h5>
+                <div class="input-wrapper">
+                    <div class="row mb-3">
+                        <div class="row col-md-6 mx-auto">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="telhado-ceramico"
+                                        onchange="controlContractCheckboxes(this)">
+                                    <label class="form-check-label" for="telhado-ceramico">Telhado cerâmico</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="telhado-metalico"
+                                        onchange="controlContractCheckboxes(this)">
+                                    <label class="form-check-label" for="telhado-metalico">Telhado metálico</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-6 mx-auto">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="laje"
+                                        onchange="controlContractCheckboxes(this)">
+                                    <label class="form-check-label" for="laje">Laje</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="solo"
+                                        onchange="controlContractCheckboxes(this)">
+                                    <label class="form-check-label" for="solo">Solo</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="structure-required" class="required-message">Selecione "Telhado cerâmico", "Telhado metálico", "Laje" ou
+                        "Solo".</div>
+                </div>
+            </div>
+
+            <div class="bordered-section">
                 <h5 class="subtitle">Pagamento</h5>
                 <div class="input-wrapper">
                     <div class="row mb-3">
@@ -195,6 +237,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="bordered-section">
                 <h5 class="subtitle">Módulo fotovoltaico</h5>
                 <div class="input-wrapper">
@@ -577,48 +620,6 @@
                             <div id="coordinates-required" class="required-message">Obrigatório.</div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="bordered-section">
-                <h5 class="subtitle">Estrutura</h5>
-                <div class="input-wrapper">
-                    <div class="row mb-3">
-                        <div class="row col-md-6 mx-auto">
-                            <div class="col">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="telhado-ceramico"
-                                        onchange="controlChecklistCheckboxes(this)">
-                                    <label class="form-check-label" for="telhado-ceramico">Telhado cerâmico</label>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="telhado-metalico"
-                                        onchange="controlChecklistCheckboxes(this)">
-                                    <label class="form-check-label" for="telhado-metalico">Telhado metálico</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row col-md-6 mx-auto">
-                            <div class="col">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="laje"
-                                        onchange="controlChecklistCheckboxes(this)">
-                                    <label class="form-check-label" for="laje">Laje</label>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="solo"
-                                        onchange="controlChecklistCheckboxes(this)">
-                                    <label class="form-check-label" for="solo">Solo</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="structure-required" class="required-message">Selecione "Telhado cerâmico", "Telhado metálico", "Laje" ou
-                        "Solo".</div>
                 </div>
             </div>
 
