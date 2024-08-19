@@ -210,21 +210,26 @@
                 <h5 class="subtitle">Pagamento</h5>
                 <div class="input-wrapper">
                     <div class="row mb-3">
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="container-value">
                             <label for="value" class="form-label">Valor</label>
-                            <input type="text" class="form-control" id="value" required>
+                            <input type="number" class="form-control" id="value" required>
                             <div id="value-required" class="required-message">Obrigatório.</div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="container-payment">
                             <label for="payment" class="form-label">Forma de pagamento</label>
-                            <select id="payment" class="form-select" required>
+                            <select id="payment" class="form-select" oninput="checkPayment()" required>
                                 <option selected>Selecione a forma</option>
                                 <option value="all">À vista</option>
                                 <option value="divided">Entrada mais um pagamento</option>
+                                <option value="outro">Outro</option>
                             </select>
                             <div id="payment-required" class="required-message">Obrigatório.</div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3 other-container" id="container-other-payment">
+                            <label for="other-payment" class="form-label">Descrição</label>
+                            <input type="text" class="form-control" id="other-payment" required>
+                        </div>
+                        <div class="col-md-4" id="container-instalment">
                             <label for="instalment" class="form-label">Parcela</label>
                             <select id="instalment" class="form-select" required>
                                 <option selected>Selecione a parcela</option>

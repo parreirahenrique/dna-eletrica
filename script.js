@@ -1366,3 +1366,24 @@ function checkManufacturer(name) {
     }
     
 }
+
+function checkPayment() {
+    const payment = document.getElementById("payment");
+
+    if (payment.value === "outro") {
+        document.getElementById("container-value").className = "col-md-3";
+        document.getElementById("container-payment").className = "col-md-3";
+        document.getElementById("container-instalment").className = "col-md-3";
+        
+        document.getElementById("container-other-payment").style.visibility = "visible";
+        document.getElementById("container-other-payment").style.display = "block";
+    } else {
+        document.getElementById("container-value").className = "col-md-4";
+        document.getElementById("container-payment").className = "col-md-4";
+        document.getElementById("container-instalment").className = "col-md-4";
+        
+        document.getElementById("container-other-payment").style.visibility = "hidden";
+        document.getElementById("container-other-payment").style.display = "none";
+    }
+    
+}
