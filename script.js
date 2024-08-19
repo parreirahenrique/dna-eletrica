@@ -1340,3 +1340,29 @@ function showRequiredMessageForID(inputName) {
         input.style.display = "none";
     }, 15000);
 }
+
+function checkManufacturer(name) {
+    const quantityContainer = "container-quantity-" + name;
+    const manufacturerContainer = "container-manufacturer-" + name;
+    const otherManufacturerContainer = "container-other-manufacturer-" + name;
+    const powerContainer = "container-power-" + name;
+
+    const manufacturer = document.getElementById("manufacturer-" + name);
+
+    if (manufacturer.value === "outro") {
+        document.getElementById(quantityContainer).className = "col-md-3";
+        document.getElementById(manufacturerContainer).className = "col-md-3";
+        document.getElementById(powerContainer).className = "col-md-3";
+        
+        document.getElementById(otherManufacturerContainer).style.visibility = "visible";
+        document.getElementById(otherManufacturerContainer).style.display = "block";
+    } else {
+        document.getElementById(quantityContainer).className = "col-md-4";
+        document.getElementById(manufacturerContainer).className = "col-md-4";
+        document.getElementById(powerContainer).className = "col-md-4";
+        
+        document.getElementById(otherManufacturerContainer).style.visibility = "hidden";
+        document.getElementById(otherManufacturerContainer).style.display = "none";
+    }
+    
+}

@@ -242,14 +242,14 @@
                 <h5 class="subtitle">Módulo fotovoltaico</h5>
                 <div class="input-wrapper">
                     <div class="row mb-3">
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="container-quantity-module">
                             <label for="quantity-module" class="form-label">Quantidade</label>
                             <input type="number" class="form-control" id="quantity-module" required>
                             <div id="quantity-module-required" class="required-message">Obrigatório.</div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="container-manufacturer-module">
                             <label for="manufacturer-module" class="form-label">Fabricante</label>
-                            <select id="manufacturer-module" class="form-select" required>
+                            <select id="manufacturer-module" class="form-select" oninput="checkManufacturer('module')" required>
                                 <option selected>Selecione o fabricante</option>
                                 <option value="belenergy">BelEnergy</option>
                                 <option value="canadian-solar">Canadian Solar</option>
@@ -260,10 +260,15 @@
                                 <option value="q-cells">Q Cells</option>
                                 <option value="sunpower">SunPower</option>
                                 <option value="trina">Trina</option>
+                                <option value="outro">Outro</option>
                             </select>
                             <div id="manufacturer-module-required" class="required-message">Obrigatório.</div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3 other-container" id="container-other-manufacturer-module">
+                            <label for="other-manufacturer-module" class="form-label">Nome do fabricante</label>
+                            <input type="text" class="form-control" id="other-manufacturer-module" required>
+                        </div>
+                        <div class="col-md-4" id="container-power-module">
                             <label for="power-module" class="form-label">Potência</label>
                             <select id="power-module" class="form-select" required>
                                 <option selected>Selecione a potência</option>
@@ -310,14 +315,14 @@
                 <h5 class="subtitle" id="inverter-1">Inversor</h5>
                 <div class="input-wrapper">
                     <div class="row mb-3">
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="container-quantity-inverter-1">
                             <label for="quantity-inverter-1" class="form-label">Quantidade</label>
                             <input type="number" class="form-control" id="quantity-inverter-1" required>
                             <div id="quantity-inverter-1-required" class="required-message">Obrigatório.</div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="container-manufacturer-inverter-1">
                             <label for="manufacturer-inverter-1" class="form-label">Fabricante</label>
-                            <select id="manufacturer-inverter-1" class="form-select" required>
+                            <select id="manufacturer-inverter-1" class="form-select" oninput="checkManufacturer('inverter-1')" required>
                                 <option selected>Selecione o fabricante</option>
                                 <option value="belenergy">BelEnergy</option>
                                 <option value="deye">Deye</option>
@@ -328,10 +333,15 @@
                                 <option value="renovigi">Renovigi</option>
                                 <option value="solis">Solis</option>
                                 <option value="sungrow">Sungrow</option>
+                                <option value="outro">Outro</option>
                             </select>
                             <div id="manufacturer-inverter-1-required" class="required-message">Obrigatório.</div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3 other-container" id="container-other-manufacturer-inverter-1">
+                            <label for="other-manufacturer-inverter-1" class="form-label">Nome do fabricante</label>
+                            <input type="text" class="form-control" id="other-manufacturer-inverter-1" required>
+                        </div>
+                        <div class="col-md-4" id="container-power-inverter-1">
                             <label for="power-inverter-1" class="form-label">Potência (kW)</label>
                             <select id="power-inverter-1" class="form-select" required>
                                 <option selected>Selecione a potência</option>
@@ -368,29 +378,33 @@
                 <h5 class="subtitle">Segundo inversor</h5>
                 <div class="input-wrapper">
                     <div class="row mb-3">
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="container-quantity-inverter-2">
                             <label for="quantity-inverter-2" class="form-label">Quantidade</label>
                             <input type="number" class="form-control" id="quantity-inverter-2" required>
                             <div id="quantity-inverter-2-required" class="required-message">Obrigatório.</div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="container-manufacturer-inverter-2">
                             <label for="manufacturer-inverter-2" class="form-label">Fabricante</label>
-                            <select id="manufacturer-inverter-2" class="form-select" required>
+                            <select id="manufacturer-inverter-2" class="form-select" oninput="checkManufacturer('inverter-2')" required>
                                 <option selected>Selecione o fabricante</option>
                                 <option value="belenergy">BelEnergy</option>
                                 <option value="deye">Deye</option>
                                 <option value="fronius">Fronius</option>
                                 <option value="growatt">Growatt</option>
+                                <option value="hoymiles">Hoymiles</option>
                                 <option value="huawei">Huawei</option>
                                 <option value="renovigi">Renovigi</option>
-                                <option value="sma">SMA</option>
                                 <option value="solis">Solis</option>
                                 <option value="sungrow">Sungrow</option>
-                                <option value="victron">Victron</option>
+                                <option value="outro">Outro</option>
                             </select>
                             <div id="manufacturer-inverter-2-required" class="required-message">Obrigatório.</div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3 other-container" id="container-other-manufacturer-inverter-2">
+                            <label for="other-manufacturer-inverter-2" class="form-label">Nome do fabricante</label>
+                            <input type="text" class="form-control" id="other-manufacturer-inverter-2" required>
+                        </div>
+                        <div class="col-md-4" id="container-power-inverter-2">
                             <label for="power-inverter-2" class="form-label">Potência (kW)</label>
                             <select id="power-inverter-2" class="form-select" required>
                                 <option selected>Selecione a potência</option>
@@ -426,29 +440,33 @@
                 <h5 class="subtitle">Terceiro inversor</h5>
                 <div class="input-wrapper">
                     <div class="row mb-3">
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="container-quantity-inverter-3">
                             <label for="quantity-inverter-3" class="form-label">Quantidade</label>
                             <input type="number" class="form-control" id="quantity-inverter-3" required>
                             <div id="quantity-inverter-3-required" class="required-message">Obrigatório.</div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="container-manufacturer-inverter-3">
                             <label for="manufacturer-inverter-3" class="form-label">Fabricante</label>
-                            <select id="manufacturer-inverter-3" class="form-select" required>
+                            <select id="manufacturer-inverter-3" class="form-select" oninput="checkManufacturer('inverter-3')" required>
                                 <option selected>Selecione o fabricante</option>
                                 <option value="belenergy">BelEnergy</option>
                                 <option value="deye">Deye</option>
                                 <option value="fronius">Fronius</option>
                                 <option value="growatt">Growatt</option>
+                                <option value="hoymiles">Hoymiles</option>
                                 <option value="huawei">Huawei</option>
                                 <option value="renovigi">Renovigi</option>
-                                <option value="sma">SMA</option>
                                 <option value="solis">Solis</option>
                                 <option value="sungrow">Sungrow</option>
-                                <option value="victron">Victron</option>
+                                <option value="outro">Outro</option>
                             </select>
                             <div id="manufacturer-inverter-3-required" class="required-message">Obrigatório.</div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3 other-container" id="container-other-manufacturer-inverter-3">
+                            <label for="other-manufacturer-inverter-3" class="form-label">Nome do fabricante</label>
+                            <input type="text" class="form-control" id="other-manufacturer-inverter-3" required>
+                        </div>
+                        <div class="col-md-4" id="container-power-inverter-3">
                             <label for="power-inverter-3" class="form-label">Potência (kW)</label>
                             <select id="power-inverter-3" class="form-select" required>
                                 <option selected>Selecione a potência</option>
@@ -483,29 +501,33 @@
                 <h5 class="subtitle">Quarto inversor</h5>
                 <div class="input-wrapper">
                     <div class="row mb-3">
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="container-quantity-inverter-4">
                             <label for="quantity-inverter-4" class="form-label">Quantidade</label>
                             <input type="number" class="form-control" id="quantity-inverter-4" required>
                             <div id="quantity-inverter-4-required" class="required-message">Obrigatório.</div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="container-manufacturer-inverter-4">
                             <label for="manufacturer-inverter-4" class="form-label">Fabricante</label>
-                            <select id="manufacturer-inverter-4" class="form-select" required>
+                            <select id="manufacturer-inverter-4" class="form-select" oninput="checkManufacturer('inverter-4')" required>
                                 <option selected>Selecione o fabricante</option>
                                 <option value="belenergy">BelEnergy</option>
                                 <option value="deye">Deye</option>
                                 <option value="fronius">Fronius</option>
                                 <option value="growatt">Growatt</option>
+                                <option value="hoymiles">Hoymiles</option>
                                 <option value="huawei">Huawei</option>
                                 <option value="renovigi">Renovigi</option>
-                                <option value="sma">SMA</option>
                                 <option value="solis">Solis</option>
                                 <option value="sungrow">Sungrow</option>
-                                <option value="victron">Victron</option>
+                                <option value="outro">Outro</option>
                             </select>
                             <div id="manufacturer-inverter-4-required" class="required-message">Obrigatório.</div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3 other-container" id="container-other-manufacturer-inverter-4">
+                            <label for="other-manufacturer-inverter-4" class="form-label">Nome do fabricante</label>
+                            <input type="text" class="form-control" id="other-manufacturer-inverter-4" required>
+                        </div>
+                        <div class="col-md-4" id="container-power-inverter-4">
                             <label for="power-inverter-4" class="form-label">Potência (kW)</label>
                             <select id="power-inverter-4" class="form-select" required>
                                 <option selected>Selecione a potência</option>
