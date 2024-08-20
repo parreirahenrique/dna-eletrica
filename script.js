@@ -375,6 +375,11 @@ function controlVisibility() {
             contractContainer[i].style.visibility = "hidden";
             contractContainer[i].style.display = "none";
         }
+        
+        for (let i = 0; i < changeProxyContainer.length; i++) {
+            changeProxyContainer[i].style.visibility = "hidden";
+            changeProxyContainer[i].style.display = "none";
+        }
 
         for (let i = 0; i < checklistContainer.length; i++) {
             checklistContainer[i].style.visibility = "hidden";
