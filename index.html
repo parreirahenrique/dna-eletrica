@@ -141,7 +141,8 @@
                     <div class="row mb-1">
                         <div class="col-md-6">
                             <label for="bairro" class="form-label">Bairro</label>
-                            <input type="text" class="form-control neighborhood" oninput="fillNeighborhood(this.value)" required>
+                            <input type="text" class="form-control neighborhood" oninput="fillNeighborhood(this.value)"
+                                required>
                             <div class="neighborhood-required">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
@@ -215,7 +216,8 @@
                     <div class="row mb-1">
                         <div class="col-md-6">
                             <label for="bairro" class="form-label">Bairro</label>
-                            <input type="text" class="form-control neighborhood" oninput="fillNeighborhood(this.value)" required>
+                            <input type="text" class="form-control neighborhood" oninput="fillNeighborhood(this.value)"
+                                required>
                             <div class="neighborhood-required">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
@@ -716,7 +718,8 @@
                     <div class="row mb-1">
                         <div class="col-md-6">
                             <label for="bairro" class="form-label">Bairro</label>
-                            <input type="text" class="form-control neighborhood" oninput="fillNeighborhood(this.value)" required>
+                            <input type="text" class="form-control neighborhood" oninput="fillNeighborhood(this.value)"
+                                required>
                             <div class="neighborhood-required">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
@@ -739,58 +742,39 @@
             <div class="bordered-section">
                 <h5 class="subtitle">Cliente</h5>
                 <div class="input-wrapper">
-                    <div class="row mb-1">
-                        <div class="col-md-6">
+                    <div class="row">
+                        <div class="col">
                             <label for="nome" class="form-label">Nome</label>
                             <input type="text" class="form-control name" class="name"
                                 oninput="fillClientName(this.value)" required>
                             <div class="nome-required">Obrigatório.</div>
                         </div>
                     </div>
-                    <div class="row mb-1">
-                        <div class="row col-md-6">
-                            <div class="col">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="troca-titularidade"
-                                        onchange="controlChecklistCheckboxes(this)">
-                                    <label class="form-check-label" for="troca-titularidade">Troca de
-                                        titularidade</label>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-4 d-flex justify-content-start mt-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="pessoa-juridica"
+                                    onchange="controlChecklistCheckboxes(this)">
+                                <label class="form-check-label" for="pessoa-juridica">Pessoa jurídica</label>
                             </div>
-                            <div class="col">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="pessoa-fisica"
-                                        onchange="controlChecklistCheckboxes(this)">
-                                    <label class="form-check-label" for="pessoa-fisica">Pessoa física</label>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="pessoa-juridica"
-                                        onchange="controlChecklistCheckboxes(this)">
-                                    <label class="form-check-label" for="pessoa-juridica">Pessoa jurídica</label>
-                                </div>
-                            </div>
-                            <div id="checkbox-1-required" class="required-message">Selecione "Pessoa física" ou "Pessoa
-                                jurídica".</div>
                         </div>
-                        <div class="row col-md-6">
-                            <div class="col">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="urbano"
-                                        onchange="controlChecklistCheckboxes(this)">
-                                    <label class="form-check-label" for="urbano">Urbano</label>
-                                </div>
+                        <div class="col-md-4 d-flex justify-content-center mt-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="pessoa-fisica"
+                                    onchange="controlChecklistCheckboxes(this)">
+                                <label class="form-check-label" for="pessoa-fisica">Pessoa física</label>
                             </div>
-                            <div class="col">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="rural"
-                                        onchange="controlChecklistCheckboxes(this)">
-                                    <label class="form-check-label" for="rural">Rural</label>
-                                </div>
-                            </div>
-                            <div id="checkbox-2-required" class="required-message">Selecione "Urbano" ou "Rural".</div>
                         </div>
+                        <div class="col-md-4 d-flex justify-content-end mt-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="troca-titularidade"
+                                    onchange="controlChecklistCheckboxes(this)">
+                                <label class="form-check-label" for="troca-titularidade">Troca de
+                                    titularidade</label>
+                            </div>
+                        </div>
+                        <div id="checkbox-1-required" class="required-message">Selecione "Pessoa física" ou "Pessoa
+                            jurídica".</div>
                     </div>
                 </div>
             </div>
@@ -816,7 +800,7 @@
                 <h5 class="subtitle">Projeto</h5>
                 <div class="input-wrapper">
                     <div class="row mb-3">
-                        <div class="row col-md-6 mx-auto">
+                        <div class="row">
                             <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="sem-aumento-carga"
@@ -832,7 +816,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row col-md-6 mx-auto">
+                        <div class="row">
                             <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="ligacao-nova"
@@ -858,7 +842,24 @@
                 <h5 class="subtitle">Instalação</h5>
                 <div class="input-wrapper">
                     <div class="row mb-3">
-                        <div class="row col-md-6 mx-auto">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="urbano"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="urbano">Urbano</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rural"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="rural">Rural</label>
+                                </div>
+                            </div>
+                            <div id="checkbox-2-required" class="required-message">Selecione "Urbano" ou "Rural".</div>
+                        </div>
+                        <div class="row">
                             <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="instalacao-individual"
@@ -877,7 +878,7 @@
                             <div id="checkbox-4-required" class="required-message">Selecione "Instalação individual" ou
                                 "Agrupamento".</div>
                         </div>
-                        <div class="row col-md-6 mx-auto">
+                        <div class="row">
                             <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="telhado-individual"

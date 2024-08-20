@@ -1033,6 +1033,7 @@ function generateDocuments() {
     if (fieldsFilled()) {
         const proxyVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0], null).getPropertyValue('visibility');
         const contractVisibility = window.getComputedStyle(document.getElementsByClassName("contract-container")[0], null).getPropertyValue('visibility');
+        const changeProxyVisibility = window.getComputedStyle(document.getElementsByClassName("change-proxy-container")[0], null).getPropertyValue('visibility');
         const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("checklist-container")[0], null).getPropertyValue('visibility');
         
         if (proxyVisibility === "visible") {
@@ -1041,6 +1042,10 @@ function generateDocuments() {
 
         if (contractVisibility === "visible") {
             generateContract();
+        }
+
+        if (changeProxyVisibility === "visible") {
+            generateChangeProxy();
         }
 
         if (checklistVisibility === "visible") {
