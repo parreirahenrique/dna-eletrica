@@ -37,14 +37,14 @@
     </div>
 
     <div class="form-container" id="form-container">
-        <div class="selection-container">
+        <div>
             <h3 class="header-title">Seleção de documentos</h3>
             <div class="bordered-section">
                 <h5 class="subtitle">Escolha os documentos a serem gerados</h5>
                 <div class="input-wrapper">
                     <div class="row mb-1">
                         <div class="col">
-                            <div class="form-check">
+                            <div class="form-check" id="all-container">
                                 <input class="form-check-input" type="checkbox" id="todos"
                                     onchange="controlVisibility()">
                                 <label class="form-check-label" for="todos">Todos</label>
@@ -62,6 +62,14 @@
                                 <input class="form-check-input" type="checkbox" id="contrato"
                                     onchange="controlVisibility()">
                                 <label class="form-check-label" for="contrato">Contrato</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="procuracao-troca"
+                                    onchange="controlVisibility()">
+                                <label class="form-check-label" for="procuracao-troca">Procuração para troca de
+                                    titularidade</label>
                             </div>
                         </div>
                         <div class="col">
@@ -101,37 +109,45 @@
             <div class="bordered-section">
                 <h5 class="subtitle">Instalação</h5>
                 <div class="input-wrapper">
-                    <div class="row mb-3">
-                        <div class="col-md-3">
-                            <label for="complemento" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="cep" onchange="getFullAddress()">
-                            <div id="cep-required" class="required-message">Obrigatório.</div>
+                    <div class="row mb-1">
+                        <div class="col-md-6">
+                            <label for="n-instalacao" class="form-label">Número da instalação</label>
+                            <input type="text" class="form-control n-instalacao" oninput="fillInstalation(this.value)">
+                            <div class="n-instalacao-required">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
+                            <label for="cep" class="form-label">CEP</label>
+                            <input type="text" class="form-control cep" oninput="formatCEP(this.value)"
+                                onchange="getFullAddress()">
+                            <div class="cep-required">Obrigatório.</div>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-md-6">
                             <label for="logradouro" class="form-label">Logradouro</label>
-                            <input type="text" class="form-control" id="address" required>
-                            <div id="address-required" class="required-message">Obrigatório.</div>
+                            <input type="text" class="form-control address" oninput="fillAddress(this.value)" required>
+                            <div class="address-required">Obrigatório.</div>
                         </div>
                         <div class="col-md-3">
                             <label for="numeroPredial" class="form-label">Número predial</label>
-                            <input type="text" class="form-control" id="number" required>
-                            <div id="number-required" class="required-message">Obrigatório.</div>
+                            <input type="text" class="form-control number" oninput="fillNumber(this.value)" required>
+                            <div class="number-required">Obrigatório.</div>
                         </div>
-                    </div>
-                    <div class="row mb-3">
                         <div class="col-md-3">
                             <label for="complemento" class="form-label">Complemento</label>
-                            <input type="text" class="form-control" id="complement">
+                            <input type="text" class="form-control complement" oninput="fillComplement(this.value)">
                         </div>
-                        <div class="col-md-3">
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-md-6">
                             <label for="bairro" class="form-label">Bairro</label>
-                            <input type="text" class="form-control" id="neighborhood" required>
-                            <div id="neighborhood-required" class="required-message">Obrigatório.</div>
+                            <input type="text" class="form-control neighborhood" oninput="fillNeighborhood(this.value)" required>
+                            <div class="neighborhood-required">Obrigatório.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="cidade" class="form-label">Cidade</label>
-                            <input type="text" class="form-control" id="city" required>
-                            <div id="city-required" class="required-message">Obrigatório.</div>
+                            <input type="text" class="form-control city" oninput="fillCity(this.value)" required>
+                            <div class="city-required">Obrigatório.</div>
                         </div>
                     </div>
                 </div>
@@ -159,6 +175,53 @@
                             <input type="text" class="form-control cpf-cnpj" class="cpf-cnpj"
                                 oninput="formatCPF_CNPJ(this.value)" required>
                             <div class="cpf-required">Obrigatório.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bordered-section">
+                <h5 class="subtitle">Instalação</h5>
+                <div class="input-wrapper">
+                    <div class="row mb-1">
+                        <div class="col-md-6">
+                            <label for="n-instalacao" class="form-label">Número da instalação</label>
+                            <input type="text" class="form-control n-instalacao" oninput="fillInstalation(this.value)">
+                            <div class="n-instalacao-required">Obrigatório.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cep" class="form-label">CEP</label>
+                            <input type="text" class="form-control cep" oninput="formatCEP(this.value)"
+                                onchange="getFullAddress()">
+                            <div class="cep-required">Obrigatório.</div>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-md-6">
+                            <label for="logradouro" class="form-label">Logradouro</label>
+                            <input type="text" class="form-control address" oninput="fillAddress(this.value)" required>
+                            <div class="address-required">Obrigatório.</div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="numeroPredial" class="form-label">Número predial</label>
+                            <input type="text" class="form-control number" oninput="fillNumber(this.value)" required>
+                            <div class="number-required">Obrigatório.</div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="complemento" class="form-label">Complemento</label>
+                            <input type="text" class="form-control complement" oninput="fillComplement(this.value)">
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-md-6">
+                            <label for="bairro" class="form-label">Bairro</label>
+                            <input type="text" class="form-control neighborhood" oninput="fillNeighborhood(this.value)" required>
+                            <div class="neighborhood-required">Obrigatório.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cidade" class="form-label">Cidade</label>
+                            <input type="text" class="form-control city" oninput="fillCity(this.value)" required>
+                            <div class="city-required">Obrigatório.</div>
                         </div>
                     </div>
                 </div>
@@ -201,7 +264,8 @@
                             </div>
                         </div>
                     </div>
-                    <div id="structure-required" class="required-message">Selecione "Telhado cerâmico", "Telhado metálico", "Laje" ou
+                    <div id="structure-required" class="required-message">Selecione "Telhado cerâmico", "Telhado
+                        metálico", "Laje" ou
                         "Solo".</div>
                 </div>
             </div>
@@ -254,7 +318,8 @@
                         </div>
                         <div class="col-md-4" id="container-manufacturer-module">
                             <label for="manufacturer-module" class="form-label">Fabricante</label>
-                            <select id="manufacturer-module" class="form-select" oninput="checkManufacturer('module')" required>
+                            <select id="manufacturer-module" class="form-select" oninput="checkManufacturer('module')"
+                                required>
                                 <option selected>Selecione o fabricante</option>
                                 <option value="belenergy">BelEnergy</option>
                                 <option value="canadian-solar">Canadian Solar</option>
@@ -277,7 +342,7 @@
                             <label for="power-module" class="form-label">Potência</label>
                             <select id="power-module" class="form-select" required>
                                 <option selected>Selecione a potência</option>
-                                
+
                                 <option value="550">550 Wp</option>
                                 <option value="555">555 Wp</option>
                                 <option value="560">560 Wp</option>
@@ -327,7 +392,8 @@
                         </div>
                         <div class="col-md-4" id="container-manufacturer-inverter-1">
                             <label for="manufacturer-inverter-1" class="form-label">Fabricante</label>
-                            <select id="manufacturer-inverter-1" class="form-select" oninput="checkManufacturer('inverter-1')" required>
+                            <select id="manufacturer-inverter-1" class="form-select"
+                                oninput="checkManufacturer('inverter-1')" required>
                                 <option selected>Selecione o fabricante</option>
                                 <option value="belenergy">BelEnergy</option>
                                 <option value="deye">Deye</option>
@@ -390,7 +456,8 @@
                         </div>
                         <div class="col-md-4" id="container-manufacturer-inverter-2">
                             <label for="manufacturer-inverter-2" class="form-label">Fabricante</label>
-                            <select id="manufacturer-inverter-2" class="form-select" oninput="checkManufacturer('inverter-2')" required>
+                            <select id="manufacturer-inverter-2" class="form-select"
+                                oninput="checkManufacturer('inverter-2')" required>
                                 <option selected>Selecione o fabricante</option>
                                 <option value="belenergy">BelEnergy</option>
                                 <option value="deye">Deye</option>
@@ -452,7 +519,8 @@
                         </div>
                         <div class="col-md-4" id="container-manufacturer-inverter-3">
                             <label for="manufacturer-inverter-3" class="form-label">Fabricante</label>
-                            <select id="manufacturer-inverter-3" class="form-select" oninput="checkManufacturer('inverter-3')" required>
+                            <select id="manufacturer-inverter-3" class="form-select"
+                                oninput="checkManufacturer('inverter-3')" required>
                                 <option selected>Selecione o fabricante</option>
                                 <option value="belenergy">BelEnergy</option>
                                 <option value="deye">Deye</option>
@@ -513,7 +581,8 @@
                         </div>
                         <div class="col-md-4" id="container-manufacturer-inverter-4">
                             <label for="manufacturer-inverter-4" class="form-label">Fabricante</label>
-                            <select id="manufacturer-inverter-4" class="form-select" oninput="checkManufacturer('inverter-4')" required>
+                            <select id="manufacturer-inverter-4" class="form-select"
+                                oninput="checkManufacturer('inverter-4')" required>
                                 <option selected>Selecione o fabricante</option>
                                 <option value="belenergy">BelEnergy</option>
                                 <option value="deye">Deye</option>
@@ -573,6 +642,98 @@
             </div>
         </div>
 
+        <div class="change-proxy-container">
+            <h3 class="header-title">Procuração para troca de titularidade</h3>
+            <div class="bordered-section">
+                <h5 class="subtitle">Novo titular</h5>
+                <div class="input-wrapper">
+                    <div class="row mb-1">
+                        <div class="col-md-6">
+                            <label for="nome" class="form-label">Nome do novo titular</label>
+                            <input type="text" class="form-control name" oninput="fillClientName(this.value)" required>
+                            <div class="nome-required">Obrigatório.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cpf" class="form-label">CPF/CNPJ do novo titular</label>
+                            <input type="text" class="form-control cpf-cnpj" oninput="formatCPF_CNPJ(this.value)"
+                                required>
+                            <div class="cpf-required">Obrigatório.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bordered-section">
+                <h5 class="subtitle">Antigo titular</h5>
+                <div class="input-wrapper">
+                    <div class="row mb-1">
+                        <div class="col-md-6">
+                            <label for="antigo-nome" class="form-label">Nome do antigo titular</label>
+                            <input type="text" class="form-control" id="antigo-nome" required>
+                            <div id="antigo-nome-required" class="required-message">Obrigatório.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="antigo-cpf" class="form-label">CPF/CNPJ do antigo titular</label>
+                            <input type="text" class="form-control" id="antigo-cpf" required>
+                            <div id="antigo-cpf-required" class="required-message">Obrigatório.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bordered-section">
+                <h5 class="subtitle">Instalação</h5>
+                <div class="input-wrapper">
+                    <div class="row mb-1">
+                        <div class="col-md-6">
+                            <label for="n-instalacao" class="form-label">Número da instalação</label>
+                            <input type="text" class="form-control n-instalacao" oninput="fillInstalation(this.value)">
+                            <div class="n-instalacao-required">Obrigatório.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cep" class="form-label">CEP</label>
+                            <input type="text" class="form-control cep" oninput="formatCEP(this.value)"
+                                onchange="getFullAddress()">
+                            <div class="cep-required">Obrigatório.</div>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-md-6">
+                            <label for="logradouro" class="form-label">Logradouro</label>
+                            <input type="text" class="form-control address" oninput="fillAddress(this.value)" required>
+                            <div class="address-required">Obrigatório.</div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="numeroPredial" class="form-label">Número predial</label>
+                            <input type="text" class="form-control number" oninput="fillNumber(this.value)" required>
+                            <div class="number-required">Obrigatório.</div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="complemento" class="form-label">Complemento</label>
+                            <input type="text" class="form-control complement" oninput="fillComplement(this.value)">
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-md-6">
+                            <label for="bairro" class="form-label">Bairro</label>
+                            <input type="text" class="form-control neighborhood" oninput="fillNeighborhood(this.value)" required>
+                            <div class="neighborhood-required">Obrigatório.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cidade" class="form-label">Cidade</label>
+                            <input type="text" class="form-control city" oninput="fillCity(this.value)" required>
+                            <div class="city-required">Obrigatório.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center botao-procuracao-troca">
+                <button class="btn w-100 last-btn botao-procuracao-troca" onclick="">Obter
+                    procuração para troca de titularidade</button>
+            </div>
+        </div>
+
         <div class="checklist-container">
             <h3 class="header-title">Checklist</h3>
             <div class="bordered-section">
@@ -585,24 +746,25 @@
                                 oninput="fillClientName(this.value)" required>
                             <div class="nome-required">Obrigatório.</div>
                         </div>
-                        <div class="col mt-5">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="troca-titularidade"
-                                    onchange="controlChecklistCheckboxes(this)">
-                                <label class="form-check-label" for="troca-titularidade">Troca de titularidade</label>
-                            </div>
-                        </div>
                     </div>
                     <div class="row mb-1">
-                        <div class="row col-md-6 mx-auto">
-                            <div class="col mt-3">
+                        <div class="row col-md-6">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="troca-titularidade"
+                                        onchange="controlChecklistCheckboxes(this)">
+                                    <label class="form-check-label" for="troca-titularidade">Troca de
+                                        titularidade</label>
+                                </div>
+                            </div>
+                            <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="pessoa-fisica"
                                         onchange="controlChecklistCheckboxes(this)">
                                     <label class="form-check-label" for="pessoa-fisica">Pessoa física</label>
                                 </div>
                             </div>
-                            <div class="col mt-3">
+                            <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="pessoa-juridica"
                                         onchange="controlChecklistCheckboxes(this)">
@@ -613,14 +775,14 @@
                                 jurídica".</div>
                         </div>
                         <div class="row col-md-6">
-                            <div class="col mt-3">
+                            <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="urbano"
                                         onchange="controlChecklistCheckboxes(this)">
                                     <label class="form-check-label" for="urbano">Urbano</label>
                                 </div>
                             </div>
-                            <div class="col mt-3">
+                            <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="rural"
                                         onchange="controlChecklistCheckboxes(this)">

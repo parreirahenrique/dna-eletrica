@@ -276,17 +276,17 @@ input[type="checkbox"]:checked {
     visibility: hidden;
 }
 
+.botao-procuracao-troca {
+    display: none;
+    visibility: hidden;
+}
+
 .botao-checklist {
     display: none;
     visibility: hidden;
 }
 
 .botao-todos-documentos {
-    display: none;
-    visibility: hidden;
-}
-
-.selection-container {
     display: none;
     visibility: hidden;
 }
@@ -362,6 +362,90 @@ input[type="checkbox"]:checked {
     visibility: hidden;
 }
 
+.n-instalacao-required {
+    color: white;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    border-radius: 50px;
+    background-color: rgb(200, 0, 0);
+    display: none;
+    visibility: hidden;
+}
+
+.cep-required {
+    color: white;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    border-radius: 50px;
+    background-color: rgb(200, 0, 0);
+    display: none;
+    visibility: hidden;
+}
+
+.address-required {
+    color: white;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    border-radius: 50px;
+    background-color: rgb(200, 0, 0);
+    display: none;
+    visibility: hidden;
+}
+
+.number-required {
+    color: white;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    border-radius: 50px;
+    background-color: rgb(200, 0, 0);
+    display: none;
+    visibility: hidden;
+}
+
+.neighborhood-required {
+    color: white;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    border-radius: 50px;
+    background-color: rgb(200, 0, 0);
+    display: none;
+    visibility: hidden;
+}
+
+.city-required {
+    color: white;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    border-radius: 50px;
+    background-color: rgb(200, 0, 0);
+    display: none;
+    visibility: hidden;
+}
+
 select {
     appearance: none;
     -webkit-appearance: none;
@@ -371,6 +455,11 @@ select {
 }
 
 .other-container {
+    visibility: hidden;
+    display: none;
+}
+
+.change-proxy-container {
     visibility: hidden;
     display: none;
 }

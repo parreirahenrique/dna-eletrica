@@ -136,24 +136,41 @@ function validateUser(password) {
 function controlVisibility() {
     const role = localStorage.getItem("role");
 
-    const selectionContainer = document.getElementsByClassName("selection-container");
+    const allContainer = document.getElementById("all-container");
+
+    const all = document.getElementById("todos");
+    const proxy = document.getElementById("procuracao");
+    const contract = document.getElementById("contrato");
+    const changeProxy = document.getElementById("procuracao-troca");
+    const checklist = document.getElementById("checklist");
+
     const proxyContainer = document.getElementsByClassName("proxy-container");
     const contractContainer = document.getElementsByClassName("contract-container");
+    const changeProxyContainer = document.getElementsByClassName("change-proxy-container");
     const checklistContainer = document.getElementsByClassName("checklist-container");
 
     const proxyButton = document.getElementsByClassName("botao-procuracao");
     const contractButton = document.getElementsByClassName("botao-contrato");
+    const changeProxyButton = document.getElementsByClassName("botao-procuracao-troca");
     const checklistButton = document.getElementsByClassName("botao-checklist");
     const allButton = document.getElementsByClassName("botao-todos-documentos");
-    const inverterButton = document.getElementsByClassName("inverter-btn");
 
 
     const allCheckbox = document.getElementById("todos");
     const proxyCheckbox = document.getElementById("procuracao");
     const contractCheckbox = document.getElementById("contrato");
+    const changeProxyCheckbox = document.getElementById("procuracao-troca");
     const checklistCheckbox = document.getElementById("checklist");
 
     if (role === "Salesman") {
+        allContainer.style.visibility = "hidden";
+        allContainer.style.display = "none";
+
+        all.checked = false;
+        proxy.checked = true;
+        contract.checked = true;
+        checklist.checked = true;
+
         for (let i = 0; i < proxyContainer.length; i++) {
             proxyContainer[i].style.visibility = "visible";
             proxyContainer[i].style.display = "block";
@@ -162,6 +179,18 @@ function controlVisibility() {
         for (let i = 0; i < contractContainer.length; i++) {
             contractContainer[i].style.visibility = "visible";
             contractContainer[i].style.display = "block";
+        }
+
+        if (changeProxyCheckbox.checked) {
+            for (let i = 0; i < changeProxyContainer.length; i++) {
+                changeProxyContainer[i].style.visibility = "visible";
+                changeProxyContainer[i].style.display = "block";
+            }
+        } else {
+            for (let i = 0; i < changeProxyContainer.length; i++) {
+                changeProxyContainer[i].style.visibility = "hidden";
+                changeProxyContainer[i].style.display = "none";
+            }
         }
 
         for (let i = 0; i < checklistContainer.length; i++) {
@@ -174,15 +203,13 @@ function controlVisibility() {
             allButton[i].style.display = "block";
         }
     } else if (role === "Director" || role === "Administrator") {
-
-        for (let i = 0; i < selectionContainer.length; i++) {
-            selectionContainer[i].style.visibility = "visible";
-            selectionContainer[i].style.display = "block";
-        }
+        allContainer.style.visibility = "visible";
+        allContainer.style.display = "block";
 
         if (allCheckbox.checked) {
             proxyCheckbox.checked = true;
             contractCheckbox.checked = true;
+            changeProxy.checked = true;
             checklistCheckbox.checked = true;
         }
 
@@ -210,6 +237,18 @@ function controlVisibility() {
             }
         }
 
+        if (changeProxyCheckbox.checked) {
+            for (let i = 0; i < changeProxyContainer.length; i++) {
+                changeProxyContainer[i].style.visibility = "visible";
+                changeProxyContainer[i].style.display = "block";
+            }
+        } else {
+            for (let i = 0; i < changeProxyContainer.length; i++) {
+                changeProxyContainer[i].style.visibility = "hidden";
+                changeProxyContainer[i].style.display = "none";
+            }
+        }
+
         if (checklistCheckbox.checked) {
             for (let i = 0; i < checklistContainer.length; i++) {
                 checklistContainer[i].style.visibility = "visible";
@@ -223,10 +262,13 @@ function controlVisibility() {
         }
 
         const FIRST_CONDITION = proxyCheckbox.checked && contractCheckbox.checked;
-        const SECOND_CONDITION = proxyCheckbox.checked && checklistCheckbox.checked;
-        const THIRD_CONDITION = contractCheckbox.checked && checklistCheckbox.checked;
+        const SECOND_CONDITION = proxyCheckbox.checked && changeProxyCheckbox.checked;
+        const THIRD_CONDITION = proxyCheckbox.checked && checklistCheckbox.checked;
+        const FOURTH_CONDITION = contractCheckbox.checked && changeProxyCheckbox.checked;
+        const FIFTH_CONDITION = contractCheckbox.checked && checklistCheckbox.checked;
+        const SIXTH_CONDITION = changeProxyCheckbox.checked && checklistCheckbox.checked;
 
-        if (FIRST_CONDITION || SECOND_CONDITION || THIRD_CONDITION) {
+        if (FIRST_CONDITION || SECOND_CONDITION || THIRD_CONDITION || FOURTH_CONDITION || FIFTH_CONDITION || SIXTH_CONDITION) {
             for (let i = 0; i < allButton.length; i++) {
                 allButton[i].style.visibility = "visible";
                 allButton[i].style.display = "block";
@@ -242,11 +284,16 @@ function controlVisibility() {
                 contractButton[i].style.display = "none";
             }
 
+            for (let i = 0; i < changeProxyButton.length; i++) {
+                changeProxyButton[i].style.visibility = "hidden";
+                changeProxyButton[i].style.display = "none";
+            }
+
             for (let i = 0; i < checklistButton.length; i++) {
                 checklistButton[i].style.visibility = "hidden";
                 checklistButton[i].style.display = "none";
             }
-        } else if (proxyCheckbox.checked && !contractCheckbox.checked && !checklistCheckbox.checked) {
+        } else if (proxyCheckbox.checked && !contractCheckbox.checked && !changeProxyCheckbox.checked && !checklistCheckbox.checked) {
             for (let i = 0; i < proxyButton.length; i++) {
                 proxyButton[i].style.visibility = "visible";
                 proxyButton[i].style.display = "block";
@@ -257,7 +304,7 @@ function controlVisibility() {
                 allButton[i].style.visibility = "hidden";
                 allButton[i].style.display = "none";
             }
-        } else if (!proxyCheckbox.checked && contractCheckbox.checked && !checklistCheckbox.checked) {
+        } else if (!proxyCheckbox.checked && contractCheckbox.checked && !changeProxyCheckbox.checked && !checklistCheckbox.checked) {
             for (let i = 0; i < contractButton.length; i++) {
                 contractButton[i].style.visibility = "visible";
                 contractButton[i].style.display = "block";
@@ -268,7 +315,18 @@ function controlVisibility() {
                 allButton[i].style.visibility = "hidden";
                 allButton[i].style.display = "none";
             }
-        } else if (!proxyCheckbox.checked && !contractCheckbox.checked && checklistCheckbox.checked) {
+        } else if (!proxyCheckbox.checked && !contractCheckbox.checked && changeProxyCheckbox.checked && !checklistCheckbox.checked) {
+            for (let i = 0; i < changeProxyButton.length; i++) {
+                changeProxyButton[i].style.visibility = "visible";
+                changeProxyButton[i].style.display = "block";
+                changeProxyButton[i].style.marginBottom = "0";
+            }
+
+            for (let i = 0; i < allButton.length; i++) {
+                allButton[i].style.visibility = "hidden";
+                allButton[i].style.display = "none";
+            }
+        } else if (!proxyCheckbox.checked && !contractCheckbox.checked && !changeProxyCheckbox.checked && checklistCheckbox.checked) {
             for (let i = 0; i < checklistButton.length; i++) {
                 checklistButton[i].style.visibility = "visible";
                 checklistButton[i].style.display = "block";
@@ -279,10 +337,6 @@ function controlVisibility() {
                 allButton[i].style.display = "none";
             }
         } else {
-            proxyCheckbox.checked = false;
-            contractCheckbox.checked = false;
-            checklistCheckbox.checked = false;
-
             for (let i = 0; i < allButton.length; i++) {
                 allButton[i].style.visibility = "hidden";
                 allButton[i].style.display = "none";
@@ -298,17 +352,17 @@ function controlVisibility() {
                 contractButton[i].style.display = "none";
             }
 
+            for (let i = 0; i < changeProxyButton.length; i++) {
+                changeProxyButton[i].style.visibility = "hidden";
+                changeProxyButton[i].style.display = "none";
+            }
+
             for (let i = 0; i < checklistButton.length; i++) {
                 checklistButton[i].style.visibility = "hidden";
                 checklistButton[i].style.display = "none";
             }
         }
     } else {
-        for (let i = 0; i < selectionContainer.length; i++) {
-            selectionContainer[i].style.visibility = "hidden";
-            selectionContainer[i].style.display = "none";
-        }
-
         for (let i = 0; i < proxyContainer.length; i++) {
             proxyContainer[i].style.visibility = "hidden";
             proxyContainer[i].style.display = "none";
@@ -416,10 +470,14 @@ function getUserRole(password) {
 }
 
 function getFullAddress() {
-    const cep = document.getElementById("cep").value.replace(/[^0-9]/g, '');
+    const cep = document.getElementsByClassName("cep")[0].value.replace(/\D/g, '');
 
     if (cep.length === 8) {
         const url = `https://brasilapi.com.br/api/cep/v1/${cep}`;
+
+        const address = document.getElementsByClassName("address");
+        const neighborhood = document.getElementsByClassName("neighborhood");
+        const city = document.getElementsByClassName("city");
 
         const response = fetch(url, {
             "method": "GET",
@@ -428,9 +486,11 @@ function getFullAddress() {
             .then(response => response.json())
             .then(data => {
                 if (data && data.street && data.neighborhood && data.city) {
-                    document.getElementById("address").value = data.street;
-                    document.getElementById("neighborhood").value = data.neighborhood;
-                    document.getElementById("city").value = data.city;
+                    for (let i = 0; i < address.length; i++) {
+                        address[i].value = data.street;
+                        neighborhood[i].value = data.neighborhood;
+                        city[i].value = data.city;
+                    }
                 } else if (data && data.errors && data.errors.length && data.errors[data.errors.length - 1] && data.errors[data.errors.length - 1].message) {
                     showMessage(data.errors[data.errors.length - 1].message, "error")
                 }
@@ -464,22 +524,18 @@ function hideErrorMessage() {
     errorMessageDiv.style.visibility = "hidden";
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const cepInput = document.getElementById('cep');
+function formatCEP(value) {
+    value = value.replace(/\D/g, '');
 
-    cepInput.addEventListener('input', (event) => {
-        let value = event.target.value.replace(/\D/g, '')
+    if (value.length > 5 && value.length <= 8) {
+        value = value.slice(0, 5) + '-' + value.slice(5, value.length);
+    } else if (value.length > 8) {
+        showMessage("CEP deve ter, no máximo, 8 dígitos.", "error");
+        value = value.slice(0, 5) + '-' + value.slice(5, 8);
+    }
 
-        if (value.length > 5 && value.length <= 8) {
-            value = value.slice(0, 5) + '-' + value.slice(5, value.length);
-        } else if (value.length > 8) {
-            showMessage("CEP deve ter, no máximo, 8 dígitos.", "error");
-            value = value.slice(0, 5) + '-' + value.slice(5, 8);
-        }
-
-        event.target.value = value;
-    });
-});
+    fillCEP(value);
+}
 
 function formatCPF_CNPJ(value) {
     const inputs = document.getElementsByClassName("cpf-cnpj");
@@ -738,12 +794,12 @@ function generateProxy() {
 
         const name = document.getElementsByClassName("name")[0].value;
         const cpfCnpj = document.getElementsByClassName("cpf-cnpj")[0].value;
-        const cep = document.getElementById("cep").value;
-        const address = document.getElementById("address").value;
-        const number = document.getElementById("number").value;
-        const complement = document.getElementById("complement").value;
-        const neighborhood = document.getElementById("neighborhood").value;
-        const city = document.getElementById("city").value;
+        const cep = document.getElementsByClassName("cep")[0].value;
+        const address = document.getElementsByClassName("address")[0].value;
+        const number = document.getElementsByClassName("number")[0].value;
+        const complement = document.getElementsByClassName("complement")[0].value;
+        const neighborhood = document.getElementsByClassName("neighborhood")[0].value;
+        const city = document.getElementsByClassName("city")[0].value;
         const date = String(new Date().getDate()).padStart(2, "0") + " de " + months[new Date().getMonth()] + " de " + new Date().getFullYear();
 
         const parameters = {
@@ -933,11 +989,11 @@ function fieldsFilled() {
     let filledChecklist = false;
 
     if (proxyVisibility === "visible") {
-        const cep = document.getElementById("cep").value;
-        const address = document.getElementById("address").value;
-        const number = document.getElementById("number").value;
-        const neighborhood = document.getElementById("neighborhood").value;
-        const city = document.getElementById("city").value;
+        const cep = document.getElementsByClassName("cep")[0].value;
+        const address = document.getElementsByClassName("address")[0].value;
+        const number = document.getElementsByClassName("number")[0].value;
+        const neighborhood = document.getElementsByClassName("neighborhood")[0].value;
+        const city = document.getElementsByClassName("city")[0].value;
 
         filledProxy = name && cpfCnpj && cep && address && number && neighborhood && city;
 
@@ -1310,6 +1366,62 @@ function fillClientName(name) {
 
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = name;
+    }
+}
+
+function fillInstalation(instalation) {
+    const inputs = document.getElementsByClassName("n-instalacao");
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = instalation;
+    }
+}
+
+function fillCEP(cep) {
+    const inputs = document.getElementsByClassName("cep");
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = cep;
+    }
+}
+
+function fillAddress(address) {
+    const inputs = document.getElementsByClassName("address");
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = address;
+    }
+}
+
+function fillNumber(number) {
+    const inputs = document.getElementsByClassName("number");
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = number;
+    }
+}
+
+function fillComplement(complement) {
+    const inputs = document.getElementsByClassName("complement");
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = complement;
+    }
+}
+
+function fillNeighborhood(neighborhood) {
+    const inputs = document.getElementsByClassName("neighborhood");
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = neighborhood;
+    }
+}
+
+function fillCity(city) {
+    const inputs = document.getElementsByClassName("city");
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = city;
     }
 }
 
