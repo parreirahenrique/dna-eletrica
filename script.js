@@ -363,6 +363,9 @@ function controlVisibility() {
             }
         }
     } else {
+        allContainer.style.visibility = "hidden";
+        allContainer.style.display = "none";
+        
         for (let i = 0; i < proxyContainer.length; i++) {
             proxyContainer[i].style.visibility = "hidden";
             proxyContainer[i].style.display = "none";
@@ -391,6 +394,11 @@ function controlVisibility() {
         for (let i = 0; i < contractButton.length; i++) {
             contractButton[i].style.visibility = "hidden";
             contractButton[i].style.display = "none";
+        }
+
+        for (let i = 0; i < changeProxyButton.length; i++) {
+            changeProxyButton[i].style.visibility = "hidden";
+            changeProxyButton[i].style.display = "none";
         }
 
         for (let i = 0; i < checklistButton.length; i++) {
