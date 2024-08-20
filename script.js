@@ -875,7 +875,7 @@ function generateProxy() {
             }
         );
     } else {
-        showMessage("Preencha todos os campos antes de prosseguir.", "error")
+        showMessage("Preencha todos os campos antes de prosseguir.", "error");
     }
 };
 
@@ -883,7 +883,15 @@ function generateContract() {
     if (fieldsFilled()) {
 
     } else {
-        showMessage("Preencha todos os campos antes de prosseguir.", "error")
+        showMessage("Preencha todos os campos antes de prosseguir.", "error");
+    }
+}
+
+function generateChangeProxy() {
+    if (fieldsFilled()) {
+
+    } else {
+        showMessage("Preencha todos os campos antes de prosseguir.", "error");
     }
 }
 
@@ -992,23 +1000,26 @@ function generateDocuments() {
 function fieldsFilled() {
     const proxyVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0], null).getPropertyValue('visibility');
     const contractVisibility = window.getComputedStyle(document.getElementsByClassName("contract-container")[0], null).getPropertyValue('visibility');
+    const changeProxyVisibility = window.getComputedStyle(document.getElementsByClassName("change-proxy-container")[0], null).getPropertyValue('visibility');
     const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("checklist-container")[0], null).getPropertyValue('visibility');
 
     const name = document.getElementsByClassName("name")[0].value;
     const cpfCnpj = document.getElementsByClassName("cpf-cnpj")[0].value;
+    const instalation = document.getElementsByClassName("n-instalacao")[0].value;
+    const cep = document.getElementsByClassName("cep")[0].value;
+    const address = document.getElementsByClassName("address")[0].value;
+    const number = document.getElementsByClassName("number")[0].value;
+    const neighborhood = document.getElementsByClassName("neighborhood")[0].value;
+    const city = document.getElementsByClassName("city")[0].value;
 
     let filledProxy = false;
     let filledContract = false;
+    let filledChangeProxy = false;
     let filledChecklist = false;
 
     if (proxyVisibility === "visible") {
-        const cep = document.getElementsByClassName("cep")[0].value;
-        const address = document.getElementsByClassName("address")[0].value;
-        const number = document.getElementsByClassName("number")[0].value;
-        const neighborhood = document.getElementsByClassName("neighborhood")[0].value;
-        const city = document.getElementsByClassName("city")[0].value;
 
-        filledProxy = name && cpfCnpj && cep && address && number && neighborhood && city;
+        filledProxy = name && cpfCnpj && instalation && cep && address && number && neighborhood && city;
 
         if (!name) {
             showRequiredMessageForClass("nome-required");
@@ -1018,24 +1029,75 @@ function fieldsFilled() {
             showRequiredMessageForClass("cpf-required");
         }
 
+        if (!instalation) {
+            showRequiredMessageForClass("n-instalacao-required");
+        }
+
         if (!cep) {
-            showRequiredMessageForID("cep-required");
+            showRequiredMessageForClass("cep-required");
         }
 
         if (!address) {
-            showRequiredMessageForID("address-required");
+            showRequiredMessageForClass("address-required");
         }
 
         if (!number) {
-            showRequiredMessageForID("number-required");
+            showRequiredMessageForClass("number-required");
         }
 
         if (!neighborhood) {
-            showRequiredMessageForID("neighborhood-required");
+            showRequiredMessageForClass("neighborhood-required");
         }
 
         if (!city) {
-            showRequiredMessageForID("city-required");
+            showRequiredMessageForClass("city-required");
+        }
+    }
+
+    if (changeProxyVisibility === "visible") {
+        const oldOwner = document.getElementById("antigo-nome").value;
+        const oldCpfCnpj = document.getElementById("antigo-cpf").value;
+
+        filledChangeProxy = name && cpfCnpj && oldOwner && oldCpfCnpj && instalation && cep && address && number && neighborhood && city;
+
+        if (!name) {
+            showRequiredMessageForClass("nome-required");
+        }
+
+        if (!cpfCnpj) {
+            showRequiredMessageForClass("cpf-required");
+        }
+
+        if (!oldOwner) {
+            showRequiredMessageForID("antigo-nome-required");
+        }
+
+        if (!oldCpfCnpj) {
+            showRequiredMessageForID("antigo-cpf-required");
+        }
+
+        if (!instalation) {
+            showRequiredMessageForClass("n-instalacao-required");
+        }
+
+        if (!cep) {
+            showRequiredMessageForClass("cep-required");
+        }
+
+        if (!address) {
+            showRequiredMessageForClass("address-required");
+        }
+
+        if (!number) {
+            showRequiredMessageForClass("number-required");
+        }
+
+        if (!neighborhood) {
+            showRequiredMessageForClass("neighborhood-required");
+        }
+
+        if (!city) {
+            showRequiredMessageForClass("city-required");
         }
     }
 
@@ -1083,6 +1145,11 @@ function fieldsFilled() {
         filledContract = FIRST_CONDITION && SECOND_CONDITION && THIRD_CONDITION && FOURTH_CONDITION &&
             name &&
             cpfCnpj &&
+            instalation &&
+            cep && address &&
+            number &&
+            neighborhood &&
+            city
             paymentValue &&
             (payment !== "Selecione a forma") &&
             (instalment !== "Selecione a parcela") &&
@@ -1099,6 +1166,30 @@ function fieldsFilled() {
 
         if (!cpfCnpj) {
             showRequiredMessageForClass("cpf-required");
+        }
+
+        if (!instalation) {
+            showRequiredMessageForClass("n-instalacao-required");
+        }
+
+        if (!cep) {
+            showRequiredMessageForClass("cep-required");
+        }
+
+        if (!address) {
+            showRequiredMessageForClass("address-required");
+        }
+
+        if (!number) {
+            showRequiredMessageForClass("number-required");
+        }
+
+        if (!neighborhood) {
+            showRequiredMessageForClass("neighborhood-required");
+        }
+
+        if (!city) {
+            showRequiredMessageForClass("city-required");
         }
 
         if (!ceramico && !metalico && !laje && !solo) {
@@ -1369,9 +1460,10 @@ function fieldsFilled() {
 
     const PROXY_INVISIBLE_OR_FILLED = proxyVisibility === "hidden" ? true : filledProxy;
     const CONTRACT_INVISIBLE_OR_FILLED = contractVisibility === "hidden" ? true : filledContract;
+    const CHANGE_PROXY_INVISIBLE_OR_FILLED = changeProxyVisibility === "hidden" ? true : filledChangeProxy;
     const CHECKLIST_INVISIBLE_OR_FILLED = checklistVisibility === "hidden" ? true : filledChecklist;
 
-    return PROXY_INVISIBLE_OR_FILLED && CONTRACT_INVISIBLE_OR_FILLED && CHECKLIST_INVISIBLE_OR_FILLED;
+    return PROXY_INVISIBLE_OR_FILLED && CONTRACT_INVISIBLE_OR_FILLED && CHANGE_PROXY_INVISIBLE_OR_FILLED && CHECKLIST_INVISIBLE_OR_FILLED;
 }
 
 function fillClientName(name) {
