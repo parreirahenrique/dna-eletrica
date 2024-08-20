@@ -803,7 +803,7 @@ function loadFile(url, callback) {
 
 function generateProxy() {
     if (fieldsFilled()) {
-        const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
+        const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
         const name = document.getElementsByClassName("name")[0].value;
         const cpfCnpj = document.getElementsByClassName("cpf-cnpj")[0].value;
@@ -889,7 +889,61 @@ function generateContract() {
 
 function generateChangeProxy() {
     if (fieldsFilled()) {
+        const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
+        const newOwnername = document.getElementsByClassName("name")[0].value;
+        const newOwnerCPFCNPJ = document.getElementsByClassName("cpf-cnpj")[0].value;
+        const oldOwnerName = document.getElementById("antigo-nome").value;
+        const oldOwnerCPFCNPJ = document.getElementById("antigo-cpf").value;
+        const cep = document.getElementsByClassName("cep")[0].value;
+        const address = document.getElementsByClassName("address")[0].value;
+        const number = document.getElementsByClassName("number")[0].value;
+        const complement = document.getElementsByClassName("complement")[0].value;
+        const neighborhood = document.getElementsByClassName("neighborhood")[0].value;
+        const city = document.getElementsByClassName("city")[0].value;
+        const day = String(new Date().getDate()).padStart(2, "0");
+        const month = months[new Date().getMonth()];
+        const year = new Date().getFullYear();
+
+        const parameters = {
+            newOwnername: newOwnername,
+            newOwnerCPFCNPJ: newOwnerCPFCNPJ,
+            oldOwnerName: oldOwnerName,
+            oldOwnerCPFCNPJ: oldOwnerCPFCNPJ,
+            address: address,
+            number: number + (complement ? " " + complement : ""),
+            complement: complement,
+            neighborhood: neighborhood,
+            city: city,
+            cep: cep,
+            day: day,
+            month: month,
+            year: year
+        };
+
+        loadFile(
+            "Procuracao para Troca de Titularidade.docx",
+            function (error, content) {
+                if (error) {
+                    throw error;
+                }
+                const zip = new PizZip(content);
+                const doc = new window.docxtemplater(zip, {
+                    paragraphLoop: true,
+                    linebreaks: true,
+                });
+
+                doc.render(parameters);
+
+                const blob = doc.getZip().generate({
+                    type: "blob",
+                    mimeType:
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    compression: "DEFLATE",
+                });
+                saveAs(blob, `Procuracao para Troca de Titularidade - ${newOwnername}.docx`);
+            }
+        );
     } else {
         showMessage("Preencha todos os campos antes de prosseguir.", "error");
     }
