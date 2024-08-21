@@ -574,6 +574,28 @@ function formatCPF_CNPJ(value) {
     }
 }
 
+function formatOldCPFCNPJ(value) {
+    const input = document.getElementById("antigo-cpf");
+
+    value = value.replace(/\D/g, '');
+
+    if (value.length === 11) {
+        value = value.slice(0, 3) + '.' + value.slice(3, 6) + '.' + value.slice(6, 9) + '-' + value.slice(9, 11);
+    }
+
+    else {
+        if (value.length === 14) {
+            value = value.slice(0, 2) + '.' + value.slice(2, 5) + '.' + value.slice(5, 8) + '/' + value.slice(8, 12) + '-' + value.slice(12, 14);
+        } else if (value.length > 14) {
+            value = value.slice(0, 14);
+            value = value.slice(0, 2) + '.' + value.slice(2, 5) + '.' + value.slice(5, 8) + '/' + value.slice(8, 12) + '-' + value.slice(12, 14);
+            showMessage("CNPJ deve ter, no máximo, 14 dígitos.", "error");
+        }
+    }
+
+    input.value = value;
+}
+
 function controlContractCheckboxes(checkboxChanged) {
     const ceramico = document.getElementById("telhado-ceramico");
     const metalico = document.getElementById("telhado-metalico");
@@ -881,20 +903,195 @@ function generateProxy() {
 
 function generateContract() {
     if (fieldsFilled()) {
+        const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
+        const name = document.getElementsByClassName("name")[0].value;
+        let cpfCnpj = document.getElementsByClassName("cpf-cnpj")[0].value;
+        const cep = document.getElementsByClassName("cep")[0].value;
+        const address = document.getElementsByClassName("address")[0].value;
+        const number = document.getElementsByClassName("number")[0].value;
+        const complement = document.getElementsByClassName("complement")[0].value;
+        const neighborhood = document.getElementsByClassName("neighborhood")[0].value;
+        const city = document.getElementsByClassName("city")[0].value;
+        
+        cpfCnpj = cpfCnpj.length === 14 ? "CPF de nº " + cpfCnpj : "CNPJ de nº " + cpfCnpj;
+
+        let moduleQuantity = document.getElementById("quantity-module").value;
+        let moduleManufacturer = document.getElementById("manufacturer-module").value;
+        let otherModuleManufacturer = document.getElementById("other-manufacturer-module").value;
+        let modulePower = document.getElementById("power-module").value;
+
+        let inverter1Quantity = document.getElementById("quantity-inverter-1").value;
+        let inverter1Manufacturer = document.getElementById("manufacturer-inverter-1").value;
+        let otherInverter1Manufacturer = document.getElementById("other-manufacturer-inverter-1").value;
+        let inverter1Power = document.getElementById("power-inverter-1").value;
+
+        let inverter2Quantity = document.getElementById("quantity-inverter-2").value;
+        let inverter2Manufacturer = document.getElementById("manufacturer-inverter-2").value;
+        let otherInverter2Manufacturer = document.getElementById("other-manufacturer-inverter-2").value;
+        let inverter2Power = document.getElementById("power-inverter-2").value;
+
+        let inverter3Quantity = document.getElementById("quantity-inverter-3").value;
+        let inverter3Manufacturer = document.getElementById("manufacturer-inverter-3").value;
+        let otherInverter3Manufacturer = document.getElementById("other-manufacturer-inverter-3").value;
+        let inverter3Power = document.getElementById("power-inverter-3").value;
+
+        let inverter4Quantity = document.getElementById("quantity-inverter-4").value;
+        let inverter4Manufacturer = document.getElementById("manufacturer-inverter-4").value;
+        let otherInverter4Manufacturer = document.getElementById("other-manufacturer-inverter-4").value;
+        let inverter4Power = document.getElementById("power-inverter-4").value;
+
+        moduleManufacturer = moduleManufacturer === "Outro" ? otherModuleManufacturer.toUpperCase() : moduleManufacturer.toUpperCase();
+        
+        inverter1Manufacturer = inverter1Manufacturer === "Outro" ? otherInverter1Manufacturer.toUpperCase() : inverter1Manufacturer.toUpperCase();
+        inverter2Manufacturer = inverter2Manufacturer === "Outro" ? otherInverter2Manufacturer.toUpperCase() : inverter2Manufacturer.toUpperCase();
+        inverter3Manufacturer = inverter3Manufacturer === "Outro" ? otherInverter3Manufacturer.toUpperCase() : inverter3Manufacturer.toUpperCase();
+        inverter4Manufacturer = inverter4Manufacturer === "Outro" ? otherInverter4Manufacturer.toUpperCase() : inverter4Manufacturer.toUpperCase();
+
+        let metallicRoof = document.getElementById("telhado-metalico").checked;
+        let ceramicRoof = document.getElementById("telhado-ceramico").checked;
+        let slab = document.getElementById("laje").checked;
+        let solo = document.getElementById("solo").checked;
+
+        let peakPower = formatNumber((moduleQuantity * parseInt(modulePower.split(" Wp")[0])) / 1000) + " kWp";
+
+        let inverterDescription = (inverter1Manufacturer ? (inverter1Manufacturer + " ") : "") + " " + inverter1Power;
+
+        inverterDescription += inverter2Quantity ? "\nINVERSOR " + (inverter2Manufacturer ? (inverter2Manufacturer.toUpperCase() + " ") : "") + inverter2Power : "";
+        inverterDescription += inverter3Quantity ? "\nINVERSOR " + (inverter3Manufacturer ? (inverter3Manufacturer.toUpperCase() + " ") : "") + inverter3Power : "";
+        inverterDescription += inverter4Quantity ? "\nINVERSOR " + (inverter4Manufacturer ? (inverter4Manufacturer.toUpperCase() + " ") : "") + inverter4Power : "";
+
+        let inverterQuantity = inverter1Quantity;
+
+        inverterQuantity += inverter2Quantity ? "\n" + inverter2Quantity : "";
+        inverterQuantity += inverter3Quantity ? "\n" + inverter3Quantity : "";
+        inverterQuantity += inverter4Quantity ? "\n" + inverter4Quantity : "";
+        
+        let moduleDescription = (moduleManufacturer ? (moduleManufacturer.toUpperCase() + " ") : "") + " " + modulePower;
+
+        let roofType;
+
+        if (metallicRoof) {
+            roofType = "TELHADO METÁLICO"
+        } else if (ceramicRoof) {
+            roofType = "TELHADO CERÂMICO"
+        } else if (slab) {
+            roofType = "LAJE"
+        } else if (solo) {
+            roofType = "SOLO"
+        }
+
+        let paymentMethod = document.getElementById("payment").value;
+        let instalment = document.getElementById("instalment").value;
+        let otherPaymentMethod = document.getElementById("other-payment").value;
+
+        let payment;
+
+        if (paymentMethod === "Outro") {
+            payment = otherPaymentMethod;
+        } else {
+            if (instalment === "100") {
+                payment = "À vista"
+            }
+
+            if (instalment === "30-70") {
+                payment = "Entrada de 30% mais um pagamento de 70%"
+            }
+
+            if (instalment === "50-50") {
+                payment = "Entrada de 50% mais um pagamento de 50%"
+            }
+        }
+
+        let value = "R$ " + formatNumber(document.getElementById("value").value);
+
+        
+        let day = String(new Date().getDate()).padStart(2, "0");
+        let month = months[new Date().getMonth()];
+        let year = new Date().getFullYear();
+
+        const parameters = {
+            name: name,
+            cpfCnpj: cpfCnpj,
+            address: address,
+            number: number + (complement ? " " + complement : ""),
+            neighborhood: neighborhood,
+            city: city,
+            cep: cep,
+            peakPower: peakPower,
+            inverterDescription: inverterDescription,
+            inverterQuantity: inverterQuantity,
+            moduleDescription: moduleDescription,
+            moduleQuantity: moduleQuantity,
+            roofType: roofType,
+            payment: payment,
+            value: value,
+            day: day,
+            month: month,
+            year: year
+        };
+
+        loadFile(
+            "Contrato.docx",
+            function (error, content) {
+                if (error) {
+                    throw error;
+                }
+                const zip = new PizZip(content);
+                const doc = new window.docxtemplater(zip, {
+                    paragraphLoop: true,
+                    linebreaks: true,
+                });
+
+                doc.render(parameters);
+
+                const blob = doc.getZip().generate({
+                    type: "blob",
+                    mimeType:
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    compression: "DEFLATE",
+                });
+                saveAs(blob, `Contrato - ${name}.docx`);
+            }
+        );
     } else {
         showMessage("Preencha todos os campos antes de prosseguir.", "error");
     }
+}
+
+function formatNumber(value) {
+    // Converter o valor para número
+    let num = parseFloat(value);
+
+    // Verificar se o valor é um número válido
+    if (isNaN(num)) {
+        return "Valor inválido"; // Retorna uma mensagem de erro, ou você pode personalizar isso conforme necessário
+    }
+
+    // Fixar o número em duas casas decimais
+    let str = num.toFixed(2);
+
+    // Separar a parte inteira da parte decimal
+    let parts = str.split(".");
+    let integerPart = parts[0];
+    let decimalPart = parts[1];
+
+    // Adicionar separador de milhar
+    integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    // Retornar a string formatada com vírgula como separador decimal
+    return integerPart + "," + decimalPart;
 }
 
 function generateChangeProxy() {
     if (fieldsFilled()) {
         const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
-        const newOwnername = document.getElementsByClassName("name")[0].value;
+        const newOwnerName = document.getElementsByClassName("name")[0].value;
         const newOwnerCPFCNPJ = document.getElementsByClassName("cpf-cnpj")[0].value;
         const oldOwnerName = document.getElementById("antigo-nome").value;
         const oldOwnerCPFCNPJ = document.getElementById("antigo-cpf").value;
+        const instalationNumber = document.getElementsByClassName("n-instalacao")[0].value;
         const cep = document.getElementsByClassName("cep")[0].value;
         const address = document.getElementsByClassName("address")[0].value;
         const number = document.getElementsByClassName("number")[0].value;
@@ -906,11 +1103,12 @@ function generateChangeProxy() {
         const year = new Date().getFullYear();
 
         const parameters = {
-            newOwnername: newOwnername,
+            newOwnerName: newOwnerName,
             newOwnerCPFCNPJ: newOwnerCPFCNPJ,
             oldOwnerName: oldOwnerName,
             oldOwnerCPFCNPJ: oldOwnerCPFCNPJ,
             address: address,
+            instalationNumber: instalationNumber,
             number: number + (complement ? " " + complement : ""),
             complement: complement,
             neighborhood: neighborhood,
@@ -941,7 +1139,7 @@ function generateChangeProxy() {
                         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                     compression: "DEFLATE",
                 });
-                saveAs(blob, `Procuracao para Troca de Titularidade - ${newOwnername}.docx`);
+                saveAs(blob, `Procuracao para Troca de Titularidade - ${newOwnerName}.docx`);
             }
         );
     } else {
@@ -1625,7 +1823,7 @@ function checkManufacturer(name) {
 
     const manufacturer = document.getElementById("manufacturer-" + name);
 
-    if (manufacturer.value === "outro") {
+    if (manufacturer.value === "Outro") {
         document.getElementById(quantityContainer).className = "col-md-3";
         document.getElementById(manufacturerContainer).className = "col-md-3";
         document.getElementById(powerContainer).className = "col-md-3";
@@ -1646,7 +1844,7 @@ function checkManufacturer(name) {
 function checkPayment() {
     const payment = document.getElementById("payment");
 
-    if (payment.value === "outro") {
+    if (payment.value === "Outro") {
         document.getElementById("container-value").className = "col-md-3";
         document.getElementById("container-payment").className = "col-md-3";
         document.getElementById("container-instalment").className = "col-md-3";
