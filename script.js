@@ -1234,20 +1234,38 @@ function generateDocuments() {
         const changeProxyVisibility = window.getComputedStyle(document.getElementsByClassName("change-proxy-container")[0], null).getPropertyValue('visibility');
         const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("checklist-container")[0], null).getPropertyValue('visibility');
         
+        let initalTime = 0;
+
         if (proxyVisibility === "visible") {
-            generateProxy();
+            setTimeout(() => {
+                generateProxy();
+            }, initalTime);
+
+            initalTime += 2000;
         }
 
         if (contractVisibility === "visible") {
-            generateContract();
+            setTimeout(() => {
+                generateContract();
+            }, initalTime);
+
+            initalTime += 2000;
         }
 
         if (changeProxyVisibility === "visible") {
-            generateChangeProxy();
+            setTimeout(() => {
+                generateChangeProxy();
+            }, initalTime);
+
+            initalTime += 2000;
         }
 
         if (checklistVisibility === "visible") {
-            generateChecklist();
+            setTimeout(() => {
+                generateChecklist();
+            }, initalTime);
+
+            initalTime += 2000;
         }
     } else {
         showMessage("Preencha todos os campos antes de prosseguir.", "error")
