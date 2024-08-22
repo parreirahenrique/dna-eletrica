@@ -463,3 +463,19 @@ select {
     visibility: hidden;
     display: none;
 }
+
+@media (max-width: 767.98px) {
+    .login-container {
+        margin-right: 10px;
+        margin-left: 0px;
+        width: calc(100% - 60px);
+    }
+    .form-container {
+        margin-right: 10px;
+        margin-left: 30px;
+        width: calc(100% - 40px);
+    }
+    .first-container {
+        margin-top: 20px;
+    }
+}
