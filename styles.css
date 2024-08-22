@@ -466,14 +466,14 @@ select {
 
 @media (max-width: 767.98px) {
     .login-container {
-        margin-right: 10px;
+        margin-right: 30px;
         margin-left: 0px;
-        width: calc(100% - 60px);
+        width: calc(100% - 30px);
     }
     .form-container {
-        margin-right: 10px;
+        margin-right: 50px;
         margin-left: 30px;
-        width: calc(100% - 40px);
+        width: calc(100% - 80px);
     }
     .first-container {
         margin-top: 20px;
