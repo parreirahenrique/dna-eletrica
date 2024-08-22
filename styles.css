@@ -471,9 +471,9 @@ select {
         width: calc(100% - 30px);
     }
     .form-container {
-        margin-right: 50px;
-        margin-left: 50px;
-        width: calc(100% - 100px);
+        margin-right: 30px;
+        margin-left: 30px;
+        width: calc(100% - 60px);
     }
     .first-container {
         margin-top: 20px;
