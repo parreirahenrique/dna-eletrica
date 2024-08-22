@@ -472,8 +472,8 @@ select {
     }
     .form-container {
         margin-right: 50px;
-        margin-left: 30px;
-        width: calc(100% - 80px);
+        margin-left: 50px;
+        width: calc(100% - 100px);
     }
     .first-container {
         margin-top: 20px;
