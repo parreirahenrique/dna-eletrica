@@ -103,6 +103,7 @@ function login() {
         document.getElementById("form-container").style.visibility = "hidden";
         document.getElementById("login-container").style.visibility = "visible";
         document.getElementById("password").value = "";
+        hideEverything();
     }
 
     controlVisibility();
@@ -116,7 +117,7 @@ function logout() {
     localStorage.removeItem("user");
     localStorage.removeItem("password");
     localStorage.removeItem("role");
-    controlVisibility();
+    hideEverything();
 }
 
 function validateUser(password) {
@@ -133,7 +134,7 @@ function validateUser(password) {
     return false;
 }
 
-function controlVisibility() {
+function controlVisibility(input) {
     const role = localStorage.getItem("role");
 
     const allContainer = document.getElementById("all-container");
@@ -141,16 +142,19 @@ function controlVisibility() {
     const all = document.getElementById("todos");
     const proxy = document.getElementById("procuracao");
     const contract = document.getElementById("contrato");
+    const budget = document.getElementById("orcamento");
     const changeProxy = document.getElementById("procuracao-troca");
     const checklist = document.getElementById("checklist");
 
     const proxyContainer = document.getElementsByClassName("proxy-container");
     const contractContainer = document.getElementsByClassName("contract-container");
+    const budgetContainer = document.getElementsByClassName("budget-container");
     const changeProxyContainer = document.getElementsByClassName("change-proxy-container");
     const checklistContainer = document.getElementsByClassName("checklist-container");
 
     const proxyButton = document.getElementsByClassName("botao-procuracao");
     const contractButton = document.getElementsByClassName("botao-contrato");
+    const budgetButton = document.getElementsByClassName("botao-orcamento");
     const changeProxyButton = document.getElementsByClassName("botao-procuracao-troca");
     const checklistButton = document.getElementsByClassName("botao-checklist");
     const allButton = document.getElementsByClassName("botao-todos-documentos");
@@ -159,6 +163,7 @@ function controlVisibility() {
     const allCheckbox = document.getElementById("todos");
     const proxyCheckbox = document.getElementById("procuracao");
     const contractCheckbox = document.getElementById("contrato");
+    const budgetCheckbox = document.getElementById("orcamento");
     const changeProxyCheckbox = document.getElementById("procuracao-troca");
     const checklistCheckbox = document.getElementById("checklist");
 
@@ -166,229 +171,161 @@ function controlVisibility() {
         allContainer.style.visibility = "hidden";
         allContainer.style.display = "none";
 
-        all.checked = false;
-        proxy.checked = true;
-        contract.checked = true;
-        checklist.checked = true;
+        if (input === proxy && proxy.checked) {
+            proxy.checked = true;
+            contract.checked = true;
+            checklist.checked = true;
+        } else if (input === contract && contract.checked) {
+            proxy.checked = true;
+            contract.checked = true;
+            checklist.checked = true;
+        } else if (input === checklist && checklist.checked) {
+            proxy.checked = true;
+            contract.checked = true;
+            checklist.checked = true;
+        } else if (input === proxy && !proxy.checked) {
+            proxy.checked = false;
+            contract.checked = false;
+            checklist.checked = false;
+        } else if (input === contract && !contract.checked) {
+            proxy.checked = false;
+            contract.checked = false;
+            checklist.checked = false;
+        } else if (input === checklist && !checklist.checked) {
+            proxy.checked = false;
+            contract.checked = false;
+            checklist.checked = false;
+        }
 
+        // for (let i = 0; i < proxyContainer.length; i++) {
+        //     proxyContainer[i].style.visibility = "visible";
+        //     proxyContainer[i].style.display = "block";
+        // }
+
+        // for (let i = 0; i < contractContainer.length; i++) {
+        //     contractContainer[i].style.visibility = "visible";
+        //     contractContainer[i].style.display = "block";
+        // }
+
+        // if (changeProxyCheckbox.checked) {
+        //     for (let i = 0; i < changeProxyContainer.length; i++) {
+        //         changeProxyContainer[i].style.visibility = "visible";
+        //         changeProxyContainer[i].style.display = "block";
+        //     }
+        // } else {
+        //     for (let i = 0; i < changeProxyContainer.length; i++) {
+        //         changeProxyContainer[i].style.visibility = "hidden";
+        //         changeProxyContainer[i].style.display = "none";
+        //     }
+        // }
+
+        // for (let i = 0; i < checklistContainer.length; i++) {
+        //     checklistContainer[i].style.visibility = "visible";
+        //     checklistContainer[i].style.display = "block";
+        // }
+
+        // for (let i = 0; i < allButton.length; i++) {
+        //     allButton[i].style.visibility = "visible";
+        //     allButton[i].style.display = "block";
+        // }
+    } else if (role === "Director" || role === "Administrator") {
+        allContainer.style.visibility = "visible";
+        allContainer.style.display = "block";
+    } else {
+
+    }
+
+    if (input === allCheckbox && allCheckbox.checked) {
+        proxyCheckbox.checked = true;
+        contractCheckbox.checked = true;
+        budgetCheckbox.checked = true;
+        changeProxy.checked = true;
+        checklistCheckbox.checked = true;
+    } else if (input === allCheckbox && !allCheckbox.checked) {
+        proxyCheckbox.checked = false;
+        contractCheckbox.checked = false;
+        budgetCheckbox.checked = false;
+        changeProxy.checked = false;
+        checklistCheckbox.checked = false;
+    } else if (!proxyCheckbox.checked || !contractCheckbox.checked || !budgetCheckbox.checked || !changeProxy.checked || !checklistCheckbox.checked) {
+        allCheckbox.checked = false;
+    }
+
+    if (proxyCheckbox.checked) {
         for (let i = 0; i < proxyContainer.length; i++) {
             proxyContainer[i].style.visibility = "visible";
             proxyContainer[i].style.display = "block";
         }
-
-        for (let i = 0; i < contractContainer.length; i++) {
-            contractContainer[i].style.visibility = "visible";
-            contractContainer[i].style.display = "block";
-        }
-
-        if (changeProxyCheckbox.checked) {
-            for (let i = 0; i < changeProxyContainer.length; i++) {
-                changeProxyContainer[i].style.visibility = "visible";
-                changeProxyContainer[i].style.display = "block";
-            }
-        } else {
-            for (let i = 0; i < changeProxyContainer.length; i++) {
-                changeProxyContainer[i].style.visibility = "hidden";
-                changeProxyContainer[i].style.display = "none";
-            }
-        }
-
-        for (let i = 0; i < checklistContainer.length; i++) {
-            checklistContainer[i].style.visibility = "visible";
-            checklistContainer[i].style.display = "block";
-        }
-
-        for (let i = 0; i < allButton.length; i++) {
-            allButton[i].style.visibility = "visible";
-            allButton[i].style.display = "block";
-        }
-    } else if (role === "Director" || role === "Administrator") {
-        allContainer.style.visibility = "visible";
-        allContainer.style.display = "block";
-
-        if (allCheckbox.checked) {
-            proxyCheckbox.checked = true;
-            contractCheckbox.checked = true;
-            changeProxy.checked = true;
-            checklistCheckbox.checked = true;
-        }
-
-        if (proxyCheckbox.checked) {
-            for (let i = 0; i < proxyContainer.length; i++) {
-                proxyContainer[i].style.visibility = "visible";
-                proxyContainer[i].style.display = "block";
-            }
-        } else {
-            for (let i = 0; i < proxyContainer.length; i++) {
-                proxyContainer[i].style.visibility = "hidden";
-                proxyContainer[i].style.display = "none";
-            }
-        }
-
-        if (contractCheckbox.checked) {
-            for (let i = 0; i < contractContainer.length; i++) {
-                contractContainer[i].style.visibility = "visible";
-                contractContainer[i].style.display = "block";
-            }
-        } else {
-            for (let i = 0; i < contractContainer.length; i++) {
-                contractContainer[i].style.visibility = "hidden";
-                contractContainer[i].style.display = "none";
-            }
-        }
-
-        if (changeProxyCheckbox.checked) {
-            for (let i = 0; i < changeProxyContainer.length; i++) {
-                changeProxyContainer[i].style.visibility = "visible";
-                changeProxyContainer[i].style.display = "block";
-            }
-        } else {
-            for (let i = 0; i < changeProxyContainer.length; i++) {
-                changeProxyContainer[i].style.visibility = "hidden";
-                changeProxyContainer[i].style.display = "none";
-            }
-        }
-
-        if (checklistCheckbox.checked) {
-            for (let i = 0; i < checklistContainer.length; i++) {
-                checklistContainer[i].style.visibility = "visible";
-                checklistContainer[i].style.display = "block";
-            }
-        } else {
-            for (let i = 0; i < contractContainer.length; i++) {
-                checklistContainer[i].style.visibility = "hidden";
-                checklistContainer[i].style.display = "none";
-            }
-        }
-
-        const FIRST_CONDITION = proxyCheckbox.checked && contractCheckbox.checked;
-        const SECOND_CONDITION = proxyCheckbox.checked && changeProxyCheckbox.checked;
-        const THIRD_CONDITION = proxyCheckbox.checked && checklistCheckbox.checked;
-        const FOURTH_CONDITION = contractCheckbox.checked && changeProxyCheckbox.checked;
-        const FIFTH_CONDITION = contractCheckbox.checked && checklistCheckbox.checked;
-        const SIXTH_CONDITION = changeProxyCheckbox.checked && checklistCheckbox.checked;
-
-        if (FIRST_CONDITION || SECOND_CONDITION || THIRD_CONDITION || FOURTH_CONDITION || FIFTH_CONDITION || SIXTH_CONDITION) {
-            for (let i = 0; i < allButton.length; i++) {
-                allButton[i].style.visibility = "visible";
-                allButton[i].style.display = "block";
-            }
-
-            for (let i = 0; i < proxyButton.length; i++) {
-                proxyButton[i].style.visibility = "hidden";
-                proxyButton[i].style.display = "none";
-            }
-
-            for (let i = 0; i < contractButton.length; i++) {
-                contractButton[i].style.visibility = "hidden";
-                contractButton[i].style.display = "none";
-            }
-
-            for (let i = 0; i < changeProxyButton.length; i++) {
-                changeProxyButton[i].style.visibility = "hidden";
-                changeProxyButton[i].style.display = "none";
-            }
-
-            for (let i = 0; i < checklistButton.length; i++) {
-                checklistButton[i].style.visibility = "hidden";
-                checklistButton[i].style.display = "none";
-            }
-        } else if (proxyCheckbox.checked && !contractCheckbox.checked && !changeProxyCheckbox.checked && !checklistCheckbox.checked) {
-            for (let i = 0; i < proxyButton.length; i++) {
-                proxyButton[i].style.visibility = "visible";
-                proxyButton[i].style.display = "block";
-                proxyButton[i].style.marginBottom = "0";
-            }
-
-            for (let i = 0; i < allButton.length; i++) {
-                allButton[i].style.visibility = "hidden";
-                allButton[i].style.display = "none";
-            }
-        } else if (!proxyCheckbox.checked && contractCheckbox.checked && !changeProxyCheckbox.checked && !checklistCheckbox.checked) {
-            for (let i = 0; i < contractButton.length; i++) {
-                contractButton[i].style.visibility = "visible";
-                contractButton[i].style.display = "block";
-                contractButton[i].style.marginBottom = "0";
-            }
-
-            for (let i = 0; i < allButton.length; i++) {
-                allButton[i].style.visibility = "hidden";
-                allButton[i].style.display = "none";
-            }
-        } else if (!proxyCheckbox.checked && !contractCheckbox.checked && changeProxyCheckbox.checked && !checklistCheckbox.checked) {
-            for (let i = 0; i < changeProxyButton.length; i++) {
-                changeProxyButton[i].style.visibility = "visible";
-                changeProxyButton[i].style.display = "block";
-                changeProxyButton[i].style.marginBottom = "0";
-            }
-
-            for (let i = 0; i < allButton.length; i++) {
-                allButton[i].style.visibility = "hidden";
-                allButton[i].style.display = "none";
-            }
-        } else if (!proxyCheckbox.checked && !contractCheckbox.checked && !changeProxyCheckbox.checked && checklistCheckbox.checked) {
-            for (let i = 0; i < checklistButton.length; i++) {
-                checklistButton[i].style.visibility = "visible";
-                checklistButton[i].style.display = "block";
-            }
-
-            for (let i = 0; i < allButton.length; i++) {
-                allButton[i].style.visibility = "hidden";
-                allButton[i].style.display = "none";
-            }
-        } else {
-            for (let i = 0; i < allButton.length; i++) {
-                allButton[i].style.visibility = "hidden";
-                allButton[i].style.display = "none";
-            }
-
-            for (let i = 0; i < proxyButton.length; i++) {
-                proxyButton[i].style.visibility = "hidden";
-                proxyButton[i].style.display = "none";
-            }
-
-            for (let i = 0; i < contractButton.length; i++) {
-                contractButton[i].style.visibility = "hidden";
-                contractButton[i].style.display = "none";
-            }
-
-            for (let i = 0; i < changeProxyButton.length; i++) {
-                changeProxyButton[i].style.visibility = "hidden";
-                changeProxyButton[i].style.display = "none";
-            }
-
-            for (let i = 0; i < checklistButton.length; i++) {
-                checklistButton[i].style.visibility = "hidden";
-                checklistButton[i].style.display = "none";
-            }
-        }
     } else {
-        allContainer.style.visibility = "hidden";
-        allContainer.style.display = "none";
-        
         for (let i = 0; i < proxyContainer.length; i++) {
             proxyContainer[i].style.visibility = "hidden";
             proxyContainer[i].style.display = "none";
         }
+    }
 
+    if (contractCheckbox.checked) {
+        for (let i = 0; i < contractContainer.length; i++) {
+            contractContainer[i].style.visibility = "visible";
+            contractContainer[i].style.display = "block";
+        }
+    } else {
         for (let i = 0; i < contractContainer.length; i++) {
             contractContainer[i].style.visibility = "hidden";
             contractContainer[i].style.display = "none";
         }
-        
+    }
+
+    if (budgetCheckbox.checked) {
+        for (let i = 0; i < budgetContainer.length; i++) {
+            budgetContainer[i].style.visibility = "visible";
+            budgetContainer[i].style.display = "block";
+        }
+    } else {
+        for (let i = 0; i < budgetContainer.length; i++) {
+            budgetContainer[i].style.visibility = "hidden";
+            budgetContainer[i].style.display = "none";
+        }
+    }
+
+    if (changeProxyCheckbox.checked) {
+        for (let i = 0; i < changeProxyContainer.length; i++) {
+            changeProxyContainer[i].style.visibility = "visible";
+            changeProxyContainer[i].style.display = "block";
+        }
+    } else {
         for (let i = 0; i < changeProxyContainer.length; i++) {
             changeProxyContainer[i].style.visibility = "hidden";
             changeProxyContainer[i].style.display = "none";
         }
+    }
 
+    if (checklistCheckbox.checked) {
         for (let i = 0; i < checklistContainer.length; i++) {
+            checklistContainer[i].style.visibility = "visible";
+            checklistContainer[i].style.display = "block";
+        }
+    } else {
+        for (let i = 0; i < contractContainer.length; i++) {
             checklistContainer[i].style.visibility = "hidden";
             checklistContainer[i].style.display = "none";
         }
+    }
 
+    const FIRST_CONDITION = proxyCheckbox.checked && contractCheckbox.checked;
+    const SECOND_CONDITION = proxyCheckbox.checked && changeProxyCheckbox.checked;
+    const THIRD_CONDITION = proxyCheckbox.checked && checklistCheckbox.checked;
+    const FOURTH_CONDITION = contractCheckbox.checked && changeProxyCheckbox.checked;
+    const FIFTH_CONDITION = contractCheckbox.checked && checklistCheckbox.checked;
+    const SIXTH_CONDITION = changeProxyCheckbox.checked && checklistCheckbox.checked;
+    const SEVENTH_CONDITION = budgetCheckbox.checked && proxyCheckbox.checked;
+    const EIGHTH_CONDITION = budgetCheckbox.checked && contractCheckbox.checked;
+    const NINTH_CONDITION = budgetCheckbox.checked && changeProxyCheckbox.checked;
+    const TENTH_CONDITION = budgetCheckbox.checked && checklistCheckbox.checked;
+
+    if (FIRST_CONDITION || SECOND_CONDITION || THIRD_CONDITION || FOURTH_CONDITION || FIFTH_CONDITION || SIXTH_CONDITION || SEVENTH_CONDITION || EIGHTH_CONDITION || NINTH_CONDITION || TENTH_CONDITION) {
         for (let i = 0; i < allButton.length; i++) {
-            allButton[i].style.visibility = "hidden";
-            allButton[i].style.display = "none";
+            allButton[i].style.visibility = "visible";
+            allButton[i].style.display = "block";
         }
 
         for (let i = 0; i < proxyButton.length; i++) {
@@ -410,6 +347,187 @@ function controlVisibility() {
             checklistButton[i].style.visibility = "hidden";
             checklistButton[i].style.display = "none";
         }
+
+        for (let i = 0; i < budgetButton.length; i++) {
+            budgetButton[i].style.visibility = "hidden";
+            budgetButton[i].style.display = "none";
+        }
+    } else if (proxyCheckbox.checked && !contractCheckbox.checked && !budgetCheckbox.checked && !changeProxyCheckbox.checked && !checklistCheckbox.checked) {
+        for (let i = 0; i < proxyButton.length; i++) {
+            proxyButton[i].style.visibility = "visible";
+            proxyButton[i].style.display = "block";
+            proxyButton[i].style.marginBottom = "0";
+        }
+
+        for (let i = 0; i < allButton.length; i++) {
+            allButton[i].style.visibility = "hidden";
+            allButton[i].style.display = "none";
+        }
+    } else if (!proxyCheckbox.checked && contractCheckbox.checked && !budgetCheckbox.checked && !changeProxyCheckbox.checked && !checklistCheckbox.checked) {
+        for (let i = 0; i < contractButton.length; i++) {
+            contractButton[i].style.visibility = "visible";
+            contractButton[i].style.display = "block";
+            contractButton[i].style.marginBottom = "0";
+        }
+
+        for (let i = 0; i < allButton.length; i++) {
+            allButton[i].style.visibility = "hidden";
+            allButton[i].style.display = "none";
+        }
+    } else if (!proxyCheckbox.checked && !contractCheckbox.checked && budgetCheckbox.checked && !changeProxyCheckbox.checked && !checklistCheckbox.checked) {
+        for (let i = 0; i < budgetButton.length; i++) {
+            budgetButton[i].style.visibility = "visible";
+            budgetButton[i].style.display = "block";
+            budgetButton[i].style.marginBottom = "0";
+        }
+
+        for (let i = 0; i < allButton.length; i++) {
+            allButton[i].style.visibility = "hidden";
+            allButton[i].style.display = "none";
+        }
+    } else if (!proxyCheckbox.checked && !contractCheckbox.checked && !budgetCheckbox.checked && changeProxyCheckbox.checked && !checklistCheckbox.checked) {
+        for (let i = 0; i < changeProxyButton.length; i++) {
+            changeProxyButton[i].style.visibility = "visible";
+            changeProxyButton[i].style.display = "block";
+            changeProxyButton[i].style.marginBottom = "0";
+        }
+
+        for (let i = 0; i < allButton.length; i++) {
+            allButton[i].style.visibility = "hidden";
+            allButton[i].style.display = "none";
+        }
+    } else if (!proxyCheckbox.checked && !contractCheckbox.checked && !budgetCheckbox.checked && !changeProxyCheckbox.checked && checklistCheckbox.checked) {
+        for (let i = 0; i < checklistButton.length; i++) {
+            checklistButton[i].style.visibility = "visible";
+            checklistButton[i].style.display = "block";
+        }
+
+        for (let i = 0; i < allButton.length; i++) {
+            allButton[i].style.visibility = "hidden";
+            allButton[i].style.display = "none";
+        }
+    } else {
+        for (let i = 0; i < allButton.length; i++) {
+            allButton[i].style.visibility = "hidden";
+            allButton[i].style.display = "none";
+        }
+
+        for (let i = 0; i < proxyButton.length; i++) {
+            proxyButton[i].style.visibility = "hidden";
+            proxyButton[i].style.display = "none";
+        }
+
+        for (let i = 0; i < contractButton.length; i++) {
+            contractButton[i].style.visibility = "hidden";
+            contractButton[i].style.display = "none";
+        }
+
+        for (let i = 0; i < budgetButton.length; i++) {
+            budgetButton[i].style.visibility = "hidden";
+            budgetButton[i].style.display = "none";
+        }
+
+        for (let i = 0; i < changeProxyButton.length; i++) {
+            changeProxyButton[i].style.visibility = "hidden";
+            changeProxyButton[i].style.display = "none";
+        }
+
+        for (let i = 0; i < checklistButton.length; i++) {
+            checklistButton[i].style.visibility = "hidden";
+            checklistButton[i].style.display = "none";
+        }
+    }
+}
+
+function hideEverything() {
+    const role = localStorage.getItem("role");
+
+    const allContainer = document.getElementById("all-container");
+
+    const all = document.getElementById("todos");
+    const proxy = document.getElementById("procuracao");
+    const contract = document.getElementById("contrato");
+    const budget = document.getElementById("orcamento");
+    const changeProxy = document.getElementById("procuracao-troca");
+    const checklist = document.getElementById("checklist");
+
+    const proxyContainer = document.getElementsByClassName("proxy-container");
+    const contractContainer = document.getElementsByClassName("contract-container");
+    const budgetContainer = document.getElementsByClassName("budget-container");
+    const changeProxyContainer = document.getElementsByClassName("change-proxy-container");
+    const checklistContainer = document.getElementsByClassName("checklist-container");
+
+    const proxyButton = document.getElementsByClassName("botao-procuracao");
+    const contractButton = document.getElementsByClassName("botao-contrato");
+    const budgetButton = document.getElementsByClassName("botao-orcamento");
+    const changeProxyButton = document.getElementsByClassName("botao-procuracao-troca");
+    const checklistButton = document.getElementsByClassName("botao-checklist");
+    const allButton = document.getElementsByClassName("botao-todos-documentos");
+
+
+    const allCheckbox = document.getElementById("todos");
+    const proxyCheckbox = document.getElementById("procuracao");
+    const contractCheckbox = document.getElementById("contrato");
+    const budgetCheckbox = document.getElementById("orcamento");
+    const changeProxyCheckbox = document.getElementById("procuracao-troca");
+    const checklistCheckbox = document.getElementById("checklist");
+
+    allContainer.style.visibility = "hidden";
+    allContainer.style.display = "none";
+
+    for (let i = 0; i < proxyContainer.length; i++) {
+        proxyContainer[i].style.visibility = "hidden";
+        proxyContainer[i].style.display = "none";
+    }
+
+    for (let i = 0; i < contractContainer.length; i++) {
+        contractContainer[i].style.visibility = "hidden";
+        contractContainer[i].style.display = "none";
+    }
+
+    for (let i = 0; i < budgetContainer.length; i++) {
+        budgetContainer[i].style.visibility = "hidden";
+        budgetContainer[i].style.display = "none";
+    }
+
+    for (let i = 0; i < changeProxyContainer.length; i++) {
+        changeProxyContainer[i].style.visibility = "hidden";
+        changeProxyContainer[i].style.display = "none";
+    }
+
+    for (let i = 0; i < checklistContainer.length; i++) {
+        checklistContainer[i].style.visibility = "hidden";
+        checklistContainer[i].style.display = "none";
+    }
+
+    for (let i = 0; i < allButton.length; i++) {
+        allButton[i].style.visibility = "hidden";
+        allButton[i].style.display = "none";
+    }
+
+    for (let i = 0; i < proxyButton.length; i++) {
+        proxyButton[i].style.visibility = "hidden";
+        proxyButton[i].style.display = "none";
+    }
+
+    for (let i = 0; i < contractButton.length; i++) {
+        contractButton[i].style.visibility = "hidden";
+        contractButton[i].style.display = "none";
+    }
+
+    for (let i = 0; i < budgetButton.length; i++) {
+        budgetButton[i].style.visibility = "hidden";
+        budgetButton[i].style.display = "none";
+    }
+
+    for (let i = 0; i < changeProxyButton.length; i++) {
+        changeProxyButton[i].style.visibility = "hidden";
+        changeProxyButton[i].style.display = "none";
+    }
+
+    for (let i = 0; i < checklistButton.length; i++) {
+        checklistButton[i].style.visibility = "hidden";
+        checklistButton[i].style.display = "none";
     }
 }
 
@@ -441,6 +559,34 @@ function addInverter() {
     }
 }
 
+function addBudgetInverter() {
+    const inverter1 = document.getElementById("inverter-1-orcamento");
+    const inverter2 = document.getElementById("inverter-2-orcamento");
+    const inverter3 = document.getElementById("inverter-3-orcamento");
+    const inverter4 = document.getElementById("inverter-4-orcamento");
+
+    const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-2-orcamento"), null).getPropertyValue('visibility') === "hidden";
+
+    const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-2-orcamento"), null).getPropertyValue('visibility') === "visible" &&
+        window.getComputedStyle(document.getElementById("inverter-3-orcamento"), null).getPropertyValue('visibility') === "hidden";
+
+    const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-2-orcamento"), null).getPropertyValue('visibility') === "visible" &&
+        window.getComputedStyle(document.getElementById("inverter-3-orcamento"), null).getPropertyValue('visibility') === "visible" &&
+        window.getComputedStyle(document.getElementById("inverter-4-orcamento"), null).getPropertyValue('visibility') === "hidden";
+
+    if (FIRST_CONDITION) {
+        inverter1.innerText = "Primeiro inversor";
+        inverter2.style.visibility = "visible";
+        inverter2.style.display = "block";
+    } else if (SECOND_CONDITION) {
+        inverter3.style.visibility = "visible";
+        inverter3.style.display = "block";
+    } else if (THIRD_CONDITION) {
+        inverter4.style.visibility = "visible";
+        inverter4.style.display = "block";
+    }
+}
+
 function removeInverter() {
     const inverter1 = document.getElementById("inverter-1");
     const inverter2 = document.getElementById("inverter-2");
@@ -455,6 +601,34 @@ function removeInverter() {
     const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-4"), null).getPropertyValue('visibility') === "hidden" &&
         window.getComputedStyle(document.getElementById("inverter-3"), null).getPropertyValue('visibility') === "hidden" &&
         window.getComputedStyle(document.getElementById("inverter-2"), null).getPropertyValue('visibility') === "visible";
+
+    if (FIRST_CONDITION) {
+        inverter4.style.visibility = "hidden";
+        inverter4.style.display = "none";
+    } else if (SECOND_CONDITION) {
+        inverter3.style.visibility = "hidden";
+        inverter3.style.display = "none";
+    } else if (THIRD_CONDITION) {
+        inverter1.innerText = "Inversor";
+        inverter2.style.visibility = "hidden";
+        inverter2.style.display = "none";
+    }
+}
+
+function removeBudgetInverter() {
+    const inverter1 = document.getElementById("inverter-1-orcamento");
+    const inverter2 = document.getElementById("inverter-2-orcamento");
+    const inverter3 = document.getElementById("inverter-3-orcamento");
+    const inverter4 = document.getElementById("inverter-4-orcamento");
+
+    const FIRST_CONDITION = window.getComputedStyle(document.getElementById("inverter-4-orcamento"), null).getPropertyValue('visibility') === "visible";
+
+    const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-4-orcamento"), null).getPropertyValue('visibility') === "hidden" &&
+        window.getComputedStyle(document.getElementById("inverter-3-orcamento"), null).getPropertyValue('visibility') === "visible";
+
+    const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-4-orcamento"), null).getPropertyValue('visibility') === "hidden" &&
+        window.getComputedStyle(document.getElementById("inverter-3-orcamento"), null).getPropertyValue('visibility') === "hidden" &&
+        window.getComputedStyle(document.getElementById("inverter-2-orcamento"), null).getPropertyValue('visibility') === "visible";
 
     if (FIRST_CONDITION) {
         inverter4.style.visibility = "hidden";
@@ -621,13 +795,38 @@ function controlContractCheckboxes(checkboxChanged) {
     }
 }
 
+function controlBudgetCheckboxes(checkboxChanged) {
+    const ceramico = document.getElementById("telhado-ceramico-orcamento");
+    const metalico = document.getElementById("telhado-metalico-orcamento");
+    const laje = document.getElementById("laje-orcamento");
+    const solo = document.getElementById("solo-orcamento");
+
+    if (checkboxChanged === ceramico && ceramico.checked) {
+        metalico.checked = false;
+        laje.checked = false;
+        solo.checked = false;
+    } else if (checkboxChanged === metalico && metalico.checked) {
+        ceramico.checked = false;
+        laje.checked = false;
+        solo.checked = false;
+    } else if (checkboxChanged === laje && laje.checked) {
+        ceramico.checked = false;
+        metalico.checked = false;
+        solo.checked = false;
+    } else if (checkboxChanged === solo && solo.checked) {
+        ceramico.checked = false;
+        metalico.checked = false;
+        laje.checked = false;
+    }
+}
+
 function controlChecklistCheckboxes(checkboxChanged) {
     const trocaTitularidade = document.getElementById("troca-titularidade");
     const pessoaFisica = document.getElementById("pessoa-fisica");
     const pessoaJuridica = document.getElementById("pessoa-juridica");
     const urbano = document.getElementById("urbano");
     const rural = document.getElementById("rural");
-    
+
     const semAumento = document.getElementById("sem-aumento-carga");
     const comAumento = document.getElementById("com-aumento-carga");
     const aumentoUsina = document.getElementById("aumento-usina");
@@ -913,7 +1112,7 @@ function generateContract() {
         const complement = document.getElementsByClassName("complement")[0].value;
         const neighborhood = document.getElementsByClassName("neighborhood")[0].value;
         const city = document.getElementsByClassName("city")[0].value;
-        
+
         cpfCnpj = cpfCnpj.length === 14 ? "CPF de nº " + cpfCnpj : "CNPJ de nº " + cpfCnpj;
 
         let moduleQuantity = document.getElementById("quantity-module").value;
@@ -942,7 +1141,7 @@ function generateContract() {
         let inverter4Power = document.getElementById("power-inverter-4").value;
 
         moduleManufacturer = moduleManufacturer === "Outro" ? otherModuleManufacturer.toUpperCase() : moduleManufacturer.toUpperCase();
-        
+
         inverter1Manufacturer = inverter1Manufacturer === "Outro" ? otherInverter1Manufacturer.toUpperCase() : inverter1Manufacturer.toUpperCase();
         inverter2Manufacturer = inverter2Manufacturer === "Outro" ? otherInverter2Manufacturer.toUpperCase() : inverter2Manufacturer.toUpperCase();
         inverter3Manufacturer = inverter3Manufacturer === "Outro" ? otherInverter3Manufacturer.toUpperCase() : inverter3Manufacturer.toUpperCase();
@@ -966,7 +1165,7 @@ function generateContract() {
         inverterQuantity += inverter2Quantity ? "\n" + inverter2Quantity : "";
         inverterQuantity += inverter3Quantity ? "\n" + inverter3Quantity : "";
         inverterQuantity += inverter4Quantity ? "\n" + inverter4Quantity : "";
-        
+
         let moduleDescription = (moduleManufacturer ? (moduleManufacturer.toUpperCase() + " ") : "") + " " + modulePower;
 
         let roofType;
@@ -1005,7 +1204,7 @@ function generateContract() {
 
         let value = "R$ " + formatNumber(document.getElementById("value").value);
 
-        
+
         let day = String(new Date().getDate()).padStart(2, "0");
         let month = months[new Date().getMonth()];
         let year = new Date().getFullYear();
@@ -1151,14 +1350,14 @@ function generateChecklist() {
     if (fieldsFilled()) {
         const container = document.getElementsByClassName('checklist-container')[0];
         const { jsPDF } = window.jspdf;
-        
+
         // Calcula a escala baseada na largura da página A4 em pixels, subtraindo as margens
         const pdfWidth = 595.28 - 40; // Largura em pontos para uma página A4, menos 20px de margem de cada lado
         const containerWidth = container.scrollWidth + 60;
         const scale = pdfWidth / containerWidth; // Calcula a escala para caber no PDF
-        
+
         const pdf = new jsPDF('p', 'pt', 'a4');
-        
+
         // Estilo CSS adicional para forçar a fonte do Bootstrap no PDF e ajustar o fundo
         const customStyles = `
             .checklist-container {
@@ -1185,7 +1384,7 @@ function generateChecklist() {
                 border: 1px solid #aaaaaa; /* Borda da div */
             }
         `;
-        
+
         // Estilo CSS adicional para remover setas das caixas de seleção no PDF
         const removeSelectArrowStyle = `
             select {
@@ -1220,7 +1419,7 @@ function generateChecklist() {
                 }
             }
         });
-        
+
 
     } else {
         showMessage("Preencha todos os campos antes de prosseguir.", "error")
@@ -1233,7 +1432,7 @@ function generateDocuments() {
         const contractVisibility = window.getComputedStyle(document.getElementsByClassName("contract-container")[0], null).getPropertyValue('visibility');
         const changeProxyVisibility = window.getComputedStyle(document.getElementsByClassName("change-proxy-container")[0], null).getPropertyValue('visibility');
         const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("checklist-container")[0], null).getPropertyValue('visibility');
-        
+
         let initalTime = 0;
 
         if (proxyVisibility === "visible") {
@@ -1407,7 +1606,7 @@ function fieldsFilled() {
         const powerInverter4 = document.getElementById("power-inverter-4").value;
 
         const FIRST_CONDITION = ceramico || metalico || laje || solo;
-        
+
         const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-2"), null).getPropertyValue('visibility') === "hidden" ? true :
             (quantityInverter2 && manufacturerInverter2 !== "Selecione o fabricante" && powerInverter2 !== "Selecione a potência");
 
@@ -1425,7 +1624,7 @@ function fieldsFilled() {
             number &&
             neighborhood &&
             city
-            paymentValue &&
+        paymentValue &&
             (payment !== "Selecione a forma") &&
             (instalment !== "Selecione a parcela") &&
             quantityModule &&
@@ -1845,18 +2044,44 @@ function checkManufacturer(name) {
         document.getElementById(quantityContainer).className = "col-md-3";
         document.getElementById(manufacturerContainer).className = "col-md-3";
         document.getElementById(powerContainer).className = "col-md-3";
-        
+
         document.getElementById(otherManufacturerContainer).style.visibility = "visible";
         document.getElementById(otherManufacturerContainer).style.display = "block";
     } else {
         document.getElementById(quantityContainer).className = "col-md-4";
         document.getElementById(manufacturerContainer).className = "col-md-4";
         document.getElementById(powerContainer).className = "col-md-4";
-        
+
         document.getElementById(otherManufacturerContainer).style.visibility = "hidden";
         document.getElementById(otherManufacturerContainer).style.display = "none";
     }
-    
+
+}
+
+function checkBudgetManufacturer(name) {
+    const quantityContainer = "container-quantity-" + name + "-orcamento";
+    const manufacturerContainer = "container-manufacturer-" + name + "-orcamento";
+    const otherManufacturerContainer = "container-other-manufacturer-" + name + "-orcamento";
+    const powerContainer = "container-power-" + name + "-orcamento";
+
+    const manufacturer = document.getElementById("manufacturer-" + name + "-orcamento");
+
+    if (manufacturer.value === "Outro") {
+        document.getElementById(quantityContainer).className = "col-md-3";
+        document.getElementById(manufacturerContainer).className = "col-md-3";
+        document.getElementById(powerContainer).className = "col-md-3";
+
+        document.getElementById(otherManufacturerContainer).style.visibility = "visible";
+        document.getElementById(otherManufacturerContainer).style.display = "block";
+    } else {
+        document.getElementById(quantityContainer).className = "col-md-4";
+        document.getElementById(manufacturerContainer).className = "col-md-4";
+        document.getElementById(powerContainer).className = "col-md-4";
+
+        document.getElementById(otherManufacturerContainer).style.visibility = "hidden";
+        document.getElementById(otherManufacturerContainer).style.display = "none";
+    }
+
 }
 
 function checkPayment() {
@@ -1866,16 +2091,37 @@ function checkPayment() {
         document.getElementById("container-value").className = "col-md-3";
         document.getElementById("container-payment").className = "col-md-3";
         document.getElementById("container-instalment").className = "col-md-3";
-        
+
         document.getElementById("container-other-payment").style.visibility = "visible";
         document.getElementById("container-other-payment").style.display = "block";
     } else {
         document.getElementById("container-value").className = "col-md-4";
         document.getElementById("container-payment").className = "col-md-4";
         document.getElementById("container-instalment").className = "col-md-4";
-        
+
         document.getElementById("container-other-payment").style.visibility = "hidden";
         document.getElementById("container-other-payment").style.display = "none";
     }
-    
+
+}
+
+function checkBudgetPayment() {
+    const payment = document.getElementById("payment-orcamento");
+
+    if (payment.value === "Outro") {
+        document.getElementById("container-value-orcamento").className = "col-md-3";
+        document.getElementById("container-payment-orcamento").className = "col-md-3";
+        document.getElementById("container-instalment-orcamento").className = "col-md-3";
+
+        document.getElementById("container-other-payment-orcamento").style.visibility = "visible";
+        document.getElementById("container-other-payment-orcamento").style.display = "block";
+    } else {
+        document.getElementById("container-value-orcamento").className = "col-md-4";
+        document.getElementById("container-payment-orcamento").className = "col-md-4";
+        document.getElementById("container-instalment-orcamento").className = "col-md-4";
+
+        document.getElementById("container-other-payment-orcamento").style.visibility = "hidden";
+        document.getElementById("container-other-payment-orcamento").style.display = "none";
+    }
+
 }

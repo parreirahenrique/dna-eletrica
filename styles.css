@@ -256,6 +256,21 @@ input[type="checkbox"]:checked {
     visibility: hidden;
 }
 
+#inverter-2-orcamento {
+    display: none;
+    visibility: hidden;
+}
+
+#inverter-3-orcamento {
+    display: none;
+    visibility: hidden;
+}
+
+#inverter-4-orcamento {
+    display: none;
+    visibility: hidden;
+}
+
 .disjuntor-solicitado {
     display: none;
     visibility: hidden;
@@ -272,6 +287,11 @@ input[type="checkbox"]:checked {
 }
 
 .botao-contrato {
+    display: none;
+    visibility: hidden;
+}
+
+.botao-orcamento {
     display: none;
     visibility: hidden;
 }
@@ -297,6 +317,11 @@ input[type="checkbox"]:checked {
 }
 
 .contract-container {
+    display: none;
+    visibility: hidden;
+}
+
+.budget-container {
     display: none;
     visibility: hidden;
 }
