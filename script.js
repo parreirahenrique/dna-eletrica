@@ -1258,6 +1258,156 @@ function generateContract() {
     }
 }
 
+function generateBudget() {
+    if (fieldsFilled()) {
+        const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+
+        const name = document.getElementsByClassName("name")[0].value;
+        const city = document.getElementsByClassName("city")[0].value;
+
+        let moduleQuantity = document.getElementById("quantity-module").value;
+        let moduleManufacturer = document.getElementById("manufacturer-module").value;
+        let otherModuleManufacturer = document.getElementById("other-manufacturer-module").value;
+        let modulePower = document.getElementById("power-module").value;
+
+        let inverter1Quantity = document.getElementById("quantity-inverter-1").value;
+        let inverter1Manufacturer = document.getElementById("manufacturer-inverter-1").value;
+        let otherInverter1Manufacturer = document.getElementById("other-manufacturer-inverter-1").value;
+        let inverter1Power = document.getElementById("power-inverter-1").value;
+
+        let inverter2Quantity = document.getElementById("quantity-inverter-2").value;
+        let inverter2Manufacturer = document.getElementById("manufacturer-inverter-2").value;
+        let otherInverter2Manufacturer = document.getElementById("other-manufacturer-inverter-2").value;
+        let inverter2Power = document.getElementById("power-inverter-2").value;
+
+        let inverter3Quantity = document.getElementById("quantity-inverter-3").value;
+        let inverter3Manufacturer = document.getElementById("manufacturer-inverter-3").value;
+        let otherInverter3Manufacturer = document.getElementById("other-manufacturer-inverter-3").value;
+        let inverter3Power = document.getElementById("power-inverter-3").value;
+
+        let inverter4Quantity = document.getElementById("quantity-inverter-4").value;
+        let inverter4Manufacturer = document.getElementById("manufacturer-inverter-4").value;
+        let otherInverter4Manufacturer = document.getElementById("other-manufacturer-inverter-4").value;
+        let inverter4Power = document.getElementById("power-inverter-4").value;
+
+        moduleManufacturer = moduleManufacturer === "Outro" ? otherModuleManufacturer.toUpperCase() : moduleManufacturer.toUpperCase();
+
+        inverter1Manufacturer = inverter1Manufacturer === "Outro" ? otherInverter1Manufacturer.toUpperCase() : inverter1Manufacturer.toUpperCase();
+        inverter2Manufacturer = inverter2Manufacturer === "Outro" ? otherInverter2Manufacturer.toUpperCase() : inverter2Manufacturer.toUpperCase();
+        inverter3Manufacturer = inverter3Manufacturer === "Outro" ? otherInverter3Manufacturer.toUpperCase() : inverter3Manufacturer.toUpperCase();
+        inverter4Manufacturer = inverter4Manufacturer === "Outro" ? otherInverter4Manufacturer.toUpperCase() : inverter4Manufacturer.toUpperCase();
+
+        let metallicRoof = document.getElementById("telhado-metalico").checked;
+        let ceramicRoof = document.getElementById("telhado-ceramico").checked;
+        let slab = document.getElementById("laje").checked;
+        let solo = document.getElementById("solo").checked;
+
+        let peakPower = formatNumber((moduleQuantity * parseInt(modulePower.split(" Wp")[0])) / 1000) + " kWp";
+
+        let inverterDescription = (inverter1Manufacturer ? (inverter1Manufacturer + " ") : "") + " " + inverter1Power;
+
+        inverterDescription += inverter2Quantity ? "\nINVERSOR " + (inverter2Manufacturer ? (inverter2Manufacturer.toUpperCase() + " ") : "") + inverter2Power : "";
+        inverterDescription += inverter3Quantity ? "\nINVERSOR " + (inverter3Manufacturer ? (inverter3Manufacturer.toUpperCase() + " ") : "") + inverter3Power : "";
+        inverterDescription += inverter4Quantity ? "\nINVERSOR " + (inverter4Manufacturer ? (inverter4Manufacturer.toUpperCase() + " ") : "") + inverter4Power : "";
+
+        let inverterQuantity = inverter1Quantity;
+
+        inverterQuantity += inverter2Quantity ? "\n" + inverter2Quantity : "";
+        inverterQuantity += inverter3Quantity ? "\n" + inverter3Quantity : "";
+        inverterQuantity += inverter4Quantity ? "\n" + inverter4Quantity : "";
+
+        let moduleDescription = (moduleManufacturer ? (moduleManufacturer.toUpperCase() + " ") : "") + " " + modulePower;
+
+        let roofType;
+
+        if (metallicRoof) {
+            roofType = "TELHADO METÁLICO"
+        } else if (ceramicRoof) {
+            roofType = "TELHADO CERÂMICO"
+        } else if (slab) {
+            roofType = "LAJE"
+        } else if (solo) {
+            roofType = "SOLO"
+        }
+
+        let paymentMethod = document.getElementById("payment").value;
+        let instalment = document.getElementById("instalment").value;
+        let otherPaymentMethod = document.getElementById("other-payment").value;
+
+        let payment;
+
+        if (paymentMethod === "Outro") {
+            payment = otherPaymentMethod;
+        } else {
+            if (instalment === "100") {
+                payment = "À vista"
+            }
+
+            if (instalment === "30-70") {
+                payment = "Entrada de 30% mais um pagamento de 70%"
+            }
+
+            if (instalment === "50-50") {
+                payment = "Entrada de 50% mais um pagamento de 50%"
+            }
+        }
+
+        let value = "R$ " + formatNumber(document.getElementById("value").value);
+        let stringValue = numberToWords(document.getElementById("value").value);
+
+        let day = String(new Date().getDate()).padStart(2, "0");
+        let month = months[new Date().getMonth()];
+        let year = new Date().getFullYear();
+
+        const parameters = {
+            name: name,
+            cpfCnpj: cpfCnpj,
+            address: address,
+            number: number + (complement ? " " + complement : ""),
+            neighborhood: neighborhood,
+            city: city,
+            cep: cep,
+            peakPower: peakPower,
+            inverterDescription: inverterDescription,
+            inverterQuantity: inverterQuantity,
+            moduleDescription: moduleDescription,
+            moduleQuantity: moduleQuantity,
+            roofType: roofType,
+            payment: payment,
+            value: value,
+            day: day,
+            month: month,
+            year: year
+        };
+
+        loadFile(
+            "Contrato.docx",
+            function (error, content) {
+                if (error) {
+                    throw error;
+                }
+                const zip = new PizZip(content);
+                const doc = new window.docxtemplater(zip, {
+                    paragraphLoop: true,
+                    linebreaks: true,
+                });
+
+                doc.render(parameters);
+
+                const blob = doc.getZip().generate({
+                    type: "blob",
+                    mimeType:
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    compression: "DEFLATE",
+                });
+                saveAs(blob, `Contrato - ${name}.docx`);
+            }
+        );
+    } else {
+        showMessage("Preencha todos os campos antes de prosseguir.", "error");
+    }
+}
+
 function formatNumber(value) {
     // Converter o valor para número
     let num = parseFloat(value);
@@ -2124,4 +2274,54 @@ function checkBudgetPayment() {
         document.getElementById("container-other-payment-orcamento").style.display = "none";
     }
 
+}
+
+function numberToWords(numero) {
+    const unidades = ["", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove"];
+    const dezenas = ["", "dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"];
+    const centenas = ["", "cem", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"];
+    const especiais = ["dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"];
+    const milhares = ["", "mil", "milhão", "bilhão"];
+
+    function converteCentenas(numero) {
+        if (numero < 10) return unidades[numero];
+        if (numero < 20) return especiais[numero - 10];
+        if (numero < 100) return `${dezenas[Math.floor(numero / 10)]}${numero % 10 ? " e " + unidades[numero % 10] : ""}`;
+        if (numero < 1000) {
+            if (numero === 100) return "cem";
+            return `${centenas[Math.floor(numero / 100)]}${numero % 100 ? " e " + converteCentenas(numero % 100) : ""}`;
+        }
+    }
+
+    function converteMilhar(numero) {
+        let partes = [], contador = 0;
+
+        while (numero > 0) {
+            const milhar = numero % 1000;
+            if (milhar > 0) {
+                let parte = converteCentenas(milhar);
+                if (contador > 0 && milhar === 1) parte += " " + milhares[contador].replace("ão", "ão");
+                else parte += " " + milhares[contador];
+                partes.push(parte);
+            }
+            numero = Math.floor(numero / 1000);
+            contador++;
+        }
+        return partes.reverse().join(" e ");
+    }
+
+    function converteReais(valor) {
+        const partes = valor.split(',');
+        const reais = parseInt(partes[0], 10);
+        const centavos = partes[1] ? parseInt(partes[1], 10) : null;
+
+        let reaisPorExtenso = `${converteMilhar(reais)} real${reais > 1 ? "is" : ""}`;
+        if (centavos !== null) {
+            reaisPorExtenso += ` e ${converteCentenas(centavos)} centavo${centavos > 1 ? "s" : ""}`;
+        }
+
+        return reaisPorExtenso;
+    }
+
+    return converteReais(numero);
 }
