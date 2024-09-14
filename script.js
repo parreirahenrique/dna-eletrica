@@ -136,8 +136,11 @@ function validateUser(password) {
 
 function controlVisibility(input) {
     const role = localStorage.getItem("role");
-
+    
+    const allContainerClass = document.getElementsByClassName("all-container col-lg col-sm-12 first-container");
     const allContainer = document.getElementById("all-container");
+
+    const secondCheckbox = document.getElementById("second-checkbox");
 
     const all = document.getElementById("todos");
     const proxy = document.getElementById("procuracao");
@@ -168,6 +171,16 @@ function controlVisibility(input) {
     const checklistCheckbox = document.getElementById("checklist");
 
     if (role === "Salesman") {
+        for (let i = 0; i < allContainerClass.length; i++) {
+            allContainerClass[i].style.visibility = "hidden";
+            allContainerClass[i].style.display = "none";
+
+            
+            if (window.matchMedia("(max-width: 767.98px)").matches) {
+                secondCheckbox.style.marginTop = "20px";
+            }
+        }
+
         allContainer.style.visibility = "hidden";
         allContainer.style.display = "none";
 
@@ -229,6 +242,16 @@ function controlVisibility(input) {
         //     allButton[i].style.display = "block";
         // }
     } else if (role === "Director" || role === "Administrator") {
+        proxy.classList.remove
+        for (let i = 0; i < allContainerClass.length; i++) {
+            allContainerClass[i].style.visibility = "visible";
+            allContainerClass[i].style.display = "block";
+
+            if (window.matchMedia("(min-width: 767.98px)").matches) {
+                secondCheckbox.style.marginTop = "0px";
+            }
+        }
+
         allContainer.style.visibility = "visible";
         allContainer.style.display = "block";
     } else {
@@ -1104,7 +1127,7 @@ function generateContract() {
     if (fieldsFilled()) {
         const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
-        const name = document.getElementsByClassName("name")[0].value;
+        const name = document.getElementsByClassName("name")[0].value.toUpperCase();
         let cpfCnpj = document.getElementsByClassName("cpf-cnpj")[0].value;
         const cep = document.getElementsByClassName("cep")[0].value;
         const address = document.getElementsByClassName("address")[0].value;
@@ -1181,25 +1204,19 @@ function generateContract() {
         }
 
         let paymentMethod = document.getElementById("payment").value;
-        let instalment = document.getElementById("instalment").value;
+        // let instalment = document.getElementById("instalment").value;
         let otherPaymentMethod = document.getElementById("other-payment").value;
 
         let payment;
 
         if (paymentMethod === "Outro") {
             payment = otherPaymentMethod;
-        } else {
-            if (instalment === "100") {
-                payment = "À vista"
-            }
-
-            if (instalment === "30-70") {
-                payment = "Entrada de 30% mais um pagamento de 70%"
-            }
-
-            if (instalment === "50-50") {
-                payment = "Entrada de 50% mais um pagamento de 50%"
-            }
+        } else if (paymentMethod === "all") {
+            payment = "À vista"
+        } else if (paymentMethod === "30-70") {
+            payment = "Entrada de 30% mais um pagamento de 70%"
+        } else if (paymentMethod === "50-50") {
+            payment = "Entrada de 50% mais um pagamento de 50%"
         }
 
         let value = "R$ " + formatNumber(document.getElementById("value").value);
@@ -1331,25 +1348,19 @@ function generateBudget() {
         }
 
         let paymentMethod = document.getElementById("payment").value;
-        let instalment = document.getElementById("instalment").value;
+        // let instalment = document.getElementById("instalment").value;
         let otherPaymentMethod = document.getElementById("other-payment").value;
 
         let payment;
 
         if (paymentMethod === "Outro") {
             payment = otherPaymentMethod;
-        } else {
-            if (instalment === "100") {
-                payment = "À vista"
-            }
-
-            if (instalment === "30-70") {
-                payment = "Entrada de 30% mais um pagamento de 70%"
-            }
-
-            if (instalment === "50-50") {
-                payment = "Entrada de 50% mais um pagamento de 50%"
-            }
+        } else if (paymentMethod === "all") {
+            payment = "À vista"
+        } else if (paymentMethod === "30-70") {
+            payment = "Entrada de 30% mais um pagamento de 70%"
+        } else if (paymentMethod === "50-50") {
+            payment = "Entrada de 50% mais um pagamento de 50%"
         }
 
         let value = "R$ " + formatNumber(document.getElementById("value").value);
@@ -1733,7 +1744,7 @@ function fieldsFilled() {
 
         const paymentValue = document.getElementById("value").value;
         const payment = document.getElementById("payment").value;
-        const instalment = document.getElementById("instalment").value;
+        // const instalment = document.getElementById("instalment").value;
 
         const quantityModule = document.getElementById("quantity-module").value;
         const manufacturerModule = document.getElementById("manufacturer-module").value;
@@ -1776,7 +1787,7 @@ function fieldsFilled() {
             city
         paymentValue &&
             (payment !== "Selecione a forma") &&
-            (instalment !== "Selecione a parcela") &&
+            // (instalment !== "Selecione a parcela") &&
             quantityModule &&
             (manufacturerModule !== "Selecione o fabricante") &&
             (powerModule !== "Selecione a potência") &&
@@ -1828,9 +1839,9 @@ function fieldsFilled() {
             showRequiredMessageForID("payment-required");
         }
 
-        if (instalment === "Selecione a parcela") {
-            showRequiredMessageForID("instalment-required");
-        }
+        // if (instalment === "Selecione a parcela") {
+        //     showRequiredMessageForID("instalment-required");
+        // }
 
         if (!quantityModule) {
             showRequiredMessageForID("quantity-module-required");
@@ -2238,16 +2249,16 @@ function checkPayment() {
     const payment = document.getElementById("payment");
 
     if (payment.value === "Outro") {
-        document.getElementById("container-value").className = "col-md-3";
-        document.getElementById("container-payment").className = "col-md-3";
-        document.getElementById("container-instalment").className = "col-md-3";
+        document.getElementById("container-value").className = "col-md-4";
+        document.getElementById("container-payment").className = "col-md-4";
+        // document.getElementById("container-instalment").className = "col-md-3";
 
         document.getElementById("container-other-payment").style.visibility = "visible";
         document.getElementById("container-other-payment").style.display = "block";
     } else {
-        document.getElementById("container-value").className = "col-md-4";
-        document.getElementById("container-payment").className = "col-md-4";
-        document.getElementById("container-instalment").className = "col-md-4";
+        document.getElementById("container-value").className = "col-md-6";
+        document.getElementById("container-payment").className = "col-md-6";
+        // document.getElementById("container-instalment").className = "col-md-4";
 
         document.getElementById("container-other-payment").style.visibility = "hidden";
         document.getElementById("container-other-payment").style.display = "none";
@@ -2259,16 +2270,16 @@ function checkBudgetPayment() {
     const payment = document.getElementById("payment-orcamento");
 
     if (payment.value === "Outro") {
-        document.getElementById("container-value-orcamento").className = "col-md-3";
-        document.getElementById("container-payment-orcamento").className = "col-md-3";
-        document.getElementById("container-instalment-orcamento").className = "col-md-3";
+        document.getElementById("container-value-orcamento").className = "col-md-4";
+        document.getElementById("container-payment-orcamento").className = "col-md-4";
+        // document.getElementById("container-instalment-orcamento").className = "col-md-3";
 
         document.getElementById("container-other-payment-orcamento").style.visibility = "visible";
         document.getElementById("container-other-payment-orcamento").style.display = "block";
     } else {
-        document.getElementById("container-value-orcamento").className = "col-md-4";
-        document.getElementById("container-payment-orcamento").className = "col-md-4";
-        document.getElementById("container-instalment-orcamento").className = "col-md-4";
+        document.getElementById("container-value-orcamento").className = "col-md-6";
+        document.getElementById("container-payment-orcamento").className = "col-md-6";
+        // document.getElementById("container-instalment-orcamento").className = "col-md-4";
 
         document.getElementById("container-other-payment-orcamento").style.visibility = "hidden";
         document.getElementById("container-other-payment-orcamento").style.display = "none";
