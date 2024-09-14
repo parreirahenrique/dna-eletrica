@@ -1072,7 +1072,7 @@ function generateProxy() {
         };
 
         loadFile(
-            "Procuracao (Willy).docx",
+            "Procuracao.docx",
             function (error, content) {
                 if (error) {
                     throw error;
@@ -1092,30 +1092,6 @@ function generateProxy() {
                     compression: "DEFLATE",
                 });
                 saveAs(blob, `Procuracao (Willy) - ${name}.docx`);
-            }
-        );
-
-        loadFile(
-            "Procuracao (Edson).docx",
-            function (error, content) {
-                if (error) {
-                    throw error;
-                }
-                const zip = new PizZip(content);
-                const doc = new window.docxtemplater(zip, {
-                    paragraphLoop: true,
-                    linebreaks: true,
-                });
-
-                doc.render(parameters);
-
-                const blob = doc.getZip().generate({
-                    type: "blob",
-                    mimeType:
-                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                    compression: "DEFLATE",
-                });
-                saveAs(blob, `Procuracao (Edson) - ${name}.docx`);
             }
         );
     } else {
@@ -1278,34 +1254,35 @@ function generateContract() {
 function generateBudget() {
     if (fieldsFilled()) {
         const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+        const hspMinasGerais = [5.8, 5.7, 5.3, 5.0, 4.7, 4.6, 5.0, 5.4, 5.7, 5.8, 5.7, 5.8];
 
         const name = document.getElementsByClassName("name")[0].value;
         const city = document.getElementsByClassName("city")[0].value;
 
-        let moduleQuantity = document.getElementById("quantity-module").value;
-        let moduleManufacturer = document.getElementById("manufacturer-module").value;
-        let otherModuleManufacturer = document.getElementById("other-manufacturer-module").value;
-        let modulePower = document.getElementById("power-module").value;
+        let moduleQuantity = document.getElementById("quantity-module-orcamento").value;
+        let moduleManufacturer = document.getElementById("manufacturer-module-orcamento").value;
+        let otherModuleManufacturer = document.getElementById("other-manufacturer-module-orcamento").value;
+        let modulePower = document.getElementById("power-module-orcamento").value;
 
-        let inverter1Quantity = document.getElementById("quantity-inverter-1").value;
-        let inverter1Manufacturer = document.getElementById("manufacturer-inverter-1").value;
-        let otherInverter1Manufacturer = document.getElementById("other-manufacturer-inverter-1").value;
-        let inverter1Power = document.getElementById("power-inverter-1").value;
+        let inverter1Quantity = document.getElementById("quantity-inverter-1-orcamento").value;
+        let inverter1Manufacturer = document.getElementById("manufacturer-inverter-1-orcamento").value;
+        let otherInverter1Manufacturer = document.getElementById("other-manufacturer-inverter-1-orcamento").value;
+        let inverter1Power = document.getElementById("power-inverter-1-orcamento").value;
 
-        let inverter2Quantity = document.getElementById("quantity-inverter-2").value;
-        let inverter2Manufacturer = document.getElementById("manufacturer-inverter-2").value;
-        let otherInverter2Manufacturer = document.getElementById("other-manufacturer-inverter-2").value;
-        let inverter2Power = document.getElementById("power-inverter-2").value;
+        let inverter2Quantity = document.getElementById("quantity-inverter-2-orcamento").value;
+        let inverter2Manufacturer = document.getElementById("manufacturer-inverter-2-orcamento").value;
+        let otherInverter2Manufacturer = document.getElementById("other-manufacturer-inverter-2-orcamento").value;
+        let inverter2Power = document.getElementById("power-inverter-2-orcamento").value;
 
-        let inverter3Quantity = document.getElementById("quantity-inverter-3").value;
-        let inverter3Manufacturer = document.getElementById("manufacturer-inverter-3").value;
-        let otherInverter3Manufacturer = document.getElementById("other-manufacturer-inverter-3").value;
-        let inverter3Power = document.getElementById("power-inverter-3").value;
+        let inverter3Quantity = document.getElementById("quantity-inverter-3-orcamento").value;
+        let inverter3Manufacturer = document.getElementById("manufacturer-inverter-3-orcamento").value;
+        let otherInverter3Manufacturer = document.getElementById("other-manufacturer-inverter-3-orcamento").value;
+        let inverter3Power = document.getElementById("power-inverter-3-orcamento").value;
 
-        let inverter4Quantity = document.getElementById("quantity-inverter-4").value;
-        let inverter4Manufacturer = document.getElementById("manufacturer-inverter-4").value;
-        let otherInverter4Manufacturer = document.getElementById("other-manufacturer-inverter-4").value;
-        let inverter4Power = document.getElementById("power-inverter-4").value;
+        let inverter4Quantity = document.getElementById("quantity-inverter-4-orcamento").value;
+        let inverter4Manufacturer = document.getElementById("manufacturer-inverter-4-orcamento").value;
+        let otherInverter4Manufacturer = document.getElementById("other-manufacturer-inverter-4-orcamento").value;
+        let inverter4Power = document.getElementById("power-inverter-4-orcamento").value;
 
         moduleManufacturer = moduleManufacturer === "Outro" ? otherModuleManufacturer.toUpperCase() : moduleManufacturer.toUpperCase();
 
@@ -1314,13 +1291,13 @@ function generateBudget() {
         inverter3Manufacturer = inverter3Manufacturer === "Outro" ? otherInverter3Manufacturer.toUpperCase() : inverter3Manufacturer.toUpperCase();
         inverter4Manufacturer = inverter4Manufacturer === "Outro" ? otherInverter4Manufacturer.toUpperCase() : inverter4Manufacturer.toUpperCase();
 
-        let metallicRoof = document.getElementById("telhado-metalico").checked;
-        let ceramicRoof = document.getElementById("telhado-ceramico").checked;
-        let slab = document.getElementById("laje").checked;
-        let solo = document.getElementById("solo").checked;
+        let metallicRoof = document.getElementById("telhado-metalico-orcamento").checked;
+        let ceramicRoof = document.getElementById("telhado-ceramico-orcamento").checked;
+        let slab = document.getElementById("laje-orcamento").checked;
+        let solo = document.getElementById("solo-orcamento").checked;
 
-        let peakPower = formatNumber((moduleQuantity * parseInt(modulePower.split(" Wp")[0])) / 1000) + " kWp";
-
+        let consumption = formatNumber((moduleQuantity * parseInt(modulePower.split(" Wp")[0])) * 4 * 30 / 1000);
+        let totalConsumption = formatNumber(parseFormattedNumber(consumption) * 12);
         let inverterDescription = (inverter1Manufacturer ? (inverter1Manufacturer + " ") : "") + " " + inverter1Power;
 
         inverterDescription += inverter2Quantity ? "\nINVERSOR " + (inverter2Manufacturer ? (inverter2Manufacturer.toUpperCase() + " ") : "") + inverter2Power : "";
@@ -1347,9 +1324,8 @@ function generateBudget() {
             roofType = "SOLO"
         }
 
-        let paymentMethod = document.getElementById("payment").value;
-        // let instalment = document.getElementById("instalment").value;
-        let otherPaymentMethod = document.getElementById("other-payment").value;
+        let paymentMethod = document.getElementById("payment-orcamento").value;
+        let otherPaymentMethod = document.getElementById("other-payment-orcamento").value;
 
         let payment;
 
@@ -1363,36 +1339,177 @@ function generateBudget() {
             payment = "Entrada de 50% mais um pagamento de 50%"
         }
 
-        let value = "R$ " + formatNumber(document.getElementById("value").value);
-        let stringValue = numberToWords(document.getElementById("value").value);
+        let value = "R$ " + formatNumber(document.getElementById("value-orcamento").value);
+        let stringValue = numberToWords(document.getElementById("value-orcamento").value);
 
-        let day = String(new Date().getDate()).padStart(2, "0");
-        let month = months[new Date().getMonth()];
-        let year = new Date().getFullYear();
+        let date = String(new Date().getDate()).padStart(2, "0") + "/" + new Date().getMonth() + "/" + new Date().getFullYear();
+
+        let generation1 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 0);
+        let generation2 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 1);
+        let generation3 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 2);
+        let generation4 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 3);
+        let generation5 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 4);
+        let generation6 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 5);
+        let generation7 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 6);
+        let generation8 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 7);
+        let generation9 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 8);
+        let generation10 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 9);
+        let generation11 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 10);
+        let generation12 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 11);
+
+        let totalGeneration = formatNumber(parseFormattedNumber(generation1) + 
+                              parseFormattedNumber(generation2) + 
+                              parseFormattedNumber(generation3) + 
+                              parseFormattedNumber(generation4) + 
+                              parseFormattedNumber(generation5) + 
+                              parseFormattedNumber(generation6) + 
+                              parseFormattedNumber(generation7) + 
+                              parseFormattedNumber(generation8) + 
+                              parseFormattedNumber(generation9) + 
+                              parseFormattedNumber(generation10) + 
+                              parseFormattedNumber(generation11) + 
+                              parseFormattedNumber(generation12));
+
+        let credit1 = (parseFormattedNumber(generation1) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation1) - parseFormattedNumber(consumption)) : formatNumber(0);
+        let credit2 = (parseFormattedNumber(generation2) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation2) - parseFormattedNumber(consumption)) : formatNumber(0);
+        let credit3 = (parseFormattedNumber(generation3) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation3) - parseFormattedNumber(consumption)) : formatNumber(0);
+        let credit4 = (parseFormattedNumber(generation4) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation4) - parseFormattedNumber(consumption)) : formatNumber(0);
+        let credit5 = (parseFormattedNumber(generation5) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation5) - parseFormattedNumber(consumption)) : formatNumber(0);
+        let credit6 = (parseFormattedNumber(generation6) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation6) - parseFormattedNumber(consumption)) : formatNumber(0);
+        let credit7 = (parseFormattedNumber(generation7) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation7) - parseFormattedNumber(consumption)) : formatNumber(0);
+        let credit8 = (parseFormattedNumber(generation8) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation8) - parseFormattedNumber(consumption)) : formatNumber(0);
+        let credit9 = (parseFormattedNumber(generation9) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation9) - parseFormattedNumber(consumption)) : formatNumber(0);
+        let credit10 = (parseFormattedNumber(generation10) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation10) - parseFormattedNumber(consumption)) : formatNumber(0);
+        let credit11 = (parseFormattedNumber(generation11) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation11) - parseFormattedNumber(consumption)) : formatNumber(0);
+        let credit12 = (parseFormattedNumber(generation12) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation12) - parseFormattedNumber(consumption)) : formatNumber(0);
+        
+        let accumulated1 = formatNumber(0);
+        let accumulated2 = formatNumber(parseFormattedNumber(accumulated1) + parseFormattedNumber(credit1));
+        let accumulated3 = formatNumber(parseFormattedNumber(accumulated2) + parseFormattedNumber(credit2));
+        let accumulated4 = formatNumber(parseFormattedNumber(accumulated3) + parseFormattedNumber(credit3));
+        let accumulated5 = formatNumber(parseFormattedNumber(accumulated4) + parseFormattedNumber(credit4));
+        let accumulated6 = formatNumber(parseFormattedNumber(accumulated5) + parseFormattedNumber(credit5));
+        let accumulated7 = formatNumber(parseFormattedNumber(accumulated6) + parseFormattedNumber(credit6));
+        let accumulated8 = formatNumber(parseFormattedNumber(accumulated7) + parseFormattedNumber(credit7));
+        let accumulated9 = formatNumber(parseFormattedNumber(accumulated8) + parseFormattedNumber(credit8));
+        let accumulated10 = formatNumber(parseFormattedNumber(accumulated9) + parseFormattedNumber(credit9));
+        let accumulated11 = formatNumber(parseFormattedNumber(accumulated10) + parseFormattedNumber(credit10));
+        let accumulated12 = formatNumber(parseFormattedNumber(accumulated11) + parseFormattedNumber(credit11));
+
+        let totalAccumulated = formatNumber(parseFormattedNumber(accumulated1) + 
+                              parseFormattedNumber(accumulated2) + 
+                              parseFormattedNumber(accumulated3) + 
+                              parseFormattedNumber(accumulated4) + 
+                              parseFormattedNumber(accumulated5) + 
+                              parseFormattedNumber(accumulated6) + 
+                              parseFormattedNumber(accumulated7) + 
+                              parseFormattedNumber(accumulated8) + 
+                              parseFormattedNumber(accumulated9) + 
+                              parseFormattedNumber(accumulated10) + 
+                              parseFormattedNumber(accumulated11) + 
+                              parseFormattedNumber(accumulated12));
+
+        let withoutSolar = formatNumber(parseFormattedNumber(consumption) * 0.95);
+        let totalWithout = formatNumber(parseFormattedNumber(withoutSolar) * 12);
+
+        let with1 = formatNumber(parseFormattedNumber(generation1) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
+        let with2 = formatNumber(parseFormattedNumber(generation2) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
+        let with3 = formatNumber(parseFormattedNumber(generation3) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
+        let with4 = formatNumber(parseFormattedNumber(generation4) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
+        let with5 = formatNumber(parseFormattedNumber(generation5) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
+        let with6 = formatNumber(parseFormattedNumber(generation6) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
+        let with7 = formatNumber(parseFormattedNumber(generation7) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
+        let with8 = formatNumber(parseFormattedNumber(generation8) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
+        let with9 = formatNumber(parseFormattedNumber(generation9) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
+        let with10 = formatNumber(parseFormattedNumber(generation10) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
+        let with11 = formatNumber(parseFormattedNumber(generation11) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
+        let with12 = formatNumber(parseFormattedNumber(generation12) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
+        
+        let totalWith = formatNumber(parseFormattedNumber(with1) + 
+                              parseFormattedNumber(with2) + 
+                              parseFormattedNumber(with3) + 
+                              parseFormattedNumber(with4) + 
+                              parseFormattedNumber(with5) + 
+                              parseFormattedNumber(with6) + 
+                              parseFormattedNumber(with7) + 
+                              parseFormattedNumber(with8) + 
+                              parseFormattedNumber(with9) + 
+                              parseFormattedNumber(with10) + 
+                              parseFormattedNumber(with11) + 
+                              parseFormattedNumber(with12));
 
         const parameters = {
             name: name,
-            cpfCnpj: cpfCnpj,
-            address: address,
-            number: number + (complement ? " " + complement : ""),
-            neighborhood: neighborhood,
             city: city,
-            cep: cep,
-            peakPower: peakPower,
+            date: date,
+            consumption: consumption,
             inverterDescription: inverterDescription,
             inverterQuantity: inverterQuantity,
             moduleDescription: moduleDescription,
             moduleQuantity: moduleQuantity,
             roofType: roofType,
-            payment: payment,
             value: value,
-            day: day,
-            month: month,
-            year: year
+            consumption: consumption,
+            totalConsumption: totalConsumption,
+            generation1: generation1,
+            generation2: generation2,
+            generation3: generation3,
+            generation4: generation4,
+            generation5: generation5,
+            generation6: generation6,
+            generation7: generation7,
+            generation8: generation8,
+            generation9: generation9,
+            generation10: generation10,
+            generation11: generation11,
+            generation12: generation12,
+            totalGeneration: totalGeneration,
+            credit1: credit1,
+            credit2: credit2,
+            credit3: credit3,
+            credit4: credit4,
+            credit5: credit5,
+            credit6: credit6,
+            credit7: credit7,
+            credit8: credit8,
+            credit9: credit9,
+            credit10: credit10,
+            credit11: credit11,
+            credit12: credit12,
+            accumulated1: accumulated1,
+            accumulated2: accumulated2,
+            accumulated3: accumulated3,
+            accumulated4: accumulated4,
+            accumulated5: accumulated5,
+            accumulated6: accumulated6,
+            accumulated7: accumulated7,
+            accumulated8: accumulated8,
+            accumulated9: accumulated9,
+            accumulated10: accumulated10,
+            accumulated11: accumulated11,
+            accumulated12: accumulated12,
+            totalAccumulated: totalAccumulated,
+            without: withoutSolar,
+            totalWithout: totalWithout,
+            with1: with1,
+            with2: with2,
+            with3: with3,
+            with4: with4,
+            with5: with5,
+            with6: with6,
+            with7: with7,
+            with8: with8,
+            with9: with9,
+            with10: with10,
+            with11: with11,
+            with12: with12,
+            totalWith: totalWith,
+            stringValue: stringValue,
+            payment: payment,
         };
 
         loadFile(
-            "Contrato.docx",
+            "Orcamento.docx",
             function (error, content) {
                 if (error) {
                     throw error;
@@ -1411,12 +1528,22 @@ function generateBudget() {
                         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                     compression: "DEFLATE",
                 });
-                saveAs(blob, `Contrato - ${name}.docx`);
+                saveAs(blob, `Orcamento - ${name}.docx`);
             }
         );
     } else {
         showMessage("Preencha todos os campos antes de prosseguir.", "error");
     }
+}
+
+function calcularGeracaoEnergia(quantidadePlacas, potenciaPlacas, mesIndex) {
+    const hspMinasGerais = [5.8, 5.7, 5.3, 5.0, 4.7, 4.6, 5.0, 5.4, 5.7, 5.8, 5.7, 5.8];
+    const fatorCorrecao = 4 / 5.375;
+    
+    const horasSolPlenoMes = hspMinasGerais[mesIndex];
+    const geracaoEnergia = quantidadePlacas * potenciaPlacas * horasSolPlenoMes * 30 / 1000 * fatorCorrecao;
+
+    return formatNumber(geracaoEnergia);
 }
 
 function formatNumber(value) {
@@ -1441,6 +1568,21 @@ function formatNumber(value) {
 
     // Retornar a string formatada com vírgula como separador decimal
     return integerPart + "," + decimalPart;
+}
+
+function parseFormattedNumber(formattedValue) {
+    // Remover os separadores de milhar (pontos) e substituir a vírgula pelo ponto decimal
+    let numericString = formattedValue.replace(/\./g, "").replace(",", ".");
+
+    // Converter a string em um número float
+    let num = parseFloat(numericString);
+
+    // Verificar se o valor convertido é um número válido
+    if (isNaN(num)) {
+        return "Valor inválido";
+    }
+
+    return num;
 }
 
 function generateChangeProxy() {
@@ -1591,6 +1733,7 @@ function generateDocuments() {
     if (fieldsFilled()) {
         const proxyVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0], null).getPropertyValue('visibility');
         const contractVisibility = window.getComputedStyle(document.getElementsByClassName("contract-container")[0], null).getPropertyValue('visibility');
+        const budgetVisibility = window.getComputedStyle(document.getElementsByClassName("contract-container")[0], null).getPropertyValue('visibility');
         const changeProxyVisibility = window.getComputedStyle(document.getElementsByClassName("change-proxy-container")[0], null).getPropertyValue('visibility');
         const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("checklist-container")[0], null).getPropertyValue('visibility');
 
@@ -1607,6 +1750,14 @@ function generateDocuments() {
         if (contractVisibility === "visible") {
             setTimeout(() => {
                 generateContract();
+            }, initalTime);
+
+            initalTime += 2000;
+        }
+
+        if (budgetVisibility === "visible") {
+            setTimeout(() => {
+                generateBudget();
             }, initalTime);
 
             initalTime += 2000;
@@ -1635,6 +1786,7 @@ function generateDocuments() {
 function fieldsFilled() {
     const proxyVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0], null).getPropertyValue('visibility');
     const contractVisibility = window.getComputedStyle(document.getElementsByClassName("contract-container")[0], null).getPropertyValue('visibility');
+    const budgetVisibility = window.getComputedStyle(document.getElementsByClassName("budget-container")[0], null).getPropertyValue('visibility');
     const changeProxyVisibility = window.getComputedStyle(document.getElementsByClassName("change-proxy-container")[0], null).getPropertyValue('visibility');
     const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("checklist-container")[0], null).getPropertyValue('visibility');
 
@@ -1651,6 +1803,7 @@ function fieldsFilled() {
     let filledContract = false;
     let filledChangeProxy = false;
     let filledChecklist = false;
+    let filledBudget = false;
 
     if (proxyVisibility === "visible") {
 
@@ -1903,6 +2056,174 @@ function fieldsFilled() {
             showRequiredMessageForID("power-inverter-4-required");
         }
     }
+    
+    if (budgetVisibility === "visible") {
+        const ceramico = document.getElementById("telhado-ceramico-orcamento").checked;
+        const metalico = document.getElementById("telhado-metalico-orcamento").checked;
+        const laje = document.getElementById("laje-orcamento").checked;
+        const solo = document.getElementById("solo-orcamento").checked;
+
+        const paymentValue = document.getElementById("value-orcamento").value;
+        const payment = document.getElementById("payment-orcamento").value;
+        // const instalment = document.getElementById("instalment").value;
+
+        const quantityModule = document.getElementById("quantity-module-orcamento").value;
+        const manufacturerModule = document.getElementById("manufacturer-module-orcamento").value;
+        const powerModule = document.getElementById("power-module-orcamento").value;
+
+        const quantityInverter1 = document.getElementById("quantity-inverter-1-orcamento").value;
+        const manufacturerInverter1 = document.getElementById("manufacturer-inverter-1-orcamento").value;
+        const powerInverter1 = document.getElementById("power-inverter-1-orcamento").value;
+
+        const quantityInverter2 = document.getElementById("quantity-inverter-2-orcamento").value;
+        const manufacturerInverter2 = document.getElementById("manufacturer-inverter-2-orcamento").value;
+        const powerInverter2 = document.getElementById("power-inverter-2-orcamento").value;
+
+        const quantityInverter3 = document.getElementById("quantity-inverter-3-orcamento").value;
+        const manufacturerInverter3 = document.getElementById("manufacturer-inverter-3-orcamento").value;
+        const powerInverter3 = document.getElementById("power-inverter-3-orcamento").value;
+
+        const quantityInverter4 = document.getElementById("quantity-inverter-4-orcamento").value;
+        const manufacturerInverter4 = document.getElementById("manufacturer-inverter-4-orcamento").value;
+        const powerInverter4 = document.getElementById("power-inverter-4-orcamento").value;
+
+        const FIRST_CONDITION = ceramico || metalico || laje || solo;
+
+        const SECOND_CONDITION = window.getComputedStyle(document.getElementById("inverter-2-orcamento"), null).getPropertyValue('visibility') === "hidden" ? true :
+            (quantityInverter2 && manufacturerInverter2 !== "Selecione o fabricante" && powerInverter2 !== "Selecione a potência");
+
+        const THIRD_CONDITION = window.getComputedStyle(document.getElementById("inverter-3-orcamento"), null).getPropertyValue('visibility') === "hidden" ? true :
+            (quantityInverter3 && manufacturerInverter3 !== "Selecione o fabricante" && powerInverter3 !== "Selecione a potência");
+
+        const FOURTH_CONDITION = window.getComputedStyle(document.getElementById("inverter-4-orcamento"), null).getPropertyValue('visibility') === "hidden" ? true :
+            (quantityInverter4 && manufacturerInverter4 !== "Selecione o fabricante" && powerInverter4 !== "Selecione a potência");
+
+        filledBudget = FIRST_CONDITION && SECOND_CONDITION && THIRD_CONDITION && FOURTH_CONDITION &&
+            name &&
+            cpfCnpj &&
+            instalation &&
+            cep && address &&
+            number &&
+            neighborhood &&
+            city
+        paymentValue &&
+            (payment !== "Selecione a forma") &&
+            // (instalment !== "Selecione a parcela") &&
+            quantityModule &&
+            (manufacturerModule !== "Selecione o fabricante") &&
+            (powerModule !== "Selecione a potência") &&
+            quantityInverter1 &&
+            (manufacturerInverter1 !== "Selecione o fabricante") &&
+            (powerInverter1 !== "Selecione a potência");
+
+        if (!name) {
+            showRequiredMessageForClass("nome-required");
+        }
+
+        if (!cpfCnpj) {
+            showRequiredMessageForClass("cpf-required");
+        }
+
+        if (!instalation) {
+            showRequiredMessageForClass("n-instalacao-required");
+        }
+
+        if (!cep) {
+            showRequiredMessageForClass("cep-required");
+        }
+
+        if (!address) {
+            showRequiredMessageForClass("address-required");
+        }
+
+        if (!number) {
+            showRequiredMessageForClass("number-required");
+        }
+
+        if (!neighborhood) {
+            showRequiredMessageForClass("neighborhood-required");
+        }
+
+        if (!city) {
+            showRequiredMessageForClass("city-required");
+        }
+
+        if (!ceramico && !metalico && !laje && !solo) {
+            showRequiredMessageForID("structure-required-orcamento");
+        }
+
+        if (!paymentValue) {
+            showRequiredMessageForID("value-required-orcamento");
+        }
+
+        if (payment === "Selecione a forma") {
+            showRequiredMessageForID("payment-required-orcamento");
+        }
+
+        // if (instalment === "Selecione a parcela") {
+        //     showRequiredMessageForID("instalment-required");
+        // }
+
+        if (!quantityModule) {
+            showRequiredMessageForID("quantity-module-required-orcamento");
+        }
+
+        if (manufacturerModule === "Selecione o fabricante") {
+            showRequiredMessageForID("manufacturer-module-required-orcamento");
+        }
+
+        if (powerModule === "Selecione a potência") {
+            showRequiredMessageForID("power-module-required-orcamento");
+        }
+
+        if (!quantityInverter1) {
+            showRequiredMessageForID("quantity-inverter-1-required-orcamento");
+        }
+
+        if (manufacturerInverter1 === "Selecione o fabricante") {
+            showRequiredMessageForID("manufacturer-inverter-1-required-orcamento");
+        }
+
+        if (powerInverter1 === "Selecione a potência") {
+            showRequiredMessageForID("power-inverter-1-required-orcamento");
+        }
+
+        if (!quantityInverter2) {
+            showRequiredMessageForID("quantity-inverter-2-required-orcamento");
+        }
+
+        if (manufacturerInverter2 === "Selecione o fabricante") {
+            showRequiredMessageForID("manufacturer-inverter-2-required-orcamento");
+        }
+
+        if (powerInverter2 === "Selecione a potência") {
+            showRequiredMessageForID("power-inverter-2-required-orcamento");
+        }
+
+        if (!quantityInverter3) {
+            showRequiredMessageForID("quantity-inverter-3-required-orcamento");
+        }
+
+        if (manufacturerInverter3 === "Selecione o fabricante") {
+            showRequiredMessageForID("manufacturer-inverter-3-required-orcamento");
+        }
+
+        if (powerInverter3 === "Selecione a potência") {
+            showRequiredMessageForID("power-inverter-3-required-orcamento");
+        }
+
+        if (!quantityInverter4) {
+            showRequiredMessageForID("quantity-inverter-4-required-orcamento");
+        }
+
+        if (manufacturerInverter4 === "Selecione o fabricante") {
+            showRequiredMessageForID("manufacturer-inverter-4-required-orcamento");
+        }
+
+        if (powerInverter4 === "Selecione a potência") {
+            showRequiredMessageForID("power-inverter-4-required-orcamento");
+        }
+    }
 
     if (checklistVisibility === "visible") {
         const trocaTitularidade = document.getElementById("troca-titularidade").checked;
@@ -2095,10 +2416,11 @@ function fieldsFilled() {
 
     const PROXY_INVISIBLE_OR_FILLED = proxyVisibility === "hidden" ? true : filledProxy;
     const CONTRACT_INVISIBLE_OR_FILLED = contractVisibility === "hidden" ? true : filledContract;
+    const BUDGET_INVISIBLE_OR_FILLED = budgetVisibility === "hidden" ? true : filledBudget;
     const CHANGE_PROXY_INVISIBLE_OR_FILLED = changeProxyVisibility === "hidden" ? true : filledChangeProxy;
     const CHECKLIST_INVISIBLE_OR_FILLED = checklistVisibility === "hidden" ? true : filledChecklist;
 
-    return PROXY_INVISIBLE_OR_FILLED && CONTRACT_INVISIBLE_OR_FILLED && CHANGE_PROXY_INVISIBLE_OR_FILLED && CHECKLIST_INVISIBLE_OR_FILLED;
+    return PROXY_INVISIBLE_OR_FILLED && CONTRACT_INVISIBLE_OR_FILLED && BUDGET_INVISIBLE_OR_FILLED && CHANGE_PROXY_INVISIBLE_OR_FILLED && CHECKLIST_INVISIBLE_OR_FILLED;
 }
 
 function fillClientName(name) {
@@ -2322,11 +2644,11 @@ function numberToWords(numero) {
     }
 
     function converteReais(valor) {
-        const partes = valor.split(',');
+        const partes = valor.split('.');
         const reais = parseInt(partes[0], 10);
         const centavos = partes[1] ? parseInt(partes[1], 10) : null;
 
-        let reaisPorExtenso = `${converteMilhar(reais)} real${reais > 1 ? "is" : ""}`;
+        let reaisPorExtenso = `${converteMilhar(reais)}reais`;
         if (centavos !== null) {
             reaisPorExtenso += ` e ${converteCentenas(centavos)} centavo${centavos > 1 ? "s" : ""}`;
         }
