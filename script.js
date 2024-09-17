@@ -1,10 +1,5 @@
 const USERS = [
     {
-        "user": "Alexandre",
-        "role": "Salesman",
-        "password": "alexandre@dna2024"
-    },
-    {
         "user": "Burica",
         "role": "Salesman",
         "password": "burica@dna2024"
@@ -60,11 +55,6 @@ const USERS = [
         "password": "regis@dna2024"
     },
     {
-        "user": "Reinaldo",
-        "role": "Salesman",
-        "password": "reinaldo@dna2024"
-    },
-    {
         "user": "Ronei",
         "role": "Salesman",
         "password": "ronei@dna2024"
@@ -78,6 +68,16 @@ const USERS = [
         "user": "Willy",
         "role": "Administrator",
         "password": "willy@dna2024"
+    },
+    {
+        "user": "Marcos",
+        "role": "Salesman",
+        "password": "marcos@dna2024"
+    },
+    {
+        "user": "Rafael",
+        "role": "Salesman",
+        "password": "rafael@dna2024"
     }
 ];
 
