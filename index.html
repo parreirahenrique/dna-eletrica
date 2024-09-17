@@ -293,7 +293,7 @@
                             <select id="payment" class="form-select" oninput="checkPayment()" required>
                                 <option selected>Selecione a forma</option>
                                 <option value="all">À vista</option>
-                                <option value="30-70">Entrada de 30% mais um pagamento de 70%</option>
+                                <option value="70-30">Entrada de 70% mais um pagamento de 30%</option>
                                 <option value="50-50">Entrada de 50% mais um pagamento de 50%</option>
                                 <option value="Outro">Outro</option>
                             </select>
@@ -782,8 +782,12 @@
                             <select id="payment-orcamento" class="form-select" oninput="checkBudgetPayment()" required>
                                 <option selected>Selecione a forma</option>
                                 <option value="all">À vista</option>
-                                <option value="30-70">Entrada de 30% mais um pagamento de 70%</option>
+                                <option value="financing">A ser quitada pelo financiamento bancário</option>
+                                <option value="90-10">Entrada de 90% mais um pagamento de 10%</option>
+                                <option value="70-30">Entrada de 70% mais um pagamento de 30%</option>
                                 <option value="50-50">Entrada de 50% mais um pagamento de 50%</option>
+                                <option value="50-16">Entrada de 50% mais três parcelas iguais de 16,67%</option>
+                                <option value="50-10">Entrada de 50% mais cinco parcelas iguais de 10%</option>
                                 <option value="Outro">Outro</option>
                             </select>
                             <div id="payment-required-orcamento" class="required-message">Obrigatório.</div>

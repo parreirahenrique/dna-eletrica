@@ -1189,12 +1189,20 @@ function generateContract() {
             payment = otherPaymentMethod;
         } else if (paymentMethod === "all") {
             payment = "À vista"
-        } else if (paymentMethod === "30-70") {
-            payment = "Entrada de 30% mais um pagamento de 70%"
+        } else if (paymentMethod === "financing") {
+            payment = "A ser quitada pelo financiamento bancário"
+        } else if (paymentMethod === "90-10") {
+            payment = "Entrada de 90% mais um pagamento de 10%"
+        } else if (paymentMethod === "70-30") {
+            payment = "Entrada de 70% mais um pagamento de 30%"
         } else if (paymentMethod === "50-50") {
             payment = "Entrada de 50% mais um pagamento de 50%"
+        } else if (paymentMethod === "50-16") {
+            payment = "Entrada de 50% mais três parcelas iguais de 16,67%"
+        } else if (paymentMethod === "50-10") {
+            payment = "Entrada de 50% mais cinco parcelas iguais de 10%"
         }
-
+        
         let value = "R$ " + formatNumber(document.getElementById("value").value);
 
 
@@ -1333,10 +1341,18 @@ function generateBudget() {
             payment = otherPaymentMethod;
         } else if (paymentMethod === "all") {
             payment = "À vista"
-        } else if (paymentMethod === "30-70") {
-            payment = "Entrada de 30% mais um pagamento de 70%"
+        } else if (paymentMethod === "financing") {
+            payment = "A ser quitada pelo financiamento bancário"
+        } else if (paymentMethod === "90-10") {
+            payment = "Entrada de 90% mais um pagamento de 10%"
+        } else if (paymentMethod === "70-30") {
+            payment = "Entrada de 70% mais um pagamento de 30%"
         } else if (paymentMethod === "50-50") {
             payment = "Entrada de 50% mais um pagamento de 50%"
+        } else if (paymentMethod === "50-16") {
+            payment = "Entrada de 50% mais três parcelas iguais de 16,67%"
+        } else if (paymentMethod === "50-10") {
+            payment = "Entrada de 50% mais cinco parcelas iguais de 10%"
         }
 
         let value = "R$ " + formatNumber(document.getElementById("value-orcamento").value);
