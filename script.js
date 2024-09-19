@@ -124,6 +124,7 @@ function validateUser(password) {
     for (let i = 0; i < USERS.length; i++) {
         if (USERS[i].password === password) {
             document.getElementById("salesman").value = USERS[i].user;
+            document.getElementById("today").value = new Date().getDate().toString().padStart(2, "0") + "/" + (new Date().getMonth() + 1).toString().padStart(2, "0") + "/" + new Date().getFullYear();
             localStorage.setItem("user", USERS[i].user);
             localStorage.setItem("password", password);
             localStorage.setItem("role", USERS[i].role);
@@ -136,7 +137,7 @@ function validateUser(password) {
 
 function controlVisibility(input) {
     const role = localStorage.getItem("role");
-    
+
     const allContainerClass = document.getElementsByClassName("all-container col-lg col-sm-12 first-container");
     const allContainer = document.getElementById("all-container");
 
@@ -175,7 +176,7 @@ function controlVisibility(input) {
             allContainerClass[i].style.visibility = "hidden";
             allContainerClass[i].style.display = "none";
 
-            
+
             if (window.matchMedia("(max-width: 767.98px)").matches) {
                 secondCheckbox.style.marginTop = "20px";
             }
@@ -261,7 +262,7 @@ function controlVisibility(input) {
     if (input === allCheckbox && allCheckbox.checked) {
         proxyCheckbox.checked = true;
         contractCheckbox.checked = true;
-        budgetCheckbox.checked = true;
+        // budgetCheckbox.checked = true;
         changeProxy.checked = true;
         checklistCheckbox.checked = true;
     } else if (input === allCheckbox && !allCheckbox.checked) {
@@ -298,17 +299,17 @@ function controlVisibility(input) {
         }
     }
 
-    if (budgetCheckbox.checked) {
-        for (let i = 0; i < budgetContainer.length; i++) {
-            budgetContainer[i].style.visibility = "visible";
-            budgetContainer[i].style.display = "block";
-        }
-    } else {
-        for (let i = 0; i < budgetContainer.length; i++) {
-            budgetContainer[i].style.visibility = "hidden";
-            budgetContainer[i].style.display = "none";
-        }
-    }
+    // if (budgetCheckbox.checked) {
+    //     for (let i = 0; i < budgetContainer.length; i++) {
+    //         budgetContainer[i].style.visibility = "visible";
+    //         budgetContainer[i].style.display = "block";
+    //     }
+    // } else {
+    //     for (let i = 0; i < budgetContainer.length; i++) {
+    //         budgetContainer[i].style.visibility = "hidden";
+    //         budgetContainer[i].style.display = "none";
+    //     }
+    // }
 
     if (changeProxyCheckbox.checked) {
         for (let i = 0; i < changeProxyContainer.length; i++) {
@@ -1091,7 +1092,7 @@ function generateProxy() {
                         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                     compression: "DEFLATE",
                 });
-                saveAs(blob, `Procuracao (Willy) - ${name}.docx`);
+                saveAs(blob, `Procuracao - ${name}.docx`);
             }
         );
     } else {
@@ -1202,7 +1203,7 @@ function generateContract() {
         } else if (paymentMethod === "50-10") {
             payment = "Entrada de 50% mais cinco parcelas iguais de 10%"
         }
-        
+
         let value = "R$ " + formatNumber(document.getElementById("value").value);
 
 
@@ -1373,18 +1374,18 @@ function generateBudget() {
         let generation11 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 10);
         let generation12 = calcularGeracaoEnergia(moduleQuantity, parseInt(modulePower.split(" Wp")[0]), 11);
 
-        let totalGeneration = formatNumber(parseFormattedNumber(generation1) + 
-                              parseFormattedNumber(generation2) + 
-                              parseFormattedNumber(generation3) + 
-                              parseFormattedNumber(generation4) + 
-                              parseFormattedNumber(generation5) + 
-                              parseFormattedNumber(generation6) + 
-                              parseFormattedNumber(generation7) + 
-                              parseFormattedNumber(generation8) + 
-                              parseFormattedNumber(generation9) + 
-                              parseFormattedNumber(generation10) + 
-                              parseFormattedNumber(generation11) + 
-                              parseFormattedNumber(generation12));
+        let totalGeneration = formatNumber(parseFormattedNumber(generation1) +
+            parseFormattedNumber(generation2) +
+            parseFormattedNumber(generation3) +
+            parseFormattedNumber(generation4) +
+            parseFormattedNumber(generation5) +
+            parseFormattedNumber(generation6) +
+            parseFormattedNumber(generation7) +
+            parseFormattedNumber(generation8) +
+            parseFormattedNumber(generation9) +
+            parseFormattedNumber(generation10) +
+            parseFormattedNumber(generation11) +
+            parseFormattedNumber(generation12));
 
         let credit1 = (parseFormattedNumber(generation1) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation1) - parseFormattedNumber(consumption)) : formatNumber(0);
         let credit2 = (parseFormattedNumber(generation2) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation2) - parseFormattedNumber(consumption)) : formatNumber(0);
@@ -1398,7 +1399,7 @@ function generateBudget() {
         let credit10 = (parseFormattedNumber(generation10) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation10) - parseFormattedNumber(consumption)) : formatNumber(0);
         let credit11 = (parseFormattedNumber(generation11) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation11) - parseFormattedNumber(consumption)) : formatNumber(0);
         let credit12 = (parseFormattedNumber(generation12) - parseFormattedNumber(consumption)) > 0 ? formatNumber(parseFormattedNumber(generation12) - parseFormattedNumber(consumption)) : formatNumber(0);
-        
+
         let accumulated1 = formatNumber(0);
         let accumulated2 = formatNumber(parseFormattedNumber(accumulated1) + parseFormattedNumber(credit1));
         let accumulated3 = formatNumber(parseFormattedNumber(accumulated2) + parseFormattedNumber(credit2));
@@ -1412,18 +1413,18 @@ function generateBudget() {
         let accumulated11 = formatNumber(parseFormattedNumber(accumulated10) + parseFormattedNumber(credit10));
         let accumulated12 = formatNumber(parseFormattedNumber(accumulated11) + parseFormattedNumber(credit11));
 
-        let totalAccumulated = formatNumber(parseFormattedNumber(accumulated1) + 
-                              parseFormattedNumber(accumulated2) + 
-                              parseFormattedNumber(accumulated3) + 
-                              parseFormattedNumber(accumulated4) + 
-                              parseFormattedNumber(accumulated5) + 
-                              parseFormattedNumber(accumulated6) + 
-                              parseFormattedNumber(accumulated7) + 
-                              parseFormattedNumber(accumulated8) + 
-                              parseFormattedNumber(accumulated9) + 
-                              parseFormattedNumber(accumulated10) + 
-                              parseFormattedNumber(accumulated11) + 
-                              parseFormattedNumber(accumulated12));
+        let totalAccumulated = formatNumber(parseFormattedNumber(accumulated1) +
+            parseFormattedNumber(accumulated2) +
+            parseFormattedNumber(accumulated3) +
+            parseFormattedNumber(accumulated4) +
+            parseFormattedNumber(accumulated5) +
+            parseFormattedNumber(accumulated6) +
+            parseFormattedNumber(accumulated7) +
+            parseFormattedNumber(accumulated8) +
+            parseFormattedNumber(accumulated9) +
+            parseFormattedNumber(accumulated10) +
+            parseFormattedNumber(accumulated11) +
+            parseFormattedNumber(accumulated12));
 
         let withoutSolar = formatNumber(parseFormattedNumber(consumption) * 0.95);
         let totalWithout = formatNumber(parseFormattedNumber(withoutSolar) * 12);
@@ -1440,19 +1441,19 @@ function generateBudget() {
         let with10 = formatNumber(parseFormattedNumber(generation10) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
         let with11 = formatNumber(parseFormattedNumber(generation11) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
         let with12 = formatNumber(parseFormattedNumber(generation12) * (0.95 * 0.30 * 0.29) + 50 * 0.95);
-        
-        let totalWith = formatNumber(parseFormattedNumber(with1) + 
-                              parseFormattedNumber(with2) + 
-                              parseFormattedNumber(with3) + 
-                              parseFormattedNumber(with4) + 
-                              parseFormattedNumber(with5) + 
-                              parseFormattedNumber(with6) + 
-                              parseFormattedNumber(with7) + 
-                              parseFormattedNumber(with8) + 
-                              parseFormattedNumber(with9) + 
-                              parseFormattedNumber(with10) + 
-                              parseFormattedNumber(with11) + 
-                              parseFormattedNumber(with12));
+
+        let totalWith = formatNumber(parseFormattedNumber(with1) +
+            parseFormattedNumber(with2) +
+            parseFormattedNumber(with3) +
+            parseFormattedNumber(with4) +
+            parseFormattedNumber(with5) +
+            parseFormattedNumber(with6) +
+            parseFormattedNumber(with7) +
+            parseFormattedNumber(with8) +
+            parseFormattedNumber(with9) +
+            parseFormattedNumber(with10) +
+            parseFormattedNumber(with11) +
+            parseFormattedNumber(with12));
 
         const parameters = {
             name: name,
@@ -1555,7 +1556,7 @@ function generateBudget() {
 function calcularGeracaoEnergia(quantidadePlacas, potenciaPlacas, mesIndex) {
     const hspMinasGerais = [5.8, 5.7, 5.3, 5.0, 4.7, 4.6, 5.0, 5.4, 5.7, 5.8, 5.7, 5.8];
     const fatorCorrecao = 4 / 5.375;
-    
+
     const horasSolPlenoMes = hspMinasGerais[mesIndex];
     const geracaoEnergia = quantidadePlacas * potenciaPlacas * horasSolPlenoMes * 30 / 1000 * fatorCorrecao;
 
@@ -1749,7 +1750,7 @@ function generateDocuments() {
     if (fieldsFilled()) {
         const proxyVisibility = window.getComputedStyle(document.getElementsByClassName("proxy-container")[0], null).getPropertyValue('visibility');
         const contractVisibility = window.getComputedStyle(document.getElementsByClassName("contract-container")[0], null).getPropertyValue('visibility');
-        const budgetVisibility = window.getComputedStyle(document.getElementsByClassName("contract-container")[0], null).getPropertyValue('visibility');
+        const budgetVisibility = window.getComputedStyle(document.getElementsByClassName("budget-container")[0], null).getPropertyValue('visibility');
         const changeProxyVisibility = window.getComputedStyle(document.getElementsByClassName("change-proxy-container")[0], null).getPropertyValue('visibility');
         const checklistVisibility = window.getComputedStyle(document.getElementsByClassName("checklist-container")[0], null).getPropertyValue('visibility');
 
@@ -2072,7 +2073,7 @@ function fieldsFilled() {
             showRequiredMessageForID("power-inverter-4-required");
         }
     }
-    
+
     if (budgetVisibility === "visible") {
         const ceramico = document.getElementById("telhado-ceramico-orcamento").checked;
         const metalico = document.getElementById("telhado-metalico-orcamento").checked;
