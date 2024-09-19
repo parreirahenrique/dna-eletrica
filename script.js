@@ -2657,7 +2657,10 @@ function numberToWords(numero) {
             numero = Math.floor(numero / 1000);
             contador++;
         }
-        return partes.reverse().join(" e ");
+
+        let conjunto = partes.reverse().join(" e ");
+
+        return conjunto[conjunto.length - 1] === " " ? conjunto : conjunto + " ";
     }
 
     function converteReais(valor) {
