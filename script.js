@@ -262,7 +262,7 @@ function controlVisibility(input) {
     if (input === allCheckbox && allCheckbox.checked) {
         proxyCheckbox.checked = true;
         contractCheckbox.checked = true;
-        // budgetCheckbox.checked = true;
+        budgetCheckbox.checked = true;
         changeProxy.checked = true;
         checklistCheckbox.checked = true;
     } else if (input === allCheckbox && !allCheckbox.checked) {
@@ -299,17 +299,17 @@ function controlVisibility(input) {
         }
     }
 
-    // if (budgetCheckbox.checked) {
-    //     for (let i = 0; i < budgetContainer.length; i++) {
-    //         budgetContainer[i].style.visibility = "visible";
-    //         budgetContainer[i].style.display = "block";
-    //     }
-    // } else {
-    //     for (let i = 0; i < budgetContainer.length; i++) {
-    //         budgetContainer[i].style.visibility = "hidden";
-    //         budgetContainer[i].style.display = "none";
-    //     }
-    // }
+    if (budgetCheckbox.checked) {
+        for (let i = 0; i < budgetContainer.length; i++) {
+            budgetContainer[i].style.visibility = "visible";
+            budgetContainer[i].style.display = "block";
+        }
+    } else {
+        for (let i = 0; i < budgetContainer.length; i++) {
+            budgetContainer[i].style.visibility = "hidden";
+            budgetContainer[i].style.display = "none";
+        }
+    }
 
     if (changeProxyCheckbox.checked) {
         for (let i = 0; i < changeProxyContainer.length; i++) {
