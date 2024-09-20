@@ -171,6 +171,16 @@ function controlVisibility(input) {
     const changeProxyCheckbox = document.getElementById("procuracao-troca");
     const checklistCheckbox = document.getElementById("checklist");
 
+    if (input === checklist && checklist.checked) {
+        contract.checked = true;
+    } else if (input === contract && contract.checked) {
+        checklist.checked = true;
+    } else if (input === checklist && !checklist.checked) {
+        contract.checked = false;
+    } else if (input === contract && !contract.checked) {
+        checklist.checked = false;
+    }
+
     if (role === "Salesman") {
         for (let i = 0; i < allContainerClass.length; i++) {
             allContainerClass[i].style.visibility = "hidden";
@@ -859,6 +869,7 @@ function controlChecklistCheckboxes(checkboxChanged) {
     const agrupamento = document.getElementById("agrupamento");
     const telhadoIndividual = document.getElementById("telhado-individual");
     const telhadoColetivo = document.getElementById("telhado-coletivo");
+    const disjuntorAtual = document.getElementsByClassName("disjuntor-atual");
     const disjuntorSolicitado = document.getElementsByClassName("disjuntor-solicitado");
     const disjuntorGeral = document.getElementsByClassName("disjuntor-geral");
     const procuracaoTrocaTitularidade = document.getElementsByClassName("procuracao-troca-titularidade");
@@ -1668,7 +1679,7 @@ function generateChangeProxy() {
 
 function generateChecklist() {
     if (fieldsFilled()) {
-        const container = document.getElementsByClassName('checklist-container')[0];
+        const container = document.getElementsByClassName('checklist-info-container')[0];
         const { jsPDF } = window.jspdf;
 
         // Calcula a escala baseada na largura da página A4 em pixels, subtraindo as margens
@@ -1680,6 +1691,24 @@ function generateChecklist() {
 
         // Estilo CSS adicional para forçar a fonte do Bootstrap no PDF e ajustar o fundo
         const customStyles = `
+            .contract-container {
+                font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !important;
+                background-color: #f0f0f0 !important; /* Cor de fundo um pouco mais escura */
+                padding: 20px; /* Adiciona padding para criar um contraste com o fundo do PDF */
+                border-radius: 8px; /* Bordas arredondadas para um visual mais suave */
+                margin-bottom: 200px;
+            }
+
+            #adicionar-inversor {
+                visibility: none !important;
+                display: none !important;
+            }
+
+            #retirar-inversor {
+                visibility: none !important;
+                display: none !important;
+            }
+
             .checklist-container {
                 font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !important;
                 background-color: #f0f0f0 !important; /* Cor de fundo um pouco mais escura */
@@ -1954,8 +1983,8 @@ function fieldsFilled() {
             cep && address &&
             number &&
             neighborhood &&
-            city
-        paymentValue &&
+            city &&
+            paymentValue &&
             (payment !== "Selecione a forma") &&
             // (instalment !== "Selecione a parcela") &&
             quantityModule &&
@@ -2122,8 +2151,8 @@ function fieldsFilled() {
             cep && address &&
             number &&
             neighborhood &&
-            city
-        paymentValue &&
+            city &&
+            paymentValue &&
             (payment !== "Selecione a forma") &&
             // (instalment !== "Selecione a parcela") &&
             quantityModule &&
@@ -2287,13 +2316,13 @@ function fieldsFilled() {
         const FOURTH_CONDITION = individual || agrupamento;
         const FIFTH_CONDITION = telhadoIndividual || telhadoColetivo;
         const SIXTH_CONDITION = !trocaTitularidade ? true : procuracaoTroca;
-        const SEVENTH_CONDITION = !pessoaJuridica ? true : cartaoCNPJ && contratoSocial;
+        const SEVENTH_CONDITION = !pessoaJuridica ? true : cnpj && contratoSocial;
         const EIGHTH_CONDITION = !rural ? true : car;
         const NINTH_CONDITION = !aumentoUsina ? true : fotosInversor && quantidadeModulos;
         const TENTH_CONDITION = !ligacaoNova ? true : escritura;
-        const ELEVENTH_CONDITION = !agrupamento ? true : escritura && fotosAgrupamento && disjuntorGeral && correnteGeral;
+        const ELEVENTH_CONDITION = !agrupamento ? true : escritura && fotosAgrupamento && disjuntorGeral !== "Selecione o número de fases" && correnteGeral !== "Selecione a corrente";
         const TWELFTH_CONDITION = !telhadoColetivo ? true : autorizacaoTelhado;
-        const THIRTEENTH_CONDITION = !comAumento ? true : disjuntorSolicitado && correnteSolicitado;
+        const THIRTEENTH_CONDITION = !comAumento ? true : disjuntorSolicitado !== "Selecione o número de fases" && correnteSolicitado !== "Selecione a corrente";
 
         filledChecklist = FIRST_CONDITION &&
             SECOND_CONDITION &&
@@ -2310,8 +2339,8 @@ function fieldsFilled() {
             THIRTEENTH_CONDITION &&
             name &&
             coordenadas &&
-            disjuntorAtual &&
-            correnteAtual &&
+            disjuntorAtual !== "Selecione o número de fases" &&
+            correnteAtual !== "Selecione a corrente" &&
             documento &&
             fatura &&
             coordenadasPadrao &&
