@@ -2668,6 +2668,7 @@ function numberToWords(numero) {
         if (numero < 100) return `${dezenas[Math.floor(numero / 10)]}${numero % 10 ? " e " + unidades[numero % 10] : ""}`;
         if (numero < 1000) {
             if (numero === 100) return "cem";
+            if (numero > 100 && numero < 200) return `cento${numero % 100 ? " e " + converteCentenas(numero % 100) : ""}`;
             return `${centenas[Math.floor(numero / 100)]}${numero % 100 ? " e " + converteCentenas(numero % 100) : ""}`;
         }
     }
